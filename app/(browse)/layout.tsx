@@ -10,7 +10,7 @@ export default function BrowseLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <> 
       <Navbar />
       <div className="flex h-full pt-20">
         <Suspense fallback={<SidebarSkeleton />}>

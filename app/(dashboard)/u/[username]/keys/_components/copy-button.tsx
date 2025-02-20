@@ -26,6 +26,7 @@ export function CopyButton({ value }: { value?: string }) {
       disabled={!value || isCopied}
       variant="ghost"
       size="sm"
+      className="shadow-md shadow-[red]"
     >
       <Icon className="h-4 w-4" />
     </Button>

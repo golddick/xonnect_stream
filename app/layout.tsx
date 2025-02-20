@@ -12,10 +12,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | GameHub",
-    default: "GameHub",
+    template: "%s | XONNECT",
+    default: "XONNECT",
   },
-  description: "Twitch Clone with Next.js, React.js, TailWindCSS & TypeScript.",
+  description: "Stream on xonnect",
 };
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
           <ThemeProvider
             attribute="class"
             forcedTheme="dark"
-            storageKey="gamehub-theme"
+            storageKey="xonnect-theme"
           >
             <Toaster theme="light" position="bottom-center" />
             {children}

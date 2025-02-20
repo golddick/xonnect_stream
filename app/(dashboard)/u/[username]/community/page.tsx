@@ -18,7 +18,7 @@ export default async function CommunityPage() {
   }));
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-black h-full">
       <div className="mb-4">
         <h1 className="text-2xl font-bold">Community Settings</h1>
       </div>

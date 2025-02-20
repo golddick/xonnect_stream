@@ -19,7 +19,7 @@ export function Toggle() {
       {collapsed && (
         <div className="w-full hidden lg:flex items-center justify-center pt-4 mb-4">
           <Hint label={label} side="right" asChild>
-            <Button onClick={onExpand} variant="ghost" className="h-auto p-2">
+            <Button onClick={onExpand} variant="ghost" className="h-auto p-2 shadow-md shadow-neutral-500">
               <ArrowRightFromLine className="h-4 w-4" />
             </Button>
           </Hint>
@@ -32,7 +32,7 @@ export function Toggle() {
             <Button
               onClick={onCollapse}
               variant="ghost"
-              className="h-auto p-2 ml-auto"
+              className="h-auto p-2 ml-auto shadow-md shadow-neutral-500"
             >
               <ArrowLeftFromLine className="h-4 w-4" />
             </Button>

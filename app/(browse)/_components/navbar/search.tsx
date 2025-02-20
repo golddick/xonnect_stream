@@ -23,7 +23,7 @@ export function Search() {
         query: { term: value },
       },
       { skipEmptyString: true }
-    );
+    ); 
 
     router.push(url);
   };
@@ -33,13 +33,13 @@ export function Search() {
   return (
     <form
       onSubmit={onSubmit}
-      className="relative w-full lg:w-[400px] flex items-center"
+      className="relative w-full lg:w-[400px] flex items-center  border-b border-r shadow-md shadow-neutral-700 rounded-lg"
     >
       <Input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Search"
-        className="rounded-r-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0"
+        className="rounded-r-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 border-none bg-black"
       />
       {value && (
         <X
@@ -48,13 +48,14 @@ export function Search() {
         />
       )}
       <Button
-        className="rounded-l-none"
+        className="rounded-l-none bg-black  hover:opacity-65"
         type="submit"
         size="sm"
-        variant="secondary"
+        variant={'ghost'}
       >
-        <SearchIcon className="h-5 w-5 text-muted-foreground" />
+        <SearchIcon className="h-5 w-5 text-red-600" />
       </Button>
     </form>
   );
 }
+

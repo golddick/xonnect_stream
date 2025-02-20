@@ -1,35 +1,36 @@
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client";
 
-declare global {
-  var prisma: PrismaClient | undefined;
-}
+// declare global {
+//   var prisma: PrismaClient | undefined;
+// }
 
-export const db = globalThis.prisma || new PrismaClient();
+// export const db = globalThis.prisma || new PrismaClient();
 
-if (process.env.NODE_ENV !== "production") globalThis.prisma = db;
+// if (process.env.NODE_ENV !== "production") globalThis.prisma = db;
 
  
 
 
-// import { PrismaClient } from "@prisma/client";
 
-// declare global {
-//   var prisma: PrismaClient;
-// }
+import { PrismaClient } from '@prisma/client';
 
-// let prisma: PrismaClient;
+declare global {
+  var prisma: PrismaClient | undefined; // Use `undefined` instead of `PrismaClient` for type safety
+}
 
-// if (process.env.NODE_ENV !== "production") {
-//   // In non-production environments, a new Prisma Client is created every time the module is imported
-//   console.log("Creating new Prisma client instance in non-production environment");
-//   prisma = new PrismaClient();
-// } else {
-//   // In production, use a global Prisma Client to avoid creating multiple instances
-//   if (!global.prisma) {
-//     console.log("Creating global Prisma client instance in production environment");
-//     global.prisma = new PrismaClient();
-//   }
-//   prisma = global.prisma;
-// }
+let prisma: PrismaClient;
 
-// export const db = prisma;
+if (process.env.NODE_ENV === 'production') {
+  // In production, use a global Prisma Client to avoid creating multiple instances
+  if (!global.prisma) {
+    console.log('Creating global Prisma client instance in production environment');
+    global.prisma = new PrismaClient();
+  }
+  prisma = global.prisma;
+} else {
+  // In non-production environments, create a new Prisma Client instance
+  console.log('Creating new Prisma client instance in non-production environment');
+  prisma = new PrismaClient();
+}
+
+export const db = prisma;

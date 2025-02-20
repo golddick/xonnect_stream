@@ -10,6 +10,9 @@ export const getUserByUsername = async (username: string) => {
       externalUserId: true,
       username: true,
       bio: true,
+      instagram:true,
+      twitter:true,
+      youtube:true,
       imageUrl: true,
       stream: {
         select: {

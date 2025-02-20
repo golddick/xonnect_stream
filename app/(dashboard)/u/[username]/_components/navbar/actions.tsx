@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button";
 
 export function Actions() {
   return (
-    <div className="flex items-center justify-end gap-x-2">
+    <div className="flex items-center justify-between lg:justify-end gap-x-2 ">
       <Button
         size="sm"
         variant="ghost"
-        className="text-muted-foreground hover:text-primary"
+        className="text-muted-foreground hover:text-primary  hidden md:flex"
         asChild
       >
         <Link href="/">
@@ -20,6 +20,7 @@ export function Actions() {
         </Link>
       </Button>
       <UserButton afterSignOutUrl="/" />
+
     </div>
   );
 }

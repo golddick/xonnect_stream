@@ -41,7 +41,7 @@ export function Video({
   return <div className="aspect-video border-b group relative">{content}</div>;
 }
 
-export function VideoSkeleton() {
+export function VideoSkeleton() { 
   return (
     <div className="aspect-video border-x border-background">
       <Skeleton className="h-full w-full rounded-none" />

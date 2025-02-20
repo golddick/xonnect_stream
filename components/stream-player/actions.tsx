@@ -63,9 +63,8 @@ export function Actions({
     <Button
       disabled={isPending || isHost}
       onClick={toggleFollow}
-      variant="primary"
       size="sm"
-      className="w-full lg:w-auto"
+      className="w-full lg:w-auto from-[red] font-medium to-[black] bg-gradient-to-br text-white"
     >
       <Heart
         className={cn("h-4 w-4 mr-2", isFollowing ? "fill-white" : "fill-none")}

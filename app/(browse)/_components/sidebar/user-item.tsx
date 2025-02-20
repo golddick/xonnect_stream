@@ -27,6 +27,10 @@ export function UserItem({
   const href = `/${username}`;
   const isActive = pathname === href;
 
+  console.log(isLive,'islive ?')
+
+  // const isLive = true
+
   return (
     <Button
       asChild

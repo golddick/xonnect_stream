@@ -5,13 +5,17 @@ import {
   useParticipants,
   useRemoteParticipant,
 } from "@livekit/components-react";
-import { UserIcon } from "lucide-react";
-
+import { BadgeCheck, UserIcon } from "lucide-react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { UserAvatar, UserAvatarSkeleton } from "@/components/user-avatar";
 import { VerifiedMark } from "@/components/verified-mark";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { Actions, ActionsSkeleton } from "./actions";
+import { Button } from "../ui/button";
+import { Hint } from "../hint";
+import { DotEllipse } from "./dot-ellipse";
+import { Badge } from "../ui/badge";
 
 export function Header({
   hostIdentity,
@@ -38,21 +42,36 @@ export function Header({
   const isHost = hostAsViewer === viewerIdentity;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between px-4">
+    <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between px-4 radial--gradient">
+         <div
+        className="flex 
+         justify-between
+          items-center 
+      gap-y-5
+       w-full 
+       h-full 
+       bg-[#000] 
+       bg-opacity-90 
+       bg-clip-padding 
+       backdrop-filter 
+       backdrop--blur__safari 
+       backdrop-blur-3xl"
+      >
+
+   
       <div className="flex items-center gap-x-3">
         <UserAvatar
           imageUrl={imageUrl}
           username={hostName}
-          size="lg"
+          size='default'
           isLive={isLive}
           showBadge
         />
         <div className="space-y-1">
           <div className="flex items-center gap-x-2">
-            <h2 className="text-lg font-semibold">{hostName}</h2>
-            <VerifiedMark />
+            <h2 className="text-lg font-semibold">{name}</h2>
+            <BadgeCheck  className="text-gold size-4"/>
           </div>
-          <p className="text-sm font-semibold">{name}</p>
           {isLive ? (
             <div className="font-semibold flex gap-x-1 items-center text-xs text-rose-500">
               <UserIcon className="h-4 w-4" />
@@ -62,24 +81,29 @@ export function Header({
               </p>
             </div>
           ) : (
-            <p className="font-semibold text-xs text-muted-foreground">
+            <Badge  className="font-semibold text-xs text-muted-foreground bg-black hover:text-gold shadow-md shadow-neutral-500">
               Offline
-            </p>
+            </Badge>
           )}
         </div>
       </div>
-      <Actions
-        hostIdentity={hostIdentity}
-        isFollowing={isFollowing}
-        isHost={isHost}
-      />
+
+            <div className="flex items-center gap-3">
+            <Actions
+            hostIdentity={hostIdentity}
+            isFollowing={isFollowing}
+            isHost={isHost}
+          />
+         <DotEllipse/>
+            </div>
+    </div>
     </div>
   );
 }
 
 export function HeaderSkeleton() {
   return (
-    <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between px-4">
+    <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between px-4 ">
       <div className="flex items-center gap-x-2">
         <UserAvatarSkeleton size="lg" />
         <div className="space-y-2">

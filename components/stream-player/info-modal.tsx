@@ -67,7 +67,7 @@ export function InfoModal({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="link" size="sm" className="ml-auto">
+        <Button variant="link" size="sm" className="ml-auto shadow-md shadow-neutral-500">
           Edit
         </Button>
       </DialogTrigger>

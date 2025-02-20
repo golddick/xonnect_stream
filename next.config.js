@@ -7,8 +7,15 @@ const nextConfig = {
         hostname: "utfs.io",
         pathname: "**",
       },
+      {
+        protocol: 'https',
+        hostname: 'media.sproutsocial.com',
+        pathname: '**',
+      },
+
     ],
   },
 };
 
 module.exports = nextConfig;
+ 

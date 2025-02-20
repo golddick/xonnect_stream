@@ -16,9 +16,9 @@ export function Toggle() {
   return (
     <>
       {collapsed && (
-        <div className="hidden lg:flex w-full items-center justify-center pt-4 mb-4">
+        <div className="hidden md:flex w-full items-center justify-center pt-4 mb-4">
           <Hint label={label} side="right" asChild>
-            <Button variant="ghost" onClick={onExpand} className="h-auto p-2">
+            <Button variant="ghost" onClick={onExpand} className="h-auto p-2  shadow-lg shadow-neutral-600">
               <ArrowRightFromLine className="w-4 h-4" />
             </Button>
           </Hint>
@@ -29,7 +29,7 @@ export function Toggle() {
           <p className="font-semibold text-primary">For you</p>
           <Hint label={label} side="right" asChild>
             <Button
-              className="h-auto ml-auto p-2"
+              className="h-auto ml-auto p-2  shadow-lg shadow-neutral-600"
               variant="ghost"
               onClick={onCollapse}
             >

@@ -13,6 +13,9 @@ import { AboutCard } from "./about-card";
 import { Video, VideoSkeleton } from "./video";
 import { Chat, ChatSkeleton } from "./chat";
 import { Header, HeaderSkeleton } from "./header";
+import { Skeleton } from "../ui/skeleton";
+import { Loader } from "lucide-react";
+import { About_Tab } from "./about-info-cad";
 
 type CustomStream = {
   id: string;
@@ -28,6 +31,9 @@ type CustomUser = {
   id: string;
   username: string;
   bio: string | null;
+  instagram: string | null;
+  youtube: string | null;
+  twitter: string | null;
   stream: CustomStream | null;
   imageUrl: string;
   _count: {
@@ -66,7 +72,7 @@ export function StreamPlayer({
           collapsed && "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2"
         )}
       >
-        <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
+        <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10 bg-black">
           <Video hostName={user.username} hostIdentity={user.id} />
           <Header
             imageUrl={user.imageUrl}
@@ -82,15 +88,18 @@ export function StreamPlayer({
             name={stream.name}
             thumbnailUrl={stream.thumbnailUrl}
           />
-          <AboutCard
-            hostName={user.username}
-            hostIdentity={user.id}
-            viewerIdentity={identity}
-            bio={user.bio}
-            followedByCount={user._count.followedBy}
+          <About_Tab
+           hostName={user.username}
+           hostIdentity={user.id}
+           viewerIdentity={identity}
+           bio={user.bio}
+           instagram={user.instagram}
+           youtube={user.youtube}
+           twitter={user.twitter}
+           followedByCount={user._count.followedBy}
           />
         </div>
-        <div className={cn("col-span-1", collapsed && "hidden")}>
+        <div className={cn(" hidden lg:block", collapsed && "lg:hidden")}>
           <Chat
             viewerName={name}
             hostName={user.username}
@@ -108,14 +117,17 @@ export function StreamPlayer({
 
 export function StreamPlayerSkeleton() {
   return (
-    <div className="grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full">
-      <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
-        <VideoSkeleton />
-        <HeaderSkeleton />
-      </div>
-      <div className="col-span-1 bg-background">
-        <ChatSkeleton />
-      </div>
-    </div>
+   <div className="flex flex-col gap-3">
+   <Loader className=" animate-spin"/>
+   </div>
+    // <div className="grid grid-cols-1 lg:gap-y-0 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6 h-full">
+    //   <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
+    //     <VideoSkeleton />
+    //     <HeaderSkeleton />
+    //   </div>
+    //   <div className="col-span-1 bg-background">
+    //     <ChatSkeleton />
+    //   </div>
+    // </div>
   );
 }

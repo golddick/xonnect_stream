@@ -31,7 +31,20 @@ export function ToggleCard({
   };
 
   return (
-    <div className="rounded-xl bg-muted p-6">
+    <div className="rounded-xl w-full lg:w-auto from-[black] font-medium to-[red] bg-gradient-to-br text-white  overflow-hidden">
+       <div
+        className="flex flex-col 
+      gap-y-5
+       w-full 
+       h-full 
+       p-3 
+       bg-[#000] 
+       bg-opacity-70 
+       bg-clip-padding 
+       backdrop-filter 
+       backdrop--blur__safari 
+       backdrop-blur-3xl"
+      >
       <div className="flex items-center justify-between">
         <p className="font-semibold shrink-0">{label}</p>
         <div className="space-y-2">
@@ -43,6 +56,7 @@ export function ToggleCard({
             {value ? "On" : "Off"}
           </Switch>
         </div>
+      </div>
       </div>
     </div>
   );

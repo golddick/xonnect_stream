@@ -13,12 +13,12 @@ export function Logo() {
   return (
     <Link href="/">
       <div className="flex items-center gap-x-4 hover:opacity-75 transition">
-        <div className="bg-white rounded-full p-1 mr-12 shrink-0 lg:mr-0 lg:shrink">
-          <Image src="/spooky.svg" alt="GameHub" height="32" width="32" />
+        <div className=" rounded-full p-1 mr-12 shrink-0 lg:mr-0 lg:shrink">
+          <Image src="/assets/xsb.png" alt="xonnect" height="32" width="32" />
         </div>
         <div className={cn(font.className, "hidden lg:block")}>
-          <p className="text-lg font-semibold">GameHub</p>
-          <p className="text-xs text-muted-foreground">Let&apos;s Play</p>
+          <p className="text-lg font-semibold">XONNECT</p>
+          <p className="text-xs text-muted-foreground">Let&apos;s Stream</p>
         </div>
       </div>
     </Link>

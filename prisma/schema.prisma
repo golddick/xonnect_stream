@@ -15,6 +15,9 @@ model User {
   imageUrl       String  @db.Text
   externalUserId String  @unique
   bio            String? @db.Text
+  instagram      String? @db.Text
+  twitter        String? @db.Text
+  youtube        String? @db.Text
 
   following  Follow[] @relation("Following")
   followedBy Follow[] @relation("FollowedBy")
@@ -23,6 +26,9 @@ model User {
   blockedBy Block[] @relation("BlockedBy")
 
   stream Stream?
+
+  payments Payment[]
+  schedules   Schedule[]  @relation(name: "scheduledBy")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -48,9 +54,59 @@ model Stream {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  subscribers Payment[] 
+
   @@index([userId])
   @@index([ingressId])
   // @@fulltext([name])
+}
+
+model Payment {
+  id         String            @id @default(uuid())
+  userId     String           
+  User       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  amount      Float 
+  streamId   String?           
+  stream     Stream?            @relation(fields: [streamId], references: [id], onDelete: Cascade)
+  updatedAt  DateTime          @default(now())
+  createdAt  DateTime          @default(now())
+  status     SUBSCRIPTION_STATUS
+  scheduleId String?
+  schedule   Schedule?          @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+}
+
+
+enum SUBSCRIPTION_STATUS {
+  FAILED 
+  SUCCESSFUL
+}
+
+
+model Schedule {
+  id              String   @id @default(uuid())
+  title           String   
+  address         String  
+  description     String?  
+  eventDateTime   DateTime
+  amount          Float 
+  isFree          Boolean @default(false)
+  thumbnailImage  String?  
+  thumbnailVideo  String?
+  artists     String?  
+  organizers      String? 
+
+  userId      String   
+  user        User     @relation(name: "scheduledBy",  fields: [userId], references: [id], onDelete: Cascade)
+
+  streamId    String?  
+
+  subscribers Payment[] 
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([streamId])
 }
 
 model Follow {

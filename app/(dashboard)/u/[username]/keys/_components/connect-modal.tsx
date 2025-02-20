@@ -48,7 +48,7 @@ export function ConnectModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="primary">Generate connection</Button>
+        <Button  className="w-full lg:w-auto from-[red] font-medium to-[black] bg-gradient-to-br text-white">Generate connection</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

@@ -3,7 +3,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import { Fullscreen, KeyRound, MessagesSquare, Users } from "lucide-react";
+import { Calendar, Fullscreen, KeyRound, MessagesSquare, Users } from "lucide-react";
 
 import { NavItem, NavItemSkeleton } from "./nav-item";
 
@@ -31,6 +31,11 @@ export function Navigation() {
       label: "Community",
       href: `/u/${user?.username}/community`,
       icon: Users,
+    },
+    {
+      label: "Schedule",
+      href: `/u/${user?.username}/schedule`,
+      icon: Calendar,
     },
   ];
 

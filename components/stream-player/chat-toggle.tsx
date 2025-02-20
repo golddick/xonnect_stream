@@ -27,7 +27,7 @@ export function ChatToggle() {
       <Button
         onClick={onToggle}
         variant="ghost"
-        className="h-auto p-2 hover:bg-white/10 hover:text-primary bg-transparent"
+        className="h-auto p-2 hover:bg-white/10 hover:text-primary bg-transparent shadow-lg shadow-neutral-500"
       >
         <Icon className="h-4 w-4" />
       </Button>

@@ -11,6 +11,9 @@ export const updateUser = async (values: Partial<User>) => {
 
   const validData = {
     bio: values.bio,
+    instagram: values.instagram,
+    twitter: values.twitter,
+    youtube: values.youtube
   };
 
   const user = await db.user.update({
