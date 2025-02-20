@@ -1,32 +1,10 @@
-// import React from 'react'
-
-// interface ScheduleCardProps {
-//     id:string
-//     title:string
-//     amount:number
-//     address:string
-// }
-
-// export const ScheduleCard = ({id, title, address, amount}:ScheduleCardProps) => {
-//   return (
-//     <div className='from-[red] font-medium to-[black]  bg-gradient-to-br rounded-lg'>ScheduleCard</div>
-//   )
-// }
-
-
-import { Banknote, CalendarDays } from "lucide-react"
-
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card"
+import { useUserName } from "@/hooks/use-get-username"
+import Link from "next/link"
 
 interface ScheduleCardProps {
     id:string
@@ -35,9 +13,17 @@ interface ScheduleCardProps {
     address:string
 }
 
+
+
 export function ScheduleCard({id,title,address,amount}:ScheduleCardProps) {
+
+    const username = useUserName()
+
+    const href = `/u/${username}/schedule/${id}`
+
   return (
-    <HoverCard key={id} >
+    <Link href={href} key={id}>
+        <HoverCard  >
       <HoverCardTrigger asChild className=" ">
        <div className="w-full h-full rounded-md p-2 truncate from-[red] to-[black] bg-gradient-to-br">
         {title}
@@ -54,5 +40,7 @@ export function ScheduleCard({id,title,address,amount}:ScheduleCardProps) {
         </div>
       </HoverCardContent>
     </HoverCard>
+    </Link>
+    
   )
 }

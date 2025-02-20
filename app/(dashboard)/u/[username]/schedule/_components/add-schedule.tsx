@@ -20,7 +20,7 @@ export function AddSchedule() {
         </Button>
         </Hint>
       </PopoverTrigger>
-      <PopoverContent className="w-full lg:w-[400px] bg-zinc-900  h-[700px] overflow-scroll hidden-scrollbar ">
+      <PopoverContent className="w-80 lg:w-[400px] bg-zinc-900  h-[700px] overflow-scroll hidden-scrollbar ">
         <ScheduleForm/>
       </PopoverContent>
     </Popover>
