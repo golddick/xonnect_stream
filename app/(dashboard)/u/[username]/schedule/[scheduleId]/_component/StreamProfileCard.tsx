@@ -3,7 +3,8 @@
 import React from 'react'
 import StreamVideoCard from './StreamVideoCard'
 import StreamDetails from './streamDetails/StreamDetails'
-import { StreamHeader } from './StreamHeader/StreamHeader'
+import StreamHeader from './StreamHeader/StreamHeader'
+
 
 const StreamProfileCard = () => {
     const Img = 'https://gratisography.com/wp-content/uploads/2024/01/gratisography-cyber-kitty-800x525.jpg'
