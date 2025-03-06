@@ -8,7 +8,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Plus } from "lucide-react"
-import ScheduleForm from "./create-schedule/StreamForm"
+import ScheduleForm from "./StreamForm"
+
 
 export function AddSchedule() {
   return (

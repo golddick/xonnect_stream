@@ -1,60 +1,72 @@
-'use client'
-
+'use client';
 
 import Image from 'next/image';
 import React, { useState } from 'react';
 import StreamVideoCard from './StreamVideoCard';
 import { Button } from '@/components/ui/button';
-
-interface StreamData {
-  id: number;
-  streamName: string;
-  description: string;
-  thumbNailImg: string;
-  isLive:boolean
-}
+import { Schedule, User } from '@prisma/client';
 
 interface StreamVideosProps {
-  data: StreamData[];
+  data: (Schedule & { user: User })[];
 }
 
 const StreamVideos = ({ data }: StreamVideosProps) => {
-
-  const [visible, setVisible] = useState(4);
+  const [visible, setVisible] = useState(5);
   const [showMore, setShowMore] = useState(false);
 
-  const ShowMore = () => {
-    setShowMore((prev) => !prev); // Toggle showMore state
-    setVisible((prev) => (showMore ? 4 : prev + 4)); // If currently showing more, reset to 4; otherwise, add 4
-};
+  // Conditional rendering: If no data, show the "No data" message
+  if (!data) {
+    return (
+      <div className="flex flex-col items-center justify-center">
+        <p>No data available</p>
+      </div>
+    );
+  }
 
-  console.log(data)
+  const handleShowMore = () => {
+    if (showMore) {
+      // If currently showing more, revert to showing only 5 items
+      setVisible(5);
+    } else {
+      // If not showing more, show all items
+      setVisible(data.length);
+    }
+    // Toggle the showMore state
+    setShowMore((prev) => !prev);
+  };
+
+  // Only show the "Show More" button if there are more items to display
+  const shouldShowButton = data.length > 5;
 
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className="flex flex-col items-center justify-center">
+      <div className="w-full h-auto items-center justify-center rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 mb-4">
+        {data.slice(0, visible).map((item, index) => (
+          <StreamVideoCard
+            streamName={item.title || 'No title'}
+            description={item.description || 'No description'}
+            thumbNailImg={item.thumbnailImage || '/assets/xb.png'}
+            isLive={item.isLive}
+            id={item.id}
+            key={item.id}
+            index={index}
+            dp={item.user.imageUrl}
+            creatorName={item.user.username}
+          />
+        ))}
+      </div>
 
-  <div className='  w-full h-auto  items-center justify-center rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4  px-4  mb-4'>
-     
-  {data.slice(0, visible).map((item, index) => (
-  <StreamVideoCard
-    streamName={item.streamName}
-    description={item.description}
-    thumbNailImg={item.thumbNailImg}
-    isLive={item.isLive}
-    key={item.id}
-    index={index} // Pass `true` for the first item
-  />
-))}
-
- </div>
-
- <Button className='border-b rounded-lg goldText' variant='ghost' onClick={ShowMore}>
-                {showMore ? 'Show Less' : 'Show More'}
-            </Button>
-
+      {/* Only show the button if there are more items to display */}
+      {shouldShowButton && (
+        <Button
+          className="border-b rounded-lg goldText"
+          variant="ghost"
+          onClick={handleShowMore}
+        >
+          {showMore ? 'Show Less' : 'Show More'}
+        </Button>
+      )}
     </div>
- 
-
   );
 };
 

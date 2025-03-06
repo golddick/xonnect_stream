@@ -1,5 +1,5 @@
+// core.ts
 import { createUploadthing, type FileRouter } from "uploadthing/next";
-
 import { getSelf } from "@/lib/auth-service";
 import { db } from "@/lib/db";
 
@@ -14,7 +14,6 @@ export const ourFileRouter = {
   })
     .middleware(async () => {
       const self = await getSelf();
-
       return { user: self };
     })
     .onUploadComplete(async ({ file, metadata }) => {
@@ -26,9 +25,43 @@ export const ourFileRouter = {
           thumbnailUrl: file.url,
         },
       });
+      return { fileUrl: file.url };
+    }), 
 
+      // New schedule uploader
+  scheduleUploader: uploadthing({
+    image: {
+      maxFileSize: "4MB",  // Adjust size limit as needed
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async () => {
+      const self = await getSelf();
+      return { user: self };
+    })
+    .onUploadComplete(async ({ file, metadata }) => {
       return { fileUrl: file.url };
     }),
+
+
+    //file uploader
+    ScheduleFileUploader: uploadthing({
+      image: {
+        maxFileSize: "8MB",  // Adjust size limit as needed
+        maxFileCount: 5,
+      },
+    })
+      .middleware(async () => {
+        const self = await getSelf();
+        return { user: self };
+      })
+      .onUploadComplete(async ({ file, metadata }) => {
+        return { fileUrl: file.url };
+      }),
+
 } satisfies FileRouter;
 
+
 export type OurFileRouter = typeof ourFileRouter;
+
+

@@ -59,7 +59,7 @@ export function Header({
       >
 
    
-      <div className="flex items-center gap-x-3">
+      <div className="flex items-center gap-x-3 py-4">
         <UserAvatar
           imageUrl={imageUrl}
           username={hostName}
@@ -69,7 +69,7 @@ export function Header({
         />
         <div className="space-y-1">
           <div className="flex items-center gap-x-2">
-            <h2 className="text-lg font-semibold">{name}</h2>
+            <h2 className=" text-[15px] md:text-lg font-semibold truncate">{name}</h2>
             <BadgeCheck  className="text-gold size-4"/>
           </div>
           {isLive ? (

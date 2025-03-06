@@ -16,7 +16,7 @@ export const updateStream = async (values: Partial<Stream>) => {
     });
 
     if (!selfStream) {
-      throw new Error("No stream found");
+      throw new Error("No stream found"); 
     }
 
     const validData = {

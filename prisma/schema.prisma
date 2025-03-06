@@ -14,6 +14,7 @@ model User {
   username       String  @unique
   imageUrl       String  @db.Text
   externalUserId String  @unique
+  email          String?  @unique
   bio            String? @db.Text
   instagram      String? @db.Text
   twitter        String? @db.Text
@@ -25,7 +26,8 @@ model User {
   blocking  Block[] @relation("Blocking")
   blockedBy Block[] @relation("BlockedBy")
 
-  stream Stream?
+  stream         Stream?     @relation("UserStream")
+  streamId       String?     @unique
 
   payments Payment[]
   schedules   Schedule[]  @relation(name: "scheduledBy")
@@ -48,13 +50,16 @@ model Stream {
   isChatDelayed       Boolean @default(false)
   isChatFollowersOnly Boolean @default(false)
 
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String        @unique
+  user             User          @relation("UserStream", fields: [userId], references: [id], onDelete: Cascade)
+
+  scheduleId       String?
+  schedule         Schedule?     @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  subscribers Payment[] 
+  subscribers      Payment[]     @relation("StreamSubscribers")
 
   @@index([userId])
   @@index([ingressId])
@@ -63,50 +68,67 @@ model Stream {
 
 model Payment {
   id         String            @id @default(uuid())
-  userId     String           
-  User       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  amount      Float 
+  userId     String?           
+  user       User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  email      String             
+  name      String
+  amount     Float 
   streamId   String?           
-  stream     Stream?            @relation(fields: [streamId], references: [id], onDelete: Cascade)
-  updatedAt  DateTime          @default(now())
-  createdAt  DateTime          @default(now())
   status     SUBSCRIPTION_STATUS
   scheduleId String?
-  schedule   Schedule?          @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  schedule   Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: Cascade, map: "Payment_scheduleId_fkey")
+  scheduleSubscribers Schedule? @relation("ScheduleSubscribers", fields: [scheduleId], references: [id], map: "Payment_scheduleSubscribers_fkey")
+  streamSubscribers Stream?    @relation("StreamSubscribers", fields: [streamId], references: [id], map: "Payment_streamSubscribers_fkey")
+  updatedAt  DateTime          @default(now())
+  createdAt  DateTime          @default(now())
 }
-
 
 enum SUBSCRIPTION_STATUS {
   FAILED 
   SUCCESSFUL
 }
 
-
 model Schedule {
   id              String   @id @default(uuid())
-  title           String   
-  address         String  
+  title           String  
+  address         String
   description     String?  
   eventDateTime   DateTime
-  amount          Float 
+  amount          Float ?
   isFree          Boolean @default(false)
   thumbnailImage  String?  
   thumbnailVideo  String?
-  artists     String?  
+  artists         String?  
   organizers      String? 
+  orgEmail        String  
+  userId          String  
+  user            User     @relation(name: "scheduledBy",  fields: [userId], references: [id], onDelete: Cascade)
 
-  userId      String   
-  user        User     @relation(name: "scheduledBy",  fields: [userId], references: [id], onDelete: Cascade)
+  streamId        String? 
+  isLive          Boolean @default(false) 
 
-  streamId    String?  
+  subscribers     Payment[]    @relation("ScheduleSubscribers")
+  payments        Payment[]
+  streams         Stream[]
+  fileUploads     ScheduleFileUpload[]
 
-  subscribers Payment[] 
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
   @@index([userId])
   @@index([streamId])
+}
+
+model ScheduleFileUpload {
+  id              String   @id @default(uuid())
+  scheduleId      String
+  ImageURL        String
+  schedule        Schedule @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([scheduleId])
 }
 
 model Follow {
@@ -114,11 +136,11 @@ model Follow {
   followerId  String
   followingId String
 
-  follower  User @relation(name: "Following", fields: [followerId], references: [id], onDelete: Cascade)
-  following User @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
+  follower    User @relation(name: "Following", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@unique([followerId, followingId])
   @@index([followerId])

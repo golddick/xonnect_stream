@@ -26,7 +26,7 @@ export default function VideoBox() {
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <div className=" md:max-w-screen-sm lg:max-w-screen-lg mx-auto  p-2 gap-4 items-center  hidden md:flex">
+    <div className=" md:max-w-screen-sm lg:max-w-screen-lg mx-auto  p-2 gap-4 items-center  max-w-[400px] flex">
       {/* Custom Previous Button */}
       <div
         ref={prevRef}
@@ -68,9 +68,9 @@ export default function VideoBox() {
         }}
 
       >
-        <SwiperSlide>
-            <DashBoardVideoCard isLive img={'/assets/woman.jpeg'}/>
-        </SwiperSlide>
+        {/* <SwiperSlide>
+            <DashBoardVideoCard isLive img={'/assets/woman.jpeg'} video=''/>
+        </SwiperSlide> */}
         <SwiperSlide>
             <VideoPlayer/>
         </SwiperSlide>

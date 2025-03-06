@@ -2,7 +2,7 @@ import React from 'react'
 import { CalendarDays , ChevronLeftIcon, ChevronRightIcon} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { format } from 'date-fns'
-import { AddSchedule } from './add-schedule'
+import { AddSchedule } from './create-schedule/add-schedule'
 
 interface CustomToolbarProps {
     date : Date

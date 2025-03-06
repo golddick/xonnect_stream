@@ -17,6 +17,18 @@ import {
 } from "@/components/ui/tabs"
 import { AboutCard } from "./about-card"
 import { UpcomingStream } from "./upcoming"
+import { Schedule, User } from "@prisma/client"
+
+
+// type Schedule ={
+//   id: string;
+//   title: string;
+//   description: string  | null;
+//   isFree: boolean;
+//   amount: number  | null;
+//   thumbnailImage: string  | null;
+//   thumbnailVideo: string  | null;
+// }
 
 export function About_Tab({
     bio,
@@ -26,7 +38,8 @@ export function About_Tab({
     viewerIdentity,
     instagram,
     youtube,
-    twitter
+    twitter,
+    schedule
   }: {
     hostName: string;
     hostIdentity: string;
@@ -36,6 +49,7 @@ export function About_Tab({
     youtube: string | null;
     twitter: string | null;
     followedByCount: number;
+    schedule: (Schedule & { user: User })[]
   }) {
   return (
     <Tabs defaultValue="about" className="w-full pl-4">
@@ -56,7 +70,10 @@ export function About_Tab({
           />
       </TabsContent>
       <TabsContent value="upcoming">
-        <UpcomingStream/>
+        <UpcomingStream 
+        data={schedule}
+        
+        />
       </TabsContent>
     </Tabs>
   )

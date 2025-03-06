@@ -1,7 +1,7 @@
 
 
 import { db } from "@/lib/db";
-import { currentUser } from "@clerk/nextjs/server";
+import { currentUser, EmailAddress } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
 export const getSelf = async () => {
@@ -17,6 +17,8 @@ export const getSelf = async () => {
       externalUserId: self.id,
     },
   });
+
+  console.log(self.primaryEmailAddress)
 
   if (!user) {
     throw new Error("Not found");

@@ -10,16 +10,19 @@ import { UserAvatar } from '@/components/user-avatar';
 
 interface StreamItemProps {
   streamName: string;
+  creatorName: string;
   description: string;
   thumbNailImg: string;
+  dp: string;
+  id: string
   isLive: boolean;
   index: number; 
 }
 
-const StreamVideoCard = ({ streamName, description, thumbNailImg, isLive, index }: StreamItemProps) => {
-  const href = `/Stream/23344`;
-  const profileLink = `/Creator/23344`;
+const StreamVideoCard = ({ streamName, description, thumbNailImg, isLive, index, id, dp, creatorName }: StreamItemProps) => {
+  const ScheduleProfile = `/schedule-info/${id}`;
 
+  
 
   const backgroundColors = ['bg-red-600', 'bg-[#b28228]'];
 
@@ -31,7 +34,9 @@ const StreamVideoCard = ({ streamName, description, thumbNailImg, isLive, index 
 
       <div className='rounded-xl absolute inset-0 bg-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center'/>
 
-      <div className='w-full h-[200px] relative object-cover transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 rounded-md'>
+      <div className='w-full h-[200px] relative object-cover transition-transform group-hover:translate-x-2 group-hover:-translate-y-2 rounded-md group-hover:zoom-in-50'>
+        <Link href={ScheduleProfile}>
+      
         <div className='w-full h-full absolute rounded-lg overflow-hidden'>
           <Image src={thumbNailImg} alt='img' fill className='flex' />
 
@@ -44,19 +49,18 @@ const StreamVideoCard = ({ streamName, description, thumbNailImg, isLive, index 
               )}
 
               <div className='flex absolute bottom-0 w-full items-center gap-2 px-2 py-2 bg-black bg-opacity-50 backdrop-blur-md'>
-                <Link href={profileLink}>
-                  <UserAvatar isLive={false}  imageUrl={thumbNailImg} username={streamName}/>
-                </Link>
+                  <UserAvatar isLive={false}  imageUrl={dp} username={creatorName}/>
                 <div className='flex flex-col w-full'>
-                  <Link href={href}>
+                 
                     <h2 className='capitalize hover:text-[#b28228]' style={{ fontSize: '13px' }}>{streamName}</h2>
-                  </Link>
-                  <p className='text-muted-foreground capitalize max-w-[200px] max-h-[20px] truncate' style={{ fontSize: '10px' }}>{description}</p>
+                 
+                  <p className='text-muted-foreground capitalize max-w-[200px] max-h-[20px] truncate' style={{ fontSize: '10px' }}>{creatorName}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        </Link>
       </div>
     </div>
   );

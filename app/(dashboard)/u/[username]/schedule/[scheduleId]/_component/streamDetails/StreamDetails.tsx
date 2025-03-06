@@ -1,74 +1,73 @@
 import { Button } from '@/components/ui/button'
+import { Schedule } from '@prisma/client';
 import React from 'react'
-// import StreamGallery from '../SreamGallary/StreamGallery'
+
+interface Props {
+ 
+  data: Schedule;
+}
 
 
+const StreamDetails = ({data}:Props) => {
 
-const StreamDetails = () => {
-
-    const isCreator = true
 
   return (
     <div className='w-full  '>
         <div className='flex flex-col lg:grid lg:grid-cols-2 gap-10 relative px-4 '>
 
-            <div className='flex flex-col space-y-3 w-full  Container rounded-lg'>
+            <div className='flex flex-col space-y-3 w-full shadow-[gold] shadow-md p-4 rounded-lg'>
 
-            {/* {isCreator && (
-                    // <div className={`${isLargeScreen ? '' : 'absolute top-4 right-4'}`}>
-                    <div>
-                    <EditStreamBTN/>
-                    </div>
-                )}
-
-                {!isCreator && (
-                    // <FollowBtn/>
-                    <div>follow</div>
-                )} */}
+           
 
             <ul>
                 <li>
-                    <span className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Title:</span> <i style={{fontSize:'13px', fontWeight:'500'}}> How to make a paper jet</i>
+                    <span className=' text-neutral-600 font-bold'>Title:</span> <i  className=' text-[15px] '> {data.title}</i>
                 </li>
                 <li>
-                    <span  className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Address:</span>
-                     <i style={{fontSize:'13px', fontWeight:'500'}} > Akobo mall</i>
+                    <span className=' text-neutral-600 font-bold'>Address:</span>
+                    <i  className=' text-[15px] '> {data.address}</i>
                 </li>
                 <li>
-                    <span  className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Category:</span>
-                     <i style={{fontSize:'13px', fontWeight:'500'}} > Music</i>
+                    <span className=' text-neutral-600 font-bold'>Price:</span>
+                    {
+                        data.isFree === false ? (
+                            <i  className=' text-[15px] '>N{data.amount}</i>
+                        ):
+                        (
+                            <i  className=' text-[15px] '>Free</i>
+                        )
+                    }
                 </li>
                 <li>
-                    <span  className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Description:</span>
-                     <i style={{fontSize:'13px', fontWeight:'500'}} >
-                        Professional thief Mason attempts his biggest heist with his brother, robbing a bank. When it goes wrong,.</i>
+                    <span className=' text-neutral-600 font-bold'>Description:</span> <i  className=' text-[15px] '>{data.description}</i>
                 </li>
             </ul>
             </div>
 
-            <div className='flex flex-col space-y-3 w-full Container rounded-lg'>
-            {/* <PuchaseBtn/> */}
+            <div className='flex flex-col space-y-3 w-full shadow-[red] shadow-md p-4 rounded-lg'>
             <ul>
+
                 <li>
-                    <span  className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Organizer:</span> <i style={{fontSize:'13px', fontWeight:'500'}}>sam link</i>
+                    <span className=' text-neutral-600 font-bold'>Organizer:</span> <i  className=' text-[15px] '> {data.organizers}</i>
                 </li>
+
                 <li>
-                    <span  className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Participants:</span> <i style={{fontSize:'13px', fontWeight:'500'}}>sam,
-                    John Travolta, Kristin Davis, Lukas Haas</i>
+                    <span className=' text-neutral-600 font-bold'>Organizer Email:</span> <i  className=' text-[15px] '>{data.orgEmail}</i>
                 </li>
+
                 <li>
-                    <span  className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Price:</span> <i style={{fontSize:'13px', fontWeight:'500'}}>#2,500.00</i>
+                    <span className=' text-neutral-600 font-bold'>Artists:</span> <i  className=' text-[15px] '>{data.artists}</i>
                 </li>
+                
+                
+
                 <li>
-                    <span  className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Date:</span> <i style={{fontSize:'13px', fontWeight:'500'}}>12-02-2024</i>
+                    <span className=' text-neutral-600 font-bold'>Date & Time:</span> <i className='text-[15px]'>{data.eventDateTime.toLocaleString()}</i>
                 </li>
-                <li>
-                    <span  className='goldText ' style={{fontSize:'13px', fontWeight:'500'}}>Time:</span> <i style={{fontSize:'13px', fontWeight:'500'}}>12:30:pm</i>
-                </li>
+
             </ul>
             </div>
 
-                {/* <StreamGallery/> */}
         </div>
 
       

@@ -12,10 +12,10 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="h-full p-4 lg:p-8 max-w-screen-2xl mx-auto bg-black  overflow-y-auto flex flex-col gap-6">
+    <div className="h-full p-4 lg:p-8 max-w-screen-2xl mx-auto bg-black w-full  overflow-auto flex flex-col gap-6 hidden-scrollbar">
       <Suspense fallback={<ResultsSkeleton />}>
         <VideoBox/>
-        <AdsBanner/>
+        {/* <AdsBanner/> */}
         <Results label="Creators" />
         <AllStream label="Coming Up"/>
       </Suspense>

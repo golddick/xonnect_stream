@@ -8,6 +8,7 @@ export const getUserByUsername = async (username: string) => {
     select: {
       id: true,
       externalUserId: true,
+      email:true,
       username: true,
       bio: true,
       instagram:true,
@@ -23,6 +24,43 @@ export const getUserByUsername = async (username: string) => {
           isChatFollowersOnly: true,
           thumbnailUrl: true,
           name: true,
+        },
+      },
+      schedules:{
+        select: {
+          id: true,
+          streamId: true,         
+          createdAt: true,       
+          updatedAt: true,        
+          isLive: true,          
+          userId: true,           
+          title: true,           
+          address: true,          
+          description: true,      
+          eventDateTime: true,    
+          amount: true,          
+          isFree: true,         
+          thumbnailImage: true,   
+          thumbnailVideo: true,  
+          artists: true,          
+          organizers: true, 
+          orgEmail:true,
+          user: {
+            select: {
+              id: true,
+              username: true,
+              imageUrl: true,
+              email:true,
+              externalUserId: true,
+              bio: true,
+              instagram: true,
+              twitter: true,
+              youtube: true,
+              streamId: true,
+              createdAt: true,
+              updatedAt: true,
+            }
+          }
         },
       },
       _count: {

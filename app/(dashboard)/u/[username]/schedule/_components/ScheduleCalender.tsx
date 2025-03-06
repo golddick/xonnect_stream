@@ -29,12 +29,12 @@ interface ScheduleStreamCalenderProps {
 
 export const ScheduleCalender = ({data}:ScheduleStreamCalenderProps) => {
     const [value, setValue] = useState( 
-        data.length > 0 ? new Date(data[0].eventDateTime) : new Date()
+        data.length > 0 ? new Date(data[0].eventDateTime || new Date()) : new Date()
     )
 
     const events = data.map((stream) => ({
-        start: new Date(stream.eventDateTime),
-        end: new Date(stream.eventDateTime),
+        start: new Date(stream.eventDateTime || new Date()),
+        end: new Date(stream.eventDateTime || new Date()),
         title: stream.title,
         amount: stream.amount,
         address: stream.address,
@@ -72,9 +72,9 @@ export const ScheduleCalender = ({data}:ScheduleStreamCalenderProps) => {
         eventWrapper: ({ event}) => (
             <ScheduleCard
             id={event.scheduleId}
-            title={event.title}
-            amount={event.amount}
-            address={event.address}
+            title={event.title || 'No title'}
+            amount={event.amount || 0}
+            address={event.address || 'No address'}
 
               />
         ),
@@ -87,20 +87,6 @@ export const ScheduleCalender = ({data}:ScheduleStreamCalenderProps) => {
       }}
     />
 
-
-
-    {/* <Calendar
-      localizer={localizer}
-      events={events}
-      date={value}
-      views={['month']}
-      defaultView='month'
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 500 }}
-      toolbar
-      showAllEvents
-    /> */}
   </div>
   )
 }

@@ -17,7 +17,7 @@ export async function Results({label}:ResultProps) {
     <div className="flex flex-col gap-4">
        <StreamHeader label={label}/>
       {data.length === 0 && (
-        <div className="text-muted-foreground text-sm">No streams found.</div>
+        <div className="text-muted-foreground text-sm">No creator found.</div>
       )}
       <div className="grid gap-4 grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         {data.map((result, index) => (

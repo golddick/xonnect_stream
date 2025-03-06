@@ -1,6 +1,6 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { WebhookEvent } from "@clerk/nextjs/server";
+import { EmailAddress, WebhookEvent } from "@clerk/nextjs/server";
 
 import { db } from "@/lib/db";
 import { resetIngresses } from "@/actions/ingress";
@@ -31,6 +31,8 @@ export async function POST(req: Request) {
   const payload = await req.json();
   const body = JSON.stringify(payload);
 
+  console.log(payload)
+  console.log('Webhook payload:', body)
   // Create a new Svix instance with your secret.
   const wh = new Webhook(WEBHOOK_SECRET);
 
@@ -53,6 +55,7 @@ export async function POST(req: Request) {
   const eventType = evt.type;
 
   if (eventType === "user.created") {
+
     await db.user.create({
       data: {
         externalUserId: payload.data.id,
@@ -66,6 +69,8 @@ export async function POST(req: Request) {
       },
     });
   }
+
+ 
 
   if (eventType === "user.updated") {
     await db.user.update({

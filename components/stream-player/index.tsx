@@ -16,6 +16,7 @@ import { Header, HeaderSkeleton } from "./header";
 import { Skeleton } from "../ui/skeleton";
 import { Loader } from "lucide-react";
 import { About_Tab } from "./about-info-cad";
+import { Schedule, User } from "@prisma/client";
 
 type CustomStream = {
   id: string;
@@ -25,7 +26,9 @@ type CustomStream = {
   isLive: boolean;
   thumbnailUrl: string | null;
   name: string;
+  
 };
+
 
 type CustomUser = {
   id: string;
@@ -45,10 +48,12 @@ export function StreamPlayer({
   user,
   stream,
   isFollowing,
+  schedule
 }: {
   user: CustomUser;
   stream: CustomStream;
   isFollowing: boolean;
+  schedule:  (Schedule & { user: User })[]
 }) {
   const { identity, name, token } = useViewerToken(user.id);
   const { collapsed } = useChatSidebar((state) => state);
@@ -97,6 +102,7 @@ export function StreamPlayer({
            youtube={user.youtube}
            twitter={user.twitter}
            followedByCount={user._count.followedBy}
+           schedule={schedule}
           />
         </div>
         <div className={cn(" hidden lg:block", collapsed && "lg:hidden")}>

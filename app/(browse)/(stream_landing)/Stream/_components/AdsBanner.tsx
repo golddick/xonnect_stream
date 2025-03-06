@@ -47,7 +47,7 @@ const AdsBanner = () => {
     ]
 
   return (
-      <div className={cn('flex  w-[80vw]  lg:w-[80vw] h-[35px] Container  items-center justify-center rounded-lg m-auto ', collapsed && 'lg:w-[90vw] m-auto')}>
+      <div className={cn('flex  w-[90%]  lg:w-[100%] h-[35px] Container  items-center justify-center rounded-lg m-auto ', collapsed && 'lg:w-[90vw] m-auto')}>
 
  
        

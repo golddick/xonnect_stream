@@ -15,7 +15,7 @@ export default function AuthLayout({
   return (
     <>
     <Top_nav/>
-      <div className="h-full flex flex-col mt-10">
+      <div className="h-full flex flex-col  mt-9">
         {children}
       </div>
     </>

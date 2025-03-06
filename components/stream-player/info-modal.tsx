@@ -23,7 +23,7 @@ import { UploadDropzone } from "@/lib/uploadthing";
 
 export function InfoModal({
   initialName,
-  initialThumbnailUrl,
+  initialThumbnailUrl, 
 }: {
   initialName: string;
   initialThumbnailUrl: string | null;

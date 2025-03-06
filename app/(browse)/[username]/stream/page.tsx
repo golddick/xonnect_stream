@@ -31,6 +31,6 @@ export default async function UserPage({
   if (isBlocked) notFound();
 
   return (
-    <StreamPlayer user={user} isFollowing={isFollowing} stream={user.stream} />
+    <StreamPlayer user={user} isFollowing={isFollowing} stream={user.stream}  schedule={user.schedules}/>
   );
 }
