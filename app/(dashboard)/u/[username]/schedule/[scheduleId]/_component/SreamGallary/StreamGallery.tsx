@@ -11,10 +11,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/thumbs';
 import { FreeMode, Thumbs } from 'swiper/modules';
 import { ScheduleFileUpload } from '@prisma/client';
-import { UploadDropzone } from '@/lib/uploadthing';
-import { toast } from 'sonner';
-import { updateScheduleWithFiles } from '@/actions/schedule'; 
-import { getScheduleFileById } from '@/lib/schedule-service';
+
 interface StreamGalleryProps {
   fileUpload: ScheduleFileUpload[] ;
   scheduleID: string; 

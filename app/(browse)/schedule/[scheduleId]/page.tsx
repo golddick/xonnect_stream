@@ -21,7 +21,7 @@ const page = async ({params}:Props) => {
    const data = await getScheduleById( params?.scheduleId);
   return (
     <div className=' bg-black h-full'>
-         <StreamProfileCard fileUpload={data?.fileUploads || []}  data={data} userId={self?.id} />
+         <StreamProfileCard fileUpload={data?.fileUploads || []}  data={data} userId={self?.id}  selfEmail={self.email}  selfName={self.username}/>
     </div>
   )
 }

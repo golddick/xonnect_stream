@@ -22,7 +22,7 @@ interface Schedule extends PrismaSchedule {
 interface Props {
  
   data: Schedule  ;
-  userId:string 
+  userId:string | null
   selfName:string 
   selfEmail:string | null
   fileUpload: ScheduleFileUpload []
