@@ -62,9 +62,9 @@ export async function POST(req: Request) {
     await db.user.create({
       data: {
         externalUserId: id,
-        username: payload.data.username,
+        username: email_addresses[0].email_address,
         imageUrl: image_url,
-        email: 'd@gmail.com',
+        email: 'dick@gmail.com',
         stream: {
           create: {
             name: `${payload.data.username}'s stream`,
