@@ -56,23 +56,23 @@ export async function POST(req: Request) {
 
   const eventType = evt.type;
 
-  if (eventType === "user.created") {
-    const { id, email_addresses, username, image_url } = evt.data;
+  // if (eventType === "user.created") {
+  //   const { id, email_addresses, username, image_url } = evt.data;
 
-    await db.user.create({
-      data: {
-        externalUserId: id,
-        username: payload.data.username,
-        imageUrl: image_url,
-        email: 'd@gmail.com',
-        stream: {
-          create: {
-            name: `${payload.data.username}'s stream`,
-          },
-        },
-      },
-    });
-  }
+  //   await db.user.create({
+  //     data: {
+  //       externalUserId: id,
+  //       username: payload.data.username,
+  //       imageUrl: image_url,
+  //       email: 'd@gmail.com',
+  //       stream: {
+  //         create: {
+  //           name: `${payload.data.username}'s stream`,
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
 
   // if (eventType === 'user.created') {
   //   const { id, email_addresses, username, image_url } = evt.data;
