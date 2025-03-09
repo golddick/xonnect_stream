@@ -1,53 +1,3 @@
-// import React from 'react'
-// import {
-//     DropdownMenu,
-//     DropdownMenuContent,
-//     DropdownMenuItem,
-//     DropdownMenuLabel,
-//     DropdownMenuSeparator,
-//     DropdownMenuTrigger,
-//   } from "@/components/ui/dropdown-menu"
-//   // import MoreVertIcon from '@mui/icons-material/MoreVert';
-// import Link from 'next/link';
-// import { MoreVertical, Trash } from 'lucide-react';
-// import { Button } from '@/components/ui/button';
-
-  
-//   interface SideDotProps {
-//     scheduleID:string
-//     creator:boolean
-//   }
-
-// const StreamHeaderSideDot = ({scheduleID, creator}:SideDotProps) => {
-
- 
-
-
-//   return (
-//     <div className='h-[10px] w-[10px] flex items-center '>
-//         <DropdownMenu>
-//   <DropdownMenuTrigger className='flex focus:outline-none'><MoreVertical/></DropdownMenuTrigger>
-//   <DropdownMenuContent>
- 
-//     <DropdownMenuItem>Report</DropdownMenuItem>
-//     <DropdownMenuItem>Share </DropdownMenuItem>
-//     {
-//       creator && (
-//         <Button >
-//           <span>Delete</span>
-//         </Button>
-//       )
-//     }
-
-
-//   </DropdownMenuContent>
-// </DropdownMenu>
-
-//     </div>
-//   )
-// }
-
-// export default StreamHeaderSideDot
 
 'use client'
 
@@ -58,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreVertical, Trash } from 'lucide-react';
+import { GripVertical, MoreVertical, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { deleteScheduledStream } from '@/actions/schedule';
 import { toast } from 'sonner';
@@ -99,7 +49,7 @@ const StreamHeaderSideDot = ({ scheduleID, creator }: SideDotProps) => {
     <div className="h-[10px] w-[10px] flex items-center">
       <DropdownMenu>
         <DropdownMenuTrigger className="flex focus:outline-none">
-          <MoreVertical />
+          <GripVertical />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem>Report</DropdownMenuItem>

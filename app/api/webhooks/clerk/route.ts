@@ -56,56 +56,56 @@ export async function POST(req: Request) {
 
   const eventType = evt.type;
 
-  // if (eventType === "user.created") {
-  //   const { id, email_addresses, username, image_url } = evt.data;
-
-  //   await db.user.create({
-  //     data: {
-  //       externalUserId: id,
-  //       username: payload.data.username,
-  //       imageUrl: image_url,
-  //       email: 'd@gmail.com',
-  //       stream: {
-  //         create: {
-  //           name: `${payload.data.username}'s stream`,
-  //         },
-  //       },
-  //     },
-  //   });
-  // }
-
-  if (eventType === 'user.created') {
+  if (eventType === "user.created") {
     const { id, email_addresses, username, image_url } = evt.data;
-  
-    // Check if all required data exists
-    if (!id || !email_addresses || !email_addresses[0]?.email_address) {
-      console.error("Error: Missing required data -", evt.data);
-      return new Response('Error occurred -- missing data', {
-        status: 400
-      });
-    }
-  
-    const email = email_addresses[0].email_address;
-    const user = {
-      externalUserId: id,
-      email: email, 
-      username: username ?? '', 
-      imageUrl: image_url ?? '', 
-      stream: {
-        create: {
-          name: `${username ?? 'Anonymous'}'s stream`, 
+
+    await db.user.create({
+      data: {
+        externalUserId: id,
+        username: payload.data.username,
+        imageUrl: image_url,
+        email: 'd@gmail.com',
+        stream: {
+          create: {
+            name: `${payload.data.username}'s stream`,
+          },
         },
       },
-    };
-  
-    try {
-      // Create the user in the database
-      await db.user.create({ data: user });
-    } catch (error) {
-      console.error("Error creating user:", error);
-      return new Response('Error occurred while creating user', { status: 500 });
-    }
+    });
   }
+
+  // if (eventType === 'user.created') {
+  //   const { id, email_addresses, username, image_url } = evt.data;
+  
+  //   // Check if all required data exists
+  //   if (!id || !email_addresses || !email_addresses[0]?.email_address) {
+  //     console.error("Error: Missing required data -", evt.data);
+  //     return new Response('Error occurred -- missing data', {
+  //       status: 400
+  //     });
+  //   }
+  
+  //   const email = email_addresses[0].email_address;
+  //   const user = {
+  //     externalUserId: id,
+  //     email: email, 
+  //     username: username ?? '', 
+  //     imageUrl: image_url ?? '', 
+  //     stream: {
+  //       create: {
+  //         name: `${username ?? 'Anonymous'}'s stream`, 
+  //       },
+  //     },
+  //   };
+  
+  //   try {
+  //     // Create the user in the database
+  //     await db.user.create({ data: user });
+  //   } catch (error) {
+  //     console.error("Error creating user:", error);
+  //     return new Response('Error occurred while creating user', { status: 500 });
+  //   }
+  // }
   
 
  
