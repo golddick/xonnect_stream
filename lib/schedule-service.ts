@@ -245,23 +245,3 @@ export const getScheduleById = async (scheduleId: string) => {
 };
 
 
-export const getScheduleFileById = async (scheduleId: string) => {
-  const schedule = await db.schedule.findUnique({
-    where: { id: scheduleId },
-    select: {
-      fileUploads: {
-        select: {
-          id: true,
-          createdAt: true,
-          updatedAt: true,
-          scheduleId: true,
-          ImageURL: true,
-        },
-      },
-    },
-  });
-
-  console.log("Schedule Data:", schedule); // Debugging line
-
-  return schedule;
-};

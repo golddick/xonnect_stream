@@ -1,4 +1,4 @@
-
+'use client'
 
 import { BadgeCheck, VerifiedIcon } from 'lucide-react'
 import React from 'react'
@@ -11,8 +11,8 @@ import { getSelf } from '@/lib/auth-service'
 import { EditSchedule } from '../edit-schedule/edit-schedule'
 import { AddGallery } from '../SreamGallary/AddGallery'
 import { Actions } from '@/components/stream-player/actions'
-import { PuchaseBTN } from '@/components/purchaseBTN/PurchaseBTN'
 import Link from 'next/link'
+import { PurchaseBTN } from '@/components/purchaseBTN/PurchaseBTN'
 
 
 interface Schedule extends PrismaSchedule {
@@ -22,13 +22,20 @@ interface Schedule extends PrismaSchedule {
 interface Props {
  
   data: Schedule  ;
-  userId:string | undefined
+  userId:string 
+  selfName:string 
+  selfEmail:string | null
   fileUpload: ScheduleFileUpload []
 }
 
-const StreamHeader =  ({data, userId, fileUpload}:Props) => {
+const StreamHeader =  ({data, userId, fileUpload, selfName, selfEmail}:Props) => {
 
   const creator = userId ? data.userId === userId : false;
+
+  console.log(
+    selfEmail,
+    selfName, 'self'
+  )
 
   return (
   
@@ -71,7 +78,8 @@ const StreamHeader =  ({data, userId, fileUpload}:Props) => {
             </div>
           ):(
             <div className=' flex gap-2 items-center'>
-             <PuchaseBTN/>
+             {/* <PurchaseBTN data={data} selfName={selfName} selfEmail={selfEmail} /> */}
+              <Button>purchase</Button>
             </div>
           )
         }

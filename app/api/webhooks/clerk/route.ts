@@ -1,9 +1,11 @@
 import { Webhook } from "svix";
 import { headers } from "next/headers";
-import { EmailAddress, WebhookEvent } from "@clerk/nextjs/server";
+import {  WebhookEvent } from "@clerk/nextjs/server";
 
 import { db } from "@/lib/db";
 import { resetIngresses } from "@/actions/ingress";
+import { createUser } from "@/actions/user";
+import { User } from "@prisma/client";
 
 export async function POST(req: Request) {
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
@@ -31,7 +33,7 @@ export async function POST(req: Request) {
   const payload = await req.json();
   const body = JSON.stringify(payload);
 
-  console.log(payload)
+  console.log(payload, 'payloads ')
   console.log('Webhook payload:', body)
   // Create a new Svix instance with your secret.
   const wh = new Webhook(WEBHOOK_SECRET);
@@ -54,25 +56,62 @@ export async function POST(req: Request) {
 
   const eventType = evt.type;
 
-  if (eventType === "user.created") {
+  // if (eventType === "user.created") {
+  //   const { id, email_addresses, username, image_url } = evt.data;
 
-    await db.user.create({
-      data: {
-        externalUserId: payload.data.id,
-        username: payload.data.username,
-        imageUrl: payload.data.image_url,
-        stream: {
-          create: {
-            name: `${payload.data.username}'s stream`,
-          },
+  //   await db.user.create({
+  //     data: {
+  //       externalUserId: id,
+  //       username: payload.data.username,
+  //       imageUrl: image_url,
+  //       email: 'd@gmail.com',
+  //       stream: {
+  //         create: {
+  //           name: `${payload.data.username}'s stream`,
+  //         },
+  //       },
+  //     },
+  //   });
+  // }
+
+  if (eventType === 'user.created') {
+    const { id, email_addresses, username, image_url } = evt.data;
+  
+    // Check if all required data exists
+    if (!id || !email_addresses || !email_addresses[0]?.email_address) {
+      console.error("Error: Missing required data -", evt.data);
+      return new Response('Error occurred -- missing data', {
+        status: 400
+      });
+    }
+  
+    const email = email_addresses[0].email_address;
+    const user = {
+      externalUserId: id,
+      email: email, 
+      username: username ?? '', 
+      imageUrl: image_url ?? '', 
+      stream: {
+        create: {
+          name: `${username ?? 'Anonymous'}'s stream`, 
         },
       },
-    });
+    };
+  
+    try {
+      // Create the user in the database
+      await db.user.create({ data: user });
+    } catch (error) {
+      console.error("Error creating user:", error);
+      return new Response('Error occurred while creating user', { status: 500 });
+    }
   }
+  
 
  
 
   if (eventType === "user.updated") {
+
     await db.user.update({
       where: {
         externalUserId: payload.data.id,
@@ -80,6 +119,7 @@ export async function POST(req: Request) {
       data: {
         username: payload.data.username,
         imageUrl: payload.data.image_url,
+       
       },
     });
   }

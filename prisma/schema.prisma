@@ -14,7 +14,7 @@ model User {
   username       String  @unique
   imageUrl       String  @db.Text
   externalUserId String  @unique
-  email          String?  @unique
+  email          String? @db.Text
   bio            String? @db.Text
   instagram      String? @db.Text
   twitter        String? @db.Text
