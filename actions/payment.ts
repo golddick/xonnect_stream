@@ -1,47 +1,113 @@
 "use server";
 
-import { Prisma } from "@prisma/client";
-import { revalidatePath } from "next/cache";
-import { db } from "@/lib/db";
-import { getSelf } from "@/lib/auth-service";
 
-export const createPayment = async (paymentData: {
-    userId?: string; 
-    email: string; 
-    name: string; 
-    amount: number; 
-    status: "SUCCESSFUL" | "FAILED"; 
+import { db } from '@/lib/db';
+import { Prisma } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
+
+
+// Validate the payment data
+export const validatePaymentData = (paymentData: { email: string, name: string, amount: number, scheduleId?: string, streamId?: string }) => {
+    if (!paymentData.email || !paymentData.name || !paymentData.amount) {
+        throw new Error("Missing required fields for payment");
+    }
+
+    // Ensure at least one of scheduleId or streamId is provided
+    if (!paymentData.scheduleId && !paymentData.streamId) {
+        throw new Error("Either scheduleId or streamId is required");
+    }
+};
+
+// Check if the user exists in the database
+export const checkUserExistence = async (userId: string) => {
+    const userExists = await db.user.findUnique({
+        where: { externalUserId: userId },
+    });
+
+    if (!userExists) {
+        throw new Error(`User with ID ${userId} does not exist`);
+    }
+};
+
+// Create the payment record in the database
+export const createPaymentRecord = async (paymentData: {
+    userId: string;
+    email: string;
+    name: string;
+    amount: number;
+    status: "SUCCESSFUL" | "FAILED";
     scheduleId?: string;
-    streamId?: string; 
+    streamId?: string;
+}) => {
+    // Create the payment record
+    const payment = await db.payment.create({
+        data: {
+            externalUserId: paymentData.userId,
+            email: paymentData.email,
+            name: paymentData.name,
+            amount: paymentData.amount,
+            status: paymentData.status,
+            scheduleId: paymentData.scheduleId, 
+            streamId: paymentData.streamId,
+        },
+    });
+
+    return payment;
+};
+
+// Main create payment function
+export const createPayment = async (paymentData: {
+    userId: string;
+    email: string;
+    name: string;
+    amount: number;
+    status: "SUCCESSFUL" | "FAILED";
+    scheduleId?: string;
+    streamId?: string;
 }) => {
     try {
-        const self = await getSelf();
+        // Validate the payment data
+        validatePaymentData(paymentData);
 
-        // Validate required fields for the payment
-        if (!paymentData.email || !paymentData.name || !paymentData.amount) {
-            throw new Error("Missing required fields for payment");
-        }
+        // Check if the user exists in the database
+        await checkUserExistence(paymentData.userId);
 
         // Create the payment record
-        const payment = await db.payment.create({
-            data: {
-                userId: paymentData.userId || self.id, // Use provided userId or default to self.id
-                email: paymentData.email,
-                name: paymentData.name || self.username,
-                amount: paymentData.amount,
-                status: paymentData.status,
-                scheduleId: paymentData.scheduleId, // Optional: Associate with a schedule
-                streamId: paymentData.streamId, // Optional: Associate with a stream
-            },
-        });
+        const payment = await createPaymentRecord(paymentData);
 
         // Revalidate paths for caching updates (if needed)
-        revalidatePath(`/u/${self.username}/payments`);
-        revalidatePath(`/u/${self.username}`);
+        // You might want to keep this or remove based on your setup
+        // revalidatePath(`/u/${self.username}/payments`);
+        revalidatePath(`/ schedule-info/${paymentData.scheduleId}`);
 
         return payment;
     } catch (error) {
         console.error("createPayment", error);
+
+        // Handle Prisma foreign key violation error (P2003)
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2003') {
+            throw new Error(`Invalid userId: User with ID ${paymentData.userId} does not exist.`);
+        }
+
+        // Handle any other error
         throw new Error("Internal server error");
+    }
+};
+
+export const checkIfUserPurchased = async (userId: string, scheduleId?: string,streamId?:string  ): Promise<boolean> => {
+    try {
+        const payment = await db.payment.findFirst({
+            where: {
+                externalUserId: userId,
+                scheduleId: scheduleId,
+                streamId: streamId,
+                status: "SUCCESSFUL", // Ensure the payment was successful
+            },
+        });
+
+        return !!payment; // Return true if a payment exists, false otherwise
+    } catch (error) {
+        console.error("Error checking purchase status:", error);
+        throw new Error("Failed to check purchase status");
     }
 };

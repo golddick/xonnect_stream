@@ -12,7 +12,7 @@ import { EditSchedule } from '../edit-schedule/edit-schedule'
 import { AddGallery } from '../SreamGallary/AddGallery'
 import { Actions } from '@/components/stream-player/actions'
 import Link from 'next/link'
-import { PurchaseBTN } from '@/components/purchaseBTN/PurchaseBTN'
+import { SchedulePurchaseBTN } from '@/components/purchaseBTN/SchedulePurchaseBTN'
 
 
 interface Schedule extends PrismaSchedule {
@@ -22,7 +22,7 @@ interface Schedule extends PrismaSchedule {
 interface Props {
  
   data: Schedule  ;
-  userId:string | null
+  userId:string
   selfName:string 
   selfEmail:string | null
   fileUpload: ScheduleFileUpload []
@@ -30,11 +30,13 @@ interface Props {
 
 const StreamHeader =  ({data, userId, fileUpload, selfName, selfEmail}:Props) => {
 
-  const creator = userId ? data.userId === userId : false;
+  // const creator = userId ? data.user?.externalUserId === userId : false;
+
+  const creator = userId && data.user?.externalUserId === userId;
 
   console.log(
-    selfEmail,
-    selfName, 'self'
+    data.user?.externalUserId,
+    userId, 'self'
   )
 
   return (
@@ -78,15 +80,14 @@ const StreamHeader =  ({data, userId, fileUpload, selfName, selfEmail}:Props) =>
             </div>
           ):(
             <div className=' flex gap-2 items-center'>
-             {/* <PurchaseBTN data={data} selfName={selfName} selfEmail={selfEmail} /> */}
-              <Button>purchase</Button>
+             <SchedulePurchaseBTN data={data} selfName={selfName} selfEmail={selfEmail} userId={userId} />
             </div>
           )
         }
       
             </div>
 
-            <div className=' justify-end '>  <StreamHeaderSideDot  scheduleID={data.id} creator={creator}/></div>
+            <div className=' justify-end '>  <StreamHeaderSideDot  scheduleID={data.id} creator={!!creator}/></div>
 
         </div>
       </div>

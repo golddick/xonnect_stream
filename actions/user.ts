@@ -7,17 +7,6 @@ import { getSelf } from "@/lib/auth-service";
 import { db } from "@/lib/db";
 
 
-export async function createUser(data: User) {
-  const self = await getSelf();
-  try {
-    const user = await db.user.create({ data })
-    revalidatePath(`/${self.username}`);
-    revalidatePath(`/u/${self.username}`);
-    return { user }
-  } catch (error) {
-    return { error }
-  }
-}
 
 export const updateUser = async (values: Partial<User>) => {
   const self = await getSelf();

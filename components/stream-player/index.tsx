@@ -39,7 +39,7 @@ type CustomUser = {
   twitter: string | null;
   stream: CustomStream | null;
   imageUrl: string;
-  _count: {
+  _count: { 
     followedBy: number;
   };
 };
@@ -47,13 +47,20 @@ type CustomUser = {
 export function StreamPlayer({
   user,
   stream,
+  userId,
   isFollowing,
-  schedule
+  schedule,
+  externalUserName,
+  externalUserEmail,
 }: {
   user: CustomUser;
+  userId:string;
   stream: CustomStream;
   isFollowing: boolean;
   schedule:  (Schedule & { user: User })[]
+  externalUserName: string
+  externalUserEmail: string | undefined
+
 }) {
   const { identity, name, token } = useViewerToken(user.id);
   const { collapsed } = useChatSidebar((state) => state);
@@ -78,7 +85,7 @@ export function StreamPlayer({
         )}
       >
         <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10 bg-black">
-          <Video hostName={user.username} hostIdentity={user.id} />
+          <Video hostName={user.username} hostIdentity={user.id} userId={userId}  streamId={stream.id}    schedule={schedule} externalUserName={externalUserName} externalUserEmail={externalUserEmail || ''}/>
           <Header
             imageUrl={user.imageUrl}
             hostName={user.username}
@@ -86,6 +93,8 @@ export function StreamPlayer({
             isFollowing={isFollowing}
             name={stream.name}
             viewerIdentity={identity}
+
+            // data={stream}
           />
           <InfoCard
             hostIdentity={user.id}

@@ -4,7 +4,6 @@ import {  WebhookEvent } from "@clerk/nextjs/server";
 
 import { db } from "@/lib/db";
 import { resetIngresses } from "@/actions/ingress";
-import { createUser } from "@/actions/user";
 import { User } from "@prisma/client";
 
 export async function POST(req: Request) {

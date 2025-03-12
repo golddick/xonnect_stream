@@ -92,12 +92,12 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-red-600 opacity-10 rounded-full blur-3xl"></div>
         <div className="max-w-7xl mx-auto px-8">
             <h2 className="text-white text-6xl font-bold mb-16 text-center">Trending <span className="text-red-500">Now</span></h2>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
-                    {title: "Summer Music Festival", time: "Live Now", image: "/assets/womn.jpeg"},
-                    {title: "World Tour Concert", time: "Starting in 2 hours", image: "/assets/womn.jpeg"},
-                    {title: "Exclusive Interview", time: "Tomorrow, 8 PM", image: "/assets/womn.jpeg"},
-                    {title: "Live Comedy Special", time: "Friday, 9 PM", image: "/assets/womn.jpeg"}
+                    {title: "Summer Music Festival", time: "Live Now", image: "/assets/woman.jpeg"},
+                    {title: "World Tour Concert", time: "Starting in 2 hours", image: "/assets/woman.jpeg"},
+                    {title: "Exclusive Interview", time: "Tomorrow, 8 PM", image: "/assets/woman.jpeg"},
+                    {title: "Live Comedy Special", time: "Friday, 9 PM", image: "/assets/woman.jpeg"}
                 ].map((item, index) => (
                     <div key={index} className="bg-black/40 rounded-3xl overflow-hidden group hover:transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-red-500/20">
                         <div className="aspect-video relative">

@@ -18,6 +18,12 @@ export const createScheduledStream = async (values: Partial<Schedule>) => {
       if (!values.title || !values.address || !values.eventDateTime|| !values.orgEmail  || !self.id) {
         throw new Error("Missing required fields ");
       }
+
+      const selfStream = await db.stream.findUnique({
+        where: {
+          userId: self.id,
+        },
+      });
   
       // Build the schedule data
       const scheduleData: Prisma.ScheduleCreateInput = {
@@ -32,27 +38,21 @@ export const createScheduledStream = async (values: Partial<Schedule>) => {
         artists: values.artists || null,
         organizers: values.organizers || null,
         orgEmail:values.orgEmail,
-        streamId:self.streamId,
+        streamId: self.streamId || selfStream?.id || '',
         user: {
           connect: { id: self.id }, 
         },
-        subscribers: {
-          create: [
-            {
-              userId: self.id,  
-              amount: values.amount || 0,
-              status: "SUCCESSFUL",
-              email:self.email || 'No Email',
-              name:'Creator'
-            },
-            {
-              amount: values.amount || 0,
-              status: "SUCCESSFUL",
-              email:values.orgEmail,
-              name:'Organizer'
-            },
-          ]
-        },
+        payments:{
+          create:{
+            name:`creator ${self.username}`,
+            status:'SUCCESSFUL',
+            amount:values.amount || 0,
+            email:self.email,
+            externalUserId:self.externalUserId,
+            streamId:self.streamId || selfStream?.id
+            
+          }
+        }
        
       };
       
@@ -90,6 +90,12 @@ export const updateScheduledStream = async (scheduleID: string, values: Partial<
       throw new Error("Schedule not found");
     }
 
+    const selfStream = await db.stream.findUnique({
+      where: {
+        userId: self.id,
+      },
+    });
+
     // Check if the user is the one who created the schedule
     if (schedule.userId !== self.id) {
       throw new Error("You are not authorized to edit this schedule");
@@ -108,7 +114,7 @@ export const updateScheduledStream = async (scheduleID: string, values: Partial<
       artists: values.artists || schedule.artists,
       organizers: values.organizers || schedule.organizers,
       orgEmail:values.orgEmail || schedule.orgEmail,
-      streamId: values.streamId || schedule.streamId,
+      streamId:  selfStream?.id || schedule.streamId,
       
     };
 

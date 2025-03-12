@@ -218,7 +218,8 @@ export const getScheduleById = async (scheduleId: string) => {
           select:{
             username:true,
             imageUrl:true,
-            id:true
+            id:true,
+            externalUserId:true
           }
         },
         

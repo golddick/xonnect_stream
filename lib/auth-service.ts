@@ -8,8 +8,8 @@ export const getSelf = async () => {
   const self = await currentUser();
 
   if (!self || !self.username) {
-    throw new Error("Unauthorized");
-    // redirect('/sign-in')
+    // throw new Error("Unauthorized");
+    redirect('/sign-in')
   }
 
   const user = await db.user.findUnique({

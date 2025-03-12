@@ -58,8 +58,7 @@ model Stream {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  subscribers      Payment[]     @relation("StreamSubscribers")
+  payments          Payment[] @relation("StreamPayments")
 
   @@index([userId])
   @@index([ingressId])
@@ -68,20 +67,25 @@ model Stream {
 
 model Payment {
   id         String            @id @default(uuid())
-  userId     String?           
-  user       User?             @relation(fields: [userId], references: [id], onDelete: Cascade)
-  email      String             
-  name      String
-  amount     Float 
-  streamId   String?           
-  status     SUBSCRIPTION_STATUS
+  externalUserId     String
+  user       User              @relation(fields: [externalUserId], references: [externalUserId], onDelete: Cascade)
+  email      String
+  name       String
+  amount     Float
+  streamId   String?
+  stream     Stream?           @relation("StreamPayments", fields: [streamId], references: [id], onDelete: Cascade)
   scheduleId String?
-  schedule   Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: Cascade, map: "Payment_scheduleId_fkey")
-  scheduleSubscribers Schedule? @relation("ScheduleSubscribers", fields: [scheduleId], references: [id], map: "Payment_scheduleSubscribers_fkey")
-  streamSubscribers Stream?    @relation("StreamSubscribers", fields: [streamId], references: [id], map: "Payment_streamSubscribers_fkey")
-  updatedAt  DateTime          @default(now())
+  schedule   Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  status     SUBSCRIPTION_STATUS
   createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  @@index([externalUserId])
+  @@index([scheduleId])
+  @@index([streamId])
 }
+
+
 
 enum SUBSCRIPTION_STATUS {
   FAILED 
@@ -104,10 +108,9 @@ model Schedule {
   userId          String  
   user            User     @relation(name: "scheduledBy",  fields: [userId], references: [id], onDelete: Cascade)
 
-  streamId        String? 
+  streamId        String  
   isLive          Boolean @default(false) 
 
-  subscribers     Payment[]    @relation("ScheduleSubscribers")
   payments        Payment[]
   streams         Stream[]
   fileUploads     ScheduleFileUpload[]
@@ -159,3 +162,4 @@ model Block {
   @@index([blockerId])
   @@index([blockedId])
 }
+

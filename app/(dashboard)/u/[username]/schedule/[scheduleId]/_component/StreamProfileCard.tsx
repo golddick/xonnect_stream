@@ -13,7 +13,7 @@ import StreamGallery from './SreamGallary/StreamGallery'
 
 interface Props {
   data: Schedule  | null;
-  userId:string  | null
+  userId:string 
   selfName:string 
   selfEmail:string  | null
   fileUpload: ScheduleFileUpload []

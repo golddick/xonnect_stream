@@ -14,6 +14,7 @@ export default async function CreatorPage({
   params: { username: string };
 }) {
   const user = await getUserByUsername(username);
+   const externalUser = await currentUser();
 
   if (!user || !user.stream) notFound();
 
@@ -24,7 +25,9 @@ export default async function CreatorPage({
 
   return (
     <div className=" w-full mx-auto px-4  md:px-10 rounded-2xl h-full">
-    <StreamPlayer user={user} stream={user.stream} isFollowing={true}  schedule={user.schedules}/>
+    <StreamPlayer user={user} stream={user.stream} isFollowing={isFollowing}  schedule={user.schedules}
+        userId={externalUser?.id || user.externalUserId}  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
+    />
     </div>
   );
 }

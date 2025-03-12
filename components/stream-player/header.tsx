@@ -16,6 +16,7 @@ import { Button } from "../ui/button";
 import { Hint } from "../hint";
 import { DotEllipse } from "./dot-ellipse";
 import { Badge } from "../ui/badge";
+import { StreamPurchaseBTN } from "../purchaseBTN/StreamPurchaseBTN";
 
 export function Header({
   hostIdentity,
@@ -89,11 +90,13 @@ export function Header({
       </div>
 
             <div className="flex items-center gap-3">
+          {/* <StreamPurchaseBTN data={data} selfName={selfName} selfEmail={selfEmail} userId={userId} /> */}
             <Actions
             hostIdentity={hostIdentity}
             isFollowing={isFollowing}
             isHost={isHost}
           />
+
          <DotEllipse/>
             </div>
     </div>

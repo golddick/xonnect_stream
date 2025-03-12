@@ -5,6 +5,7 @@ import { getUserByUsername } from "@/lib/user-service";
 import { isFollowingUser } from "@/lib/follow-service";
 import { isBlockedByUser } from "@/lib/block-service";
 import { StreamPlayer } from "@/components/stream-player";
+import { currentUser } from "@clerk/nextjs/server";
 
 interface UserPageProps {
   params: { username: string };
@@ -22,6 +23,7 @@ export default async function UserPage({
   params: { username },
 }: UserPageProps) {
   const user = await getUserByUsername(username);
+   const externalUser = await currentUser();
 
   if (!user || !user.stream) notFound();
 
@@ -31,6 +33,8 @@ export default async function UserPage({
   if (isBlocked) notFound();
 
   return (
-    <StreamPlayer user={user} isFollowing={isFollowing} stream={user.stream}  schedule={user.schedules}/>
+    <StreamPlayer user={user} isFollowing={isFollowing} stream={user.stream}  schedule={user.schedules}
+    userId={externalUser?.id || user.externalUserId}  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
+    />
   );
 }
