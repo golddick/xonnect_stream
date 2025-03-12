@@ -1,5 +1,5 @@
-"use client";
 
+"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import { Participant, Track } from "livekit-client";
@@ -9,36 +9,53 @@ import { toast } from "sonner";
 
 import { FullscreenControl } from "./fullscreen-control";
 import { VolumeControl } from "./volume-control";
-import { checkIfUserPurchased } from "@/actions/payment"; 
+import { checkIfUserPurchased } from "@/actions/payment";
 import { Schedule } from "@prisma/client";
 import NotPurchased from "../NotPurchased/NotPurchased";
 
 interface LiveVideoProps {
   participant: Participant;
-  userId:string;
-  streamId: string; 
-  hostIdentity: string; 
+  userId: string;
+  streamId: string;
+  hostIdentity: string;
   data: Schedule | null;
-  scheduleId: string | undefined
-
-  externalUserName: string
-  externalUserEmail: string
+  scheduleId: string | undefined;
+  externalUserName: string;
+  externalUserEmail: string;
 }
 
-export function LiveVideo({ participant, streamId, userId , hostIdentity, scheduleId, data, externalUserEmail, externalUserName}: LiveVideoProps) {
+export function LiveVideo({
+  participant,
+  streamId,
+  userId,
+  hostIdentity,
+  scheduleId,
+  data,
+  externalUserEmail,
+  externalUserName,
+}: LiveVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [volume, setVolume] = useState(0);
   const [hasPaid, setHasPaid] = useState(false); // State to track payment status
+  const [isFreeStream, setIsFreeStream] = useState(false); // State to check if the stream is free
 
-  // Check if the user has paid for the stream
+  // Check if the stream is free
   useEffect(() => {
-    if (userId && streamId && scheduleId) {
-      checkIfUserPurchased(userId, scheduleId,streamId )
+    if (data?.isFree === true) {
+      setIsFreeStream(true);
+      setHasPaid(true); // Allow access if the stream is free
+    }
+  }, [data]);
+
+  // Check if the user has paid for the stream (only if the stream is not free)
+  useEffect(() => {
+    if (!isFreeStream && userId && streamId && scheduleId) {
+      checkIfUserPurchased(userId, scheduleId, streamId)
         .then((paid) => {
-          if (!paid) {
+          if (!paid &&  data?.isFree === false) {
             toast.error("You must purchase the stream to watch it.");
           }
           setHasPaid(paid);
@@ -48,7 +65,7 @@ export function LiveVideo({ participant, streamId, userId , hostIdentity, schedu
           toast.error("Failed to verify payment status.");
         });
     }
-  }, [userId, streamId, scheduleId]);
+  }, [isFreeStream, userId, streamId, scheduleId]);
 
   const onVolumeChange = (value: number) => {
     setVolume(+value);
@@ -96,13 +113,16 @@ export function LiveVideo({ participant, streamId, userId , hostIdentity, schedu
       }
     });
 
-  // If the user hasn't paid, show a message instead of the video
-  if (!hasPaid) {
+  // If the stream is not free and the user hasn't paid, show a message instead of the video
+  if (!isFreeStream && !hasPaid) {
     return (
-      <div className="flex h-full w-[80%] mx-auto items-center justify-center bg-neutral-900 text-white gap-4 rounded-2xl">
-        <p>You must purchase the stream to watch it. alot happeing </p>
-        {userId}
-        <NotPurchased data={data} userId={userId}    externalUserName={externalUserName} externalUserEmail={externalUserEmail}/>
+      <div className="flex h-[80%] w-[80%] m-auto items-center justify-center text-white gap-4 rounded-2xl ">
+        <NotPurchased
+          data={data}
+          userId={userId}
+          externalUserName={externalUserName}
+          externalUserEmail={externalUserEmail}
+        />
       </div>
     );
   }
@@ -111,6 +131,9 @@ export function LiveVideo({ participant, streamId, userId , hostIdentity, schedu
     <div ref={wrapperRef} className="relative h-full flex">
       <video ref={videoRef} width="100%" />
       <div className="absolute top-0 h-full w-full opacity-0 hover:opacity-100 hover:transition-all">
+        <div className=" absolute left-0 bg-black shadow-md shadow-[red] rounded-lg px-4 p-2">
+          <span>{data?.title}</span>
+        </div>
         <div className="absolute right-0 lg:hidden w-[10%] mr-0 bg-transparent">
           <span>myyygs</span>
           <span>myyygs</span>
@@ -131,5 +154,3 @@ export function LiveVideo({ participant, streamId, userId , hostIdentity, schedu
     </div>
   );
 }
-
-

@@ -93,8 +93,6 @@ export function StreamPlayer({
             isFollowing={isFollowing}
             name={stream.name}
             viewerIdentity={identity}
-
-            // data={stream}
           />
           <InfoCard
             hostIdentity={user.id}
