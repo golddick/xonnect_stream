@@ -116,7 +116,7 @@ export function LiveVideo({
   // If the stream is not free and the user hasn't paid, show a message instead of the video
   if (!isFreeStream && !hasPaid) {
     return (
-      <div className="flex h-auto w-full md:w-[80%] m-auto items-center justify-center text-white gap-4 rounded-2xl ">
+      <div className=" overflow-scroll hidden-scrollbar flex h-full w-full md:w-[80%] m-auto items-center justify-center text-white gap-4 rounded-2xl ">
         <NotPurchased
           data={data}
           userId={userId}
