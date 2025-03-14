@@ -32,7 +32,7 @@ export function SchedulePurchaseBTN({ data, selfName, selfEmail, userId }: Purch
                 .then((purchased) => setHasPurchased(purchased))
                 .catch((error) => console.error("Error checking purchase status:", error));
         }
-    }, [userId, data?.id]);
+    }, [userId, data?.id, data?.streamId]);
 
     const onPay = () => {
         const paystackKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY;

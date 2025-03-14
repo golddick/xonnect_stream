@@ -48,7 +48,7 @@ export function LiveVideo({
       setIsFreeStream(true);
       setHasPaid(true); // Allow access if the stream is free
     }
-  }, [data]);
+  }, [data, data?.isFree]);
 
   // Check if the user has paid for the stream (only if the stream is not free)
   useEffect(() => {
@@ -133,11 +133,6 @@ export function LiveVideo({
       <div className="absolute top-0 h-full w-full opacity-0 hover:opacity-100 hover:transition-all">
         <div className=" absolute left-0 bg-black shadow-md shadow-[red] rounded-lg px-4 p-2">
           <span>{data?.title}</span>
-        </div>
-        <div className="absolute right-0 lg:hidden w-[10%] mr-0 bg-transparent">
-          <span>myyygs</span>
-          <span>myyygs</span>
-          <span>myyygs</span>
         </div>
         <div className="absolute bottom-0 flex h-14 w-full items-center justify-between bg-gradient-to-r from-neutral-900 px-4">
           <VolumeControl

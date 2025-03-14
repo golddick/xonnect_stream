@@ -23,7 +23,6 @@ const StreamGallery = ({fileUpload,scheduleID}:StreamGalleryProps) => {
 
   return (
         <section className="relative h-full w-full text-white mb-5">
-      <h1>Event Gallery</h1>
 
       {fileUpload?.length > 0 ? (
         <div className="container gap-4">
