@@ -30,6 +30,7 @@ import SponsorCard from "./_components/ads-card/sponsor-card"
 import TopLiveSTream from "./_components/StreamRow/TopLiveSTream"
 import { Results } from "./_components/results"
 import { getStreams } from "@/lib/feed-service";
+import Image from "next/image";
 
 export default async function Home() {
 
@@ -43,7 +44,7 @@ export default async function Home() {
                 <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-red-600 opacity-20 rounded-full blur-3xl"></div>
 
                 <div className="relative z-10 p-8">
-
+ 
                     <SponsorCard/>
 
                     <div className="mb-8">
@@ -74,7 +75,7 @@ export default async function Home() {
                             </button>
                         </div>
 
-                        <h2 className="text-white text-xl font-bold mb-4">Featured Streams</h2>
+                        <h2 className="text-white text-xl font-bold mb-4">Top Stream Channel</h2>
                        <TopLiveSTream data={stream}/>
 
                        {/* <Results label="Creators" /> */}
@@ -116,9 +117,11 @@ export default async function Home() {
                                     className="bg-black/20 rounded-xl overflow-hidden border border-white/5 group hover:border-blue-500/30 transition-all duration-300"
                                 >
                                     <div className="relative">
-                                        <img
+                                        <Image
                                             src={stream.image}
                                             alt={stream.title}
+                                            width={100}
+                                            height={80}
                                             className="w-full h-36 object-cover transition-transform duration-700 group-hover:scale-105"
                                         />
                                         <div className="absolute top-2 left-2 flex items-center gap-2">
@@ -189,7 +192,9 @@ export default async function Home() {
                                     className="bg-black/20 rounded-xl overflow-hidden border border-white/5 group hover:border-blue-500/30 transition-all duration-300"
                                 >
                                     <div className="relative">
-                                        <img
+                                        <Image
+                                            width={100}
+                                            height={80}
                                             src={stream.image}
                                             alt={stream.title}
                                             className="w-full h-36 object-cover transition-transform duration-700 group-hover:scale-105"
@@ -225,14 +230,7 @@ export default async function Home() {
                             ))}
                         </div>
 
-                        <div className="flex items-center justify-center">
-                            <button className="bg-red-600/70 hover:bg-red-600 text-white px-6 py-2.5 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 group">
-                                <span>Load More Streams</span>
-                                <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
-                                    arrow_forward
-                                </span>
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </div>

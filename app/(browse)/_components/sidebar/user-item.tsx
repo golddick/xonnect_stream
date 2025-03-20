@@ -24,7 +24,7 @@ export function UserItem({
 
   const { collapsed } = useSidebar((state) => state);
 
-  const href = `/${username}`;
+  const href = `/${username}/stream`;
   const isActive = pathname === href;
 
   console.log(isLive,'islive ?')

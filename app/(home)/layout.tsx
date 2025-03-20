@@ -1,6 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { Top_nav } from "./_component/Top-nav";
+import Footer from "./_component/Footer";
 
 
 export const metadata: Metadata = {
@@ -15,8 +16,9 @@ export default function AuthLayout({
   return (
     <>
     <Top_nav/>
-      <div className="h-full flex flex-col  mt-9">
+      <div className="h-full flex flex-col  mt-9 w-full">
         {children}
+      <Footer/>
       </div>
     </>
   );

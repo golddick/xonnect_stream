@@ -1,6 +1,7 @@
 import { Stream, User } from '@prisma/client'
 import { Play } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react'
 import { BsRecord } from 'react-icons/bs';
 
@@ -19,11 +20,11 @@ const TopLiveSTream = ({data}:TopLiveSTreamProps) => {
     {data.map((stream, index) => (
         <div
             key={index}
-            className="bg-black/20 rounded-xl overflow-hidden border border-red-700  group hover:border-blue-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-blue-800/10"
+            className="bg-black/20 rounded-xl overflow-hidden border-none shadow-md shadow-red-700/25  group hover:border-red-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-red-800/10"
         >
             <div className="relative">
                 <Image
-                    src={stream.thumbnailUrl || '/assets/xb.png'}
+                    src={stream.thumbnailUrl || '/assets/xc.jpg'}
                     alt={stream.name}
                     width={100}
                     height={100}
@@ -38,23 +39,25 @@ const TopLiveSTream = ({data}:TopLiveSTreamProps) => {
                             </span>
                             LIVE
                         </span>
-                    )}
-                    <span className="bg-black/50 text-white px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm">
-                        20 viewers
-                    </span>
+                    )}  
                 </div>
-                <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600/80 w-14 h-14 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100">
+                <Link href={`/${stream.user.username}/stream`}>
+             
+                <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600/80 w-14 h-14 rounded-full flex items-center justify-center hover:bg-red-600 transition-all duration-300 hover:scale-110 opacity-0 group-hover:opacity-100">
                     <span className="material-symbols-outlined text-white text-3xl">
                         <Play/>
                     </span>
                 </button>
+                </Link>
             </div>
             <div className="p-4">
                 <div className="flex items-center gap-2 mb-3">
-                    <img
+                    <Image
                         src={stream.user.imageUrl}
                         alt="Host"
-                        className="w-10 h-10 rounded-full border-2 border-blue-500"
+                        width={10}
+                        height={10}
+                        className="w-10 h-10 object-cover rounded-full border-2 border-red-500"
                     />
                     <div>
                         <h3 className="text-white font-semibold line-clamp-1">
@@ -63,21 +66,7 @@ const TopLiveSTream = ({data}:TopLiveSTreamProps) => {
                         <p className="text-white/60 text-xs">{stream.user.username}</p>
                     </div>
                 </div>
-                <div className="flex justify-between items-center">
-                    <span className="bg-blue-900/30 text-blue-400 px-2 py-1 rounded text-xs">
-                       category
-                    </span>
-                    <div className="flex items-center gap-2">
-                        <button className="text-white/70 hover:text-blue-400 transition-colors">
-                            <span className="material-symbols-outlined text-sm">
-                                notifications
-                            </span>
-                        </button>
-                        <button className="text-white/70 hover:text-blue-400 transition-colors">
-                            <span className="material-symbols-outlined text-sm">favorite</span>
-                        </button>
-                    </div>
-                </div>
+
             </div>
         </div>
     ))}

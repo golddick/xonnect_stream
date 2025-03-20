@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: 'media.sproutsocial.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'img.clerk.com',
+        pathname: '**',
+      },
 
     ],
   },

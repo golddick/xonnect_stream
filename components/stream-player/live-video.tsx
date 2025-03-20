@@ -46,9 +46,13 @@ export function LiveVideo({
   useEffect(() => {
     if (data?.isFree === true) {
       setIsFreeStream(true);
-      setHasPaid(true); // Allow access if the stream is free
+      setHasPaid(true);
+    } else {
+      setIsFreeStream(false);
+      setHasPaid(false);
     }
-  }, [data, data?.isFree]);
+  }, [data?.isFree]);
+  
 
   // Check if the user has paid for the stream (only if the stream is not free)
   useEffect(() => {
