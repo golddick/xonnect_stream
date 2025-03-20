@@ -42,28 +42,51 @@ export function Video({
 
 
    // Function to find the schedule closest to the current time
-   const getClosestSchedule = (schedules: (Schedule & { user: User })[]) => {
+  //  const getClosestSchedule = (schedules: (Schedule & { user: User })[]) => {
+  //   if (schedules.length === 0) return null;
+
+  //   // Get the current time or use a stream-specific time
+  //   const currentTime = new Date();
+
+  //   // Sort schedules by the start time (ascending)
+  //   schedules.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
+
+  //   // Find the schedule closest to the current time
+  //   let closestSchedule = schedules[0];
+  //   let closestDiff = Math.abs(new Date(schedules[0].eventDateTime).getTime() - currentTime.getTime());
+
+  //   schedules.forEach((schedule) => {
+  //     const diff = Math.abs(new Date(schedule.eventDateTime).getTime() - currentTime.getTime());
+  //     if (diff < closestDiff) {
+  //       closestDiff = diff;
+  //       closestSchedule = schedule;
+  //     }
+  //   });
+
+  //   return closestSchedule;
+  // };
+
+  const getClosestSchedule = (schedules: (Schedule & { user: User })[]) => {
     if (schedules.length === 0) return null;
-
-    // Get the current time or use a stream-specific time
+  
+    // Get the current time
     const currentTime = new Date();
-
-    // Sort schedules by the start time (ascending)
-    schedules.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
-
-    // Find the schedule closest to the current time
-    let closestSchedule = schedules[0];
-    let closestDiff = Math.abs(new Date(schedules[0].eventDateTime).getTime() - currentTime.getTime());
-
-    schedules.forEach((schedule) => {
-      const diff = Math.abs(new Date(schedule.eventDateTime).getTime() - currentTime.getTime());
-      if (diff < closestDiff) {
-        closestDiff = diff;
-        closestSchedule = schedule;
-      }
-    });
-
-    return closestSchedule;
+  
+    // Filter out past schedules (only keep upcoming schedules)
+    const upcomingSchedules = schedules.filter(
+      (schedule) => new Date(schedule.eventDateTime).getTime() > currentTime.getTime()
+    );
+  
+    // If no upcoming schedules exist, return null
+    if (upcomingSchedules.length === 0) return null;
+  
+    // Sort upcoming schedules by the start time (ascending)
+    upcomingSchedules.sort(
+      (a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime()
+    );
+  
+    // The first schedule in the sorted list is the closest upcoming schedule
+    return upcomingSchedules[0];
   };
 
   // Get the closest schedule from the array
