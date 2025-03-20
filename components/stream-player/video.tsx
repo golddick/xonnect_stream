@@ -42,29 +42,6 @@ export function Video({
 
 
    // Function to find the schedule closest to the current time
-  //  const getClosestSchedule = (schedules: (Schedule & { user: User })[]) => {
-  //   if (schedules.length === 0) return null;
-
-  //   // Get the current time or use a stream-specific time
-  //   const currentTime = new Date();
-
-  //   // Sort schedules by the start time (ascending)
-  //   schedules.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
-
-  //   // Find the schedule closest to the current time
-  //   let closestSchedule = schedules[0];
-  //   let closestDiff = Math.abs(new Date(schedules[0].eventDateTime).getTime() - currentTime.getTime());
-
-  //   schedules.forEach((schedule) => {
-  //     const diff = Math.abs(new Date(schedule.eventDateTime).getTime() - currentTime.getTime());
-  //     if (diff < closestDiff) {
-  //       closestDiff = diff;
-  //       closestSchedule = schedule;
-  //     }
-  //   });
-
-  //   return closestSchedule;
-  // };
 
   const getClosestSchedule = (schedules: (Schedule & { user: User })[]) => {
     if (schedules.length === 0) return null;

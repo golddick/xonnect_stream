@@ -54,12 +54,35 @@ export function LiveVideo({
   }, [data?.isFree]);
   
 
-  // Check if the user has paid for the stream (only if the stream is not free)
+  // // Check if the user has paid for the stream (only if the stream is not free)
+  // useEffect(() => {
+  //   if (!isFreeStream && userId && streamId && scheduleId) {
+  //     checkIfUserPurchased(userId, scheduleId, streamId)
+  //       .then((paid) => {
+  //         if (!paid &&  data?.isFree === false) {
+  //           toast.error("You must purchase the stream to watch it.");
+  //         }
+  //         setHasPaid(paid);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error checking payment status:", error);
+  //         toast.error("Failed to verify payment status.");
+  //       });
+  //   }
+  // }, [isFreeStream, userId, streamId, scheduleId]);
+
   useEffect(() => {
-    if (!isFreeStream && userId && streamId && scheduleId) {
+    // Ensure the user is logged in
+    if (!userId) {
+      toast.error("You must be logged in to access this stream.");
+      return; // Exit early if the user is not logged in
+    }
+  
+    // Check if the user has paid for the stream (only if the stream is not free)
+    if (!isFreeStream && streamId && scheduleId) {
       checkIfUserPurchased(userId, scheduleId, streamId)
         .then((paid) => {
-          if (!paid &&  data?.isFree === false) {
+          if (!paid && data?.isFree === false) {
             toast.error("You must purchase the stream to watch it.");
           }
           setHasPaid(paid);
@@ -69,7 +92,7 @@ export function LiveVideo({
           toast.error("Failed to verify payment status.");
         });
     }
-  }, [isFreeStream, userId, streamId, scheduleId]);
+  }, [isFreeStream, userId, streamId, scheduleId, data?.isFree]);
 
   const onVolumeChange = (value: number) => {
     setVolume(+value);

@@ -94,7 +94,7 @@ export const createPayment = async (paymentData: {
     }
 };
 
-export const checkIfUserPurchased = async (userId: string, scheduleId?: string,streamId?:string  ): Promise<boolean> => {
+export const checkIfUserPurchased = async (userId: string, scheduleId: string,streamId:string  ): Promise<boolean> => {
     try {
         const payment = await db.payment.findFirst({
             where: {
