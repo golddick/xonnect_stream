@@ -1,0 +1,14 @@
+/*
+  Warnings:
+
+  - The values [FAILED] on the enum `SUBSCRIPTION_STATUS` will be removed. If these variants are still used in the database, this will fail.
+
+*/
+-- AlterEnum
+BEGIN;
+CREATE TYPE "SUBSCRIPTION_STATUS_new" AS ENUM ('PENDING', 'SUCCESSFUL');
+ALTER TABLE "Payment" ALTER COLUMN "status" TYPE "SUBSCRIPTION_STATUS_new" USING ("status"::text::"SUBSCRIPTION_STATUS_new");
+ALTER TYPE "SUBSCRIPTION_STATUS" RENAME TO "SUBSCRIPTION_STATUS_old";
+ALTER TYPE "SUBSCRIPTION_STATUS_new" RENAME TO "SUBSCRIPTION_STATUS";
+DROP TYPE "SUBSCRIPTION_STATUS_old";
+COMMIT;
