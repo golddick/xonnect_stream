@@ -10,8 +10,8 @@ export const SingleNav = () => {
 
 
   return (
-    <nav className="flex items-center justify-between bg-transparent fixed top-0 z-10 w-full p-4 text-white text-[20px]">
-      <div className="items-center gap-2 w-[50px] h-[50px] relative flex animate-pulse rounded-lg overflow-hidden shadow-md shadow-neutral-600">
+    <nav className="flex items-center justify-between bg-black fixed top-0 z-40 w-full p-4 text-white text-[20px]">
+      <div className="items-center gap-2 w-[40px] h-[40px] relative flex animate-pulse rounded-lg overflow-hidden shadow-md shadow-neutral-600">
         <Link href={'/'}>
         <Image src='/assets/xsb.png' alt='Logo' fill className='absolute'/>
         </Link>

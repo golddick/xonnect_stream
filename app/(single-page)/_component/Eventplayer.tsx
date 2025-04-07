@@ -83,7 +83,7 @@ export function Eventplayer({
           "grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6  h-auto",
           collapsed && "lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2"
         )}
-      >
+      > 
         <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10  bg-black">
           <Video hostName={user.username} hostIdentity={user.id} userId={userId}  streamId={stream.id}    schedule={schedule} externalUserName={externalUserName} externalUserEmail={externalUserEmail || ''}/>
           {/* <Header
@@ -95,20 +95,23 @@ export function Eventplayer({
             viewerIdentity={identity}
           /> */}
 
-          <CreatorInfoCard 
-           image={user.imageUrl}
-           name={user.username}
-           isVerified= {true}
-           username={`${user.username} streaming channel`}
-           bio={user.bio || ''}
-           followers={user._count.followedBy}
-           instagram={user.instagram || ''}
-           youtube={user.youtube || ''}
-           twitter={user.twitter || ''}
-           hostIdentity={user.id}
-           viewerIdentity={identity}
-           isFollowing={isFollowing}
-          />
+            <CreatorInfoCard
+            image={user.imageUrl}
+            name={user.username}
+            isVerified={true}
+            username={`${user.username} streaming channel`}
+            bio={user.bio || ''}
+            followers={user._count.followedBy}
+            socialLinks={{
+                instagram: user.instagram || '',
+                youtube: user.youtube || '',
+                twitter: user.twitter || '',
+            }}
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            isFollowing={isFollowing}
+            />
+
          
           {/* <About_Tab
            hostName={user.username}

@@ -15,7 +15,7 @@ export const createScheduledStream = async (values: Partial<Schedule>) => {
 
   
       // Validate required fields
-      if (!values.title || !values.address || !values.eventDateTime|| !values.orgEmail  || !self.id) {
+      if (!values.title || !values.address || !values.eventDateTime|| !values.orgEmail  || !self.id || !values.category) {
         throw new Error("Missing required fields ");
       }
 
@@ -33,6 +33,8 @@ export const createScheduledStream = async (values: Partial<Schedule>) => {
         eventDateTime: new Date(values.eventDateTime),
         amount: values.amount,
         isFree: values.isFree,
+        category:values.category,
+        tags: values.tags,
         thumbnailImage: values.thumbnailImage || null,
         thumbnailVideo: values.thumbnailVideo || null,
         artists: values.artists || null,
@@ -107,6 +109,8 @@ export const updateScheduledStream = async (scheduleID: string, values: Partial<
       address: values.address || schedule.address,
       description: values.description || schedule.description,
       eventDateTime: values.eventDateTime || schedule.eventDateTime,
+      category:values.category || schedule.category,
+      tags: values.tags || schedule.tags,
       amount: values.amount || schedule.amount,
       isFree: values.isFree || schedule.isFree,
       thumbnailImage: values.thumbnailImage || schedule.thumbnailImage,

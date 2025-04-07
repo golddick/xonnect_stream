@@ -97,6 +97,8 @@ model Schedule {
   id              String   @id @default(uuid())
   title           String  
   address         String
+  category        String
+  tags            String?
   description     String?  
   eventDateTime   DateTime
   amount          Float ?

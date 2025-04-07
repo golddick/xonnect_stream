@@ -117,7 +117,7 @@ const EventCard = ({
             {price > 0 ? `₦${price.toFixed(2)}` : 'FREE'}
           </span>
           <div className="flex items-center">
-            <Link href={`/schedule-info/${id}`}>
+            <Link href={`/Event/${id}`}>
               <Button size={'icon'} className='p-2'>
                 <ArrowRight size={20} />
               </Button>

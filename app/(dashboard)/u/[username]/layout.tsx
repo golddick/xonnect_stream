@@ -26,7 +26,7 @@ export default async function CreatorLayout({
   return (
     <>
       <Navbar />
-      <div className="flex h-full pt-20">
+      <div className="flex h-full pt-20 bg-black">
         <Sidebar />
         <Container>{children}</Container>
       </div>

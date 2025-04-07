@@ -54,8 +54,8 @@ const StreamHeader = ({ data, userId, fileUpload, selfName, selfEmail }: Props) 
             </div>
           </div>
 
-          <div className='flex w-full items-center justify-end pr-4 gap-2'>
-            <div className='flex items-center'>
+          <div className='flex w-full justify-end  items-centergap-2'>
+            <div className='flex '>
               {creator ? (
                 <div className='flex gap-2 items-center'>
                   <EditSchedule data={data} />
@@ -73,9 +73,9 @@ const StreamHeader = ({ data, userId, fileUpload, selfName, selfEmail }: Props) 
               ) : null}
             </div>
 
-            <div className='justify-end'>
+           
               <StreamHeaderSideDot scheduleID={data.id} creator={!!creator}  creatorUsername={data.user?.username}/>
-            </div>
+          
           </div>
         </div>
       </div>

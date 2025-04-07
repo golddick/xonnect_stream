@@ -16,10 +16,10 @@ export default function AuthLayout({
   return (
     <>
     <Top_nav/>
-      <div className="h-full flex flex-col w-full">
+      <div className="min-h-screen flex flex-col w-full mt-10">
         {children}
-      <Footer/>
       </div> 
+      <Footer/>
     </>
   );
 }

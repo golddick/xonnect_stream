@@ -29,7 +29,7 @@ export function ChatToggle() {
         variant="ghost"
         className="h-auto p-2 hover:bg-white/10 hover:text-primary bg-transparent shadow-lg shadow-neutral-500 z-50"
       >
-        <Icon className="h-4 w-4" />
+        <Icon className="h-4 w-4  text-white" />
       </Button>
     </Hint>
   );

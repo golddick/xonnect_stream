@@ -7,6 +7,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
 import { isFollowingUser } from "@/lib/follow-service";
 import { isBlockedByUser } from "@/lib/block-service";
+import { Eventplayer } from "../../_component/Eventplayer";
 
 export default async function CreatorPage({
   params: { username },
@@ -25,7 +26,7 @@ export default async function CreatorPage({
 
   return (
     <div className=" w-full ">
-    <StreamPlayer user={user} stream={user.stream} isFollowing={isFollowing}  schedule={user.schedules}
+    <Eventplayer user={user} stream={user.stream} isFollowing={isFollowing}  schedule={user.schedules}
         userId={externalUser?.id || user.externalUserId}  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
     />
     </div>

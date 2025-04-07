@@ -11,8 +11,8 @@ export const Top_nav = () => {
 
 
   return (
-    <nav className="flex items-center justify-between bg-transparent fixed top-0 z-50 w-full p-4 text-white text-[20px]">
-      <div className="items-center gap-2 w-[50px] h-[50px] relative hidden md:flex animate-pulse rounded-lg overflow-hidden shadow-md shadow-neutral-600">
+    <nav className="flex items-center justify-between bg-black fixed top-0 z-50 w-full p-4 text-white text-[20px] ">
+      <div className="items-center gap-2 w-[40px] h-[40px] relative hidden md:flex animate-pulse rounded-lg overflow-hidden shadow-md shadow-neutral-600">
         <Image src='/assets/xsb.png' alt='Logo' fill className='absolute'/>
       </div>
       <MobileNav/>

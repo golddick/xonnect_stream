@@ -49,11 +49,11 @@ const StreamHeaderSideDot = ({ scheduleID, creator, creatorUsername }: SideDotPr
   };
 
   return (
-    <div className="h-[10px] w-[10px] flex items-center">
+    <div className=" flex items-center">
       <DropdownMenu>
         <DropdownMenuTrigger className="flex focus:outline-none ">
            <Hint label="More" asChild>
-            <Button variant={'ghost'} size={'icon'}  className=" shadow-md shadow-neutral-600  rounded-lg text-black">
+            <Button variant={'ghost'} size={'icon'}  className=" shadow-md shadow-neutral-600  rounded-lg ">
             <GripVertical />
             </Button>
           </Hint>
