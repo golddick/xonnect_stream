@@ -10,7 +10,7 @@ export default function SinglePageLayout({
   return (
     <> 
       <SingleNav />
-      <div className="flex h-full w-full mt-10 bg-black">
+      <div className="flex h-full w-full mt-[70px] bg-black">
         {children}
       </div>
     </>

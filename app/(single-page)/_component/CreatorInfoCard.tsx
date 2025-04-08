@@ -46,8 +46,8 @@ const CreatorInfoCard = ({
     const isHost = hostAsViewer === viewerIdentity;
 
   return (
-    <div className="mb-6 container">
-      <Card className="bg-black text-white ">
+    <div className="mb-6  lg:container">
+      <Card className="bg-black text-white  ">
         <CardContent className="p-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex-shrink-0">

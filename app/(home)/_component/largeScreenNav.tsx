@@ -11,7 +11,7 @@ const LargeScreenNav = () => {
       // Function to determine active link style
       const getLinkClass = (path: string) => {
         return pathname === path 
-          ? 'font-bold border-b-2 border-red-600 pb-1 bg-black/70 backdrop-blur-md px-4 py-2 rounded-lg' 
+          ? 'font-bold border-b-2 border-red-700 pb-1 bg-black/70 backdrop-blur-md px-4 py-2 rounded-lg' 
           : 'hover:opacity-80 transition-opacity bg-black/50 backdrop-blur-sm px-4 py-2 rounded-lg hover:bg-black/60'
     }
 
@@ -21,7 +21,7 @@ const LargeScreenNav = () => {
         <Link href="/about-us" className={getLinkClass('/about-us')}>About</Link>
         <Link href="/explore-event" className={getLinkClass('/explore-event')}> Event</Link>
         <Link href="/pricing" className={getLinkClass('/pricing')}>Pricing</Link>
-        <Link href="/features" className={getLinkClass('/features')}>Features</Link>
+        {/* <Link href="/features" className={getLinkClass('/features')}>Features</Link> */}
       </nav>
   )
 }

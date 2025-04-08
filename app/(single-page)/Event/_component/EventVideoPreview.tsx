@@ -19,7 +19,7 @@ const EventVideoPreview = ({ img , video }: EventVideoPreviewProps) => {
         <div className='absolute inset-0 flex items-center justify-center z-10 w-full'>
           {youtubeVideoId ? (
             <iframe
-              className='w-[300px] md:w-[600px] h-[300px] md:h-[400px] lg:w-[900px] lg:h-[500px]'
+              className='w-full md:w-[600px] h-[300px] md:h-[400px] lg:w-[900px] lg:h-[500px]'
               src={`https://www.youtube.com/embed/${youtubeVideoId}`}
               frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -28,7 +28,7 @@ const EventVideoPreview = ({ img , video }: EventVideoPreviewProps) => {
             ></iframe>
           ) : video ? (
             <video 
-              className='w-[300px] md:w-[500px] lg:w-[600px] md:h-[400px] h-[300px]' 
+              className='w-full md:w-[500px] lg:w-[600px] md:h-[400px] h-auto' 
               controls
             >
               <source src={video} type='video/mp4' />

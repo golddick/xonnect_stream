@@ -60,102 +60,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
   const followingCount = following?.length ?? 0;
 
     console.log(data, 'p')
-  // Mock data for the scheduled stream
-  const stream = {
-    id: "stream-123",
-    title: "Advanced Character Design Workshop: From Concept to Final Art",
-    description:
-      "Join professional character artist Maria Rodriguez for an in-depth workshop on creating compelling character designs for games, animation, and illustration.",
-    longDescription:
-      "In this comprehensive 3-hour workshop, you'll learn the complete process of character design from initial concept sketches to final rendered artwork.\n\nMaria will share her professional workflow developed over 10 years working with major studios including Pixar, Riot Games, and independent productions.\n\nYou'll discover:\n\n- How to develop unique character concepts that stand out\n- Techniques for creating expressive facial features and poses\n- Color theory specifically for character design\n- Industry-standard presentation methods for your designs\n- Common pitfalls to avoid in the character design process\n\nThis workshop is perfect for intermediate artists looking to level up their character design skills, as well as beginners who want to learn professional techniques from day one.\n\nAll participants will receive a digital resource pack including brushes, reference sheets, and a PDF workbook to continue practicing after the workshop.",
-    thumbnail: "/placeholder.svg?height=720&width=1280",
-    trailerVideo: "/placeholder.svg?height=720&width=1280",
-    date: "2025-06-10T18:00:00Z",
-    duration: "3 hours",
-    category: "Art & Design",
-    tags: ["Character Design", "Digital Art", "Workshop"],
-    isRecurring: false,
-    isPremium: true,
-    pricing: {
-      type: "tiered",
-      options: [
-        {
-          id: "tier-1",
-          name: "Basic Access",
-          price: "$29.99",
-          features: ["Live workshop access", "7-day replay access", "Digital resource pack"],
-        },
-        {
-          id: "tier-2",
-          name: "Premium Access",
-          price: "$49.99",
-          features: [
-            "Live workshop access",
-            "Unlimited replay access",
-            "Digital resource pack",
-            "Personalized feedback on one design",
-            "Certificate of completion",
-          ],
-          isRecommended: true,
-        },
-        {
-          id: "tier-3",
-          name: "Master Class",
-          price: "$99.99",
-          features: [
-            "Live workshop access",
-            "Unlimited replay access",
-            "Digital resource pack",
-            "Personalized feedback on three designs",
-            "Certificate of completion",
-            "30-minute 1-on-1 mentoring session",
-            "Exclusive Discord community access",
-          ],
-        },
-      ],
-    },
-    host: {
-      id: "creator-789",
-      name: "Maria Rodriguez",
-      username: "@mariadesigns",
-      image: "/placeholder.svg?height=200&width=200",
-      followers: 45600,
-      bio: "Character artist with 10+ years of experience working with major studios. Passionate about teaching and helping artists develop their unique style.",
-      socialLinks: {
-        twitter: "https://twitter.com/mariadesigns",
-        instagram: "https://instagram.com/mariadesigns",
-        artstation: "https://artstation.com/mariadesigns",
-      },
-    },
-    stats: {
-      registered: 342,
-      interested: 876,
-      maxCapacity: 500,
-    },
-    relatedStreams: [
-      {
-        id: "stream-124",
-        title: "Environment Design Fundamentals",
-        thumbnail: "/placeholder.svg?height=300&width=600",
-        date: "2025-06-17T18:00:00Z",
-        price: "$24.99",
-      },
-      {
-        id: "stream-125",
-        title: "Color Theory for Digital Artists",
-        thumbnail: "/placeholder.svg?height=300&width=600",
-        date: "2025-06-24T18:00:00Z",
-        price: "$19.99",
-      },
-      {
-        id: "stream-126",
-        title: "Portfolio Review Session",
-        thumbnail: "/placeholder.svg?height=300&width=600",
-        date: "2025-07-01T18:00:00Z",
-        price: "$39.99",
-      },
-    ],
-  }
+
 
   // Format date for display
   const formatDate = (dateString: string) => {
@@ -203,7 +108,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                   ))}
                 </div>
 
-                <h1 className="text-2xl md:text-3xl font-bold mb-3 capitalize">{data?.title}</h1>
+                <h1 className="text-2xl md:text-2xl font-bold mb-3 capitalize">{data?.title}</h1>
 
                 <div className="flex items-center gap-2 mb-4">
                   <Avatar className="h-6 w-6">
@@ -226,10 +131,6 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                     <span>{formatDate(data.eventDateTime.toISOString())}</span>
                   </div>
 
-                  {/* <div className="flex items-center gap-2 text-gray-300">
-                    <Clock className="h-5 w-5" />
-                    <span>Duration: {stream.duration}</span>
-                  </div> */}
 
                   <div className="flex items-center gap-2 text-gray-300">
                     <Tag className="h-5 w-5" />
@@ -384,7 +285,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-bold text-black">More from {data.user?.username}</h3>
                       <Link
-                        href={`/creators/${stream.host.id}`}
+                        href={`/creators/${data.userId}`}
                         className="text-red-700 hover:text-red-800 text-sm font-medium flex items-center"
                       >
                         View all
@@ -473,7 +374,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                           </Avatar>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium">John Doe</span>
+                              <span className="font-medium text-black">John Doe</span>
                               <span className="text-gray-500 text-sm">2 days ago</span>
                             </div>
                             <p className="text-gray-700 mb-2">
@@ -495,12 +396,12 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
 
                         <div className="flex items-start gap-3 ml-12">
                           <Avatar className="h-10 w-10">
-                            <AvatarImage src={stream.host.image} />
-                            <AvatarFallback>{stream.host.name.charAt(0)}</AvatarFallback>
+                            <AvatarImage src={data.user?.imageUrl} />
+                            <AvatarFallback>{data.user?.username.charAt(0)}</AvatarFallback>
                           </Avatar>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium text-black">{stream.host.name}</span>
+                              <span className="font-medium text-black">{data.user?.username}</span>
                               <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">Host</span>
                               <span className="text-gray-500 text-sm">1 day ago</span>
                             </div>
@@ -530,17 +431,6 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
 
           {/* Right Column - Pricing and Registration */}
           <div className="space-y-6">
-            {/* Pricing Options */}
-            {/* <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-bold mb-4 text-black">Pricing Options</h3>
-                <div className=" text-black">
-                  {data.amount}
-                </div>
-                <PriceCard/>
-                <PricingOptions options={stream.pricing.options} />
-              </CardContent>
-            </Card> */}
 
             {/* What You'll Get */}
             <Card>
@@ -601,36 +491,6 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
 
 
 
-// Helper component for social icons
-function SocialIcon({ platform }: { platform: string }) {
-  switch (platform) {
-    case "twitter":
-      return (
-        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-        </svg>
-      )
-    case "instagram":
-      return (
-        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-          <path
-            fillRule="evenodd"
-            d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0
- 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-            clipRule="evenodd"
-          />
-        </svg>
-      )
-    case "artstation":
-      return (
-        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M0 17.723l2.027 3.505h.001a2.424 2.424 0 0 0 2.164 1.333h13.457l-2.792-4.838H0zm24 .025c0-.484-.143-.935-.388-1.314L15.728 2.728a2.424 2.424 0 0 0-2.142-1.289H9.419L21.598 22.54l1.92-3.325c.378-.637.482-.919.482-1.467zm-11.129-3.462L7.428 4.858l-5.444 9.428h10.887z" />
-        </svg>
-      )
-    default:
-      return <ExternalLink className="h-5 w-5" />
-  }
-}
 
 function ChevronRight(props: any) {
   return (

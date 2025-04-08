@@ -41,7 +41,7 @@ export function MobileNav() {
               <Button 
                 variant={'link'} 
                 className={`w-full font-bold items-start flex justify-start ${
-                  pathname === "/" ? "border-r-2 border-red-600" : ""
+                  pathname === "/" ? "border-r-2 border-red-700" : ""
                 }`}
               >
                 <span className="text-start items-start flex">Home</span>
@@ -54,7 +54,7 @@ export function MobileNav() {
               <Button 
                 variant={'link'} 
                 className={`w-full font-bold items-start flex justify-start ${
-                  pathname === "/about-us" ? "border-r-2 border-red-600 font-bold" : ""
+                  pathname === "/about-us" ? "border-r-2 border-red-700 font-bold" : ""
                 }`}
               >
                 About
@@ -67,7 +67,7 @@ export function MobileNav() {
               <Button 
                 variant={'link'} 
                 className={`w-full font-bold items-start flex justify-start ${
-                  pathname === "/explore-event" ? "border-r-2 border-red-600 font-bold" : ""
+                  pathname === "/explore-event" ? "border-r-2 border-red-700 font-bold" : ""
                 }`}
               >
                  Event
@@ -80,7 +80,7 @@ export function MobileNav() {
               <Button 
                 variant={'link'} 
                 className={`w-full font-bold items-start flex justify-start ${
-                  pathname === "/pricing" ? "border-r-2 border-red-600 font-bold" : ""
+                  pathname === "/pricing" ? "border-r-2 border-red-700 font-bold" : ""
                 }`}
               >
                 Pricing
@@ -88,7 +88,7 @@ export function MobileNav() {
             </Link>
           </SheetClose>
 
-          <SheetClose asChild>
+          {/* <SheetClose asChild>
             <Link href="/features" className="w-full">
               <Button 
                 variant={'link'} 
@@ -99,7 +99,7 @@ export function MobileNav() {
                 Features
               </Button>
             </Link>
-          </SheetClose>
+          </SheetClose> */}
 
         </div>
       </SheetContent>

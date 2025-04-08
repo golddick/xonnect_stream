@@ -92,7 +92,7 @@ const Features = () => {
     <div id="features" className="py-12 bg-white">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="lg:text-center">
-        <h2 className="text-base text-red-600 font-semibold tracking-wide uppercase">Platform Features</h2>
+        <h2 className="text-base text-red-700 font-semibold tracking-wide uppercase">Platform Features</h2>
         <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-black sm:text-4xl">
           Everything creators and fans need
         </p>
@@ -104,9 +104,9 @@ const Features = () => {
       <div className="mt-10">
         <div className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 lg:grid-cols-3">
           {/* Feature 1 */}
-          <div className="flex">
+          <div className="flex flex-col gap-4 bg-white text-black p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100  items-center text-center group hover:-translate-y-3 hover:border-red-500">
             <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-600 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-700 text-white">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
@@ -121,9 +121,9 @@ const Features = () => {
           </div>
 
           {/* Feature 2 */}
-          <div className="flex">
+          <div className="flex flex-col gap-4 bg-white text-black p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100  items-center text-center group hover:-translate-y-3 hover:border-red-500">
             <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-600 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-700 text-white">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
                 </svg>
@@ -138,9 +138,9 @@ const Features = () => {
           </div>
 
           {/* Feature 3 */}
-          <div className="flex">
+          <div className="flex flex-col gap-4 bg-white text-black p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100  items-center text-center group hover:-translate-y-3 hover:border-red-500">
             <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-600 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-700 text-white">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -149,15 +149,15 @@ const Features = () => {
             <div className="ml-4">
               <h3 className="text-lg leading-6 font-medium text-black">Community Features</h3>
               <p className="mt-2 text-base text-gray-500">
-                Engage with creators and other fans through live chats, group interactions, and real-time discussions.
+                Engage with creators and other fans through live chats, group interactions, and personalized interactions.
               </p>
             </div>
           </div>
 
           {/* Feature 4 */}
-          <div className="flex">
+          <div className="flex flex-col gap-4 bg-white text-black p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100  items-center text-center group hover:-translate-y-3 hover:border-red-500">
             <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-600 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-700 text-white">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -166,22 +166,22 @@ const Features = () => {
             <div className="ml-4">
               <h3 className="text-lg leading-6 font-medium text-black">Video Reels</h3>
               <p className="mt-2 text-base text-gray-500">
-                Share and watch short-form video content, highlights, and clips from past events.
+                Share and watch short-form video content, highlights, and clips on the platfrom .
               </p>
             </div>
           </div>
 
           {/* Feature 5 */}
-          <div className="flex">
+          <div className="flex flex-col gap-4 bg-white text-black p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100  items-center text-center group hover:-translate-y-3 hover:border-red-500">
             <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-600 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-700 text-white">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                 </svg>
               </div>
             </div>
             <div className="ml-4">
-              <h3 className="text-lg leading-6 font-medium text-black">Writeup Section</h3>
+              <h3 className="text-lg leading-6 font-medium text-black">Writeup Post</h3>
               <p className="mt-2 text-base text-gray-500">
                 Post and engage with written content like articles, blogs, and personal stories.
               </p>
@@ -189,9 +189,9 @@ const Features = () => {
           </div>
 
           {/* Feature 6 */}
-          <div className="flex">
+          <div className="flex flex-col gap-4 bg-white text-black p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100  items-center text-center group hover:-translate-y-3 hover:border-red-500">
             <div className="flex-shrink-0">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-600 text-white">
+              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-red-700 text-white">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
@@ -200,7 +200,7 @@ const Features = () => {
             <div className="ml-4">
               <h3 className="text-lg leading-6 font-medium text-black">eCommerce</h3>
               <p className="mt-2 text-base text-gray-500">
-                Purchase authentic creator merchandise sourced directly from manufacturers.
+                Purchase authentic merchandise sourced directly from manufacturers and delivered directly to your address NO STORY.
               </p>
             </div>
           </div>

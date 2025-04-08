@@ -4,10 +4,10 @@ const FAQ = () => {
   return (
     <>
        {/* FAQ Section */}
-       <section className="py-16 px-8 bg-gray-50">
+       <section className="py-12 px-4 bg-gray-50">
                     <div className="max-w-4xl mx-auto">
                         <div className="text-center mb-12">
-                            <h2 className="text-4xl font-bold mb-3 text-black s">Frequently Asked Questions</h2>
+                            <h2 className="text-2xl font-bold mb-3 text-black s">Frequently Asked Questions</h2>
                             <p className="text-gray-600 max-w-2xl mx-auto">
                                 Find answers to the most common questions about our platform and services.
                             </p>
@@ -15,7 +15,7 @@ const FAQ = () => {
 
                         <div className="space-y-4 text-black">
                             <details className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group transition-all duration-300 hover:shadow-lg">
-                                <summary className="p-6 flex justify-between items-center font-semibold text-lg">
+                                <summary className="p-6 flex justify-between items-center font-semibold text-[15px]">
                                     <span>What type of events are available on XONNECT?</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@ const FAQ = () => {
                             </details>
 
                             <details className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group transition-all duration-300 hover:shadow-lg">
-                                <summary className="p-6 flex justify-between items-center font-semibold text-lg">
+                                <summary className="p-6 flex justify-between items-center font-semibold text-[15px]">
                                     <span>What makes Xonnect different from other live-streaming platforms?</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +64,7 @@ const FAQ = () => {
                             </details>
 
                             <details className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group transition-all duration-300 hover:shadow-lg">
-                                <summary className="p-6 flex justify-between items-center font-semibold text-lg">
+                                <summary className="p-6 flex justify-between items-center font-semibold text-[15px]">
                                     <span>Can I watch content after a live event ends?</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ const FAQ = () => {
                             </details>
 
                             <details className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group transition-all duration-300 hover:shadow-lg">
-                                <summary className="p-6 flex justify-between items-center font-semibold text-lg">
+                                <summary className="p-6 flex justify-between items-center font-semibold text-[15px]">
                                     <span>How do I start streaming as a creator?                                    </span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ const FAQ = () => {
                             </details>
 
                             <details className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer group transition-all duration-300 hover:shadow-lg">
-                                <summary className="p-6 flex justify-between items-center font-semibold text-lg">
+                                <summary className="p-6 flex justify-between items-center font-semibold text-[15px]">
                                     <span>Will Xonnect support independent creators in the future?</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
