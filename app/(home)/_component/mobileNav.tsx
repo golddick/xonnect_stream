@@ -88,7 +88,7 @@ export function MobileNav() {
             </Link>
           </SheetClose>
 
-          {/* <SheetClose asChild>
+          <SheetClose asChild>
             <Link href="/features" className="w-full">
               <Button 
                 variant={'link'} 
@@ -99,7 +99,7 @@ export function MobileNav() {
                 Features
               </Button>
             </Link>
-          </SheetClose> */}
+          </SheetClose>
 
         </div>
       </SheetContent>

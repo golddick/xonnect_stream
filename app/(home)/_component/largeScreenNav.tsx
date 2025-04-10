@@ -21,7 +21,7 @@ const LargeScreenNav = () => {
         <Link href="/about-us" className={getLinkClass('/about-us')}>About</Link>
         <Link href="/explore-event" className={getLinkClass('/explore-event')}> Event</Link>
         <Link href="/pricing" className={getLinkClass('/pricing')}>Pricing</Link>
-        {/* <Link href="/features" className={getLinkClass('/features')}>Features</Link> */}
+        <Link href="/features" className={getLinkClass('/features')}>Features</Link>
       </nav>
   )
 }

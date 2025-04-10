@@ -1,10 +1,10 @@
 import React from 'react'
-import { Pricing } from '../_component/pricing'
+import PricingPage from '../_component/pricingInfo'
 
 const page = () => {
   return (
     <>
-      <Pricing/>
+      <PricingPage/>
     </>
   )
 }

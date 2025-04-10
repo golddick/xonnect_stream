@@ -1,244 +1,228 @@
-// import React from "react"
-// import Team from "./team"
-// import Image from "next/image"
-
-// export const AboutUS = () => {
-//     return (
-//         <div id="webcrumbs">
-//             <div className="w-full bg-white font-sans">
-//                 {/* About Us Section Header */}
-//                 <header className="relative overflow-hidden">
-//                     <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10"></div>
-//                     <Image
-//                         width={100}
-//                         height={100}
-//                         src="/assets/woman.jpeg"
-//                         alt="About ExclusiveStream"
-//                         className="w-full h-[400px] object-cover object-center transform scale-105 animate-pulse-slow"
-//                     />
-            
-//                     <div className="absolute inset-0 flex flex-col justify-center items-center z-20 text-center px-4">
-//                         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 max-w-3xl leading-tight animate-fadeInDown">
-//                             About ExclusiveStream
-//                         </h1>
-//                         <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl animate-fadeInUp">
-//                             Revolutionizing how you experience live events and entertainment around the world.
-//                         </p>
-//                     </div>
-//                 </header>
-
-//                 {/* Our Story Section */}
-//                 <section className="py-16 px-4 sm:px-8 bg-white overflow-hidden">
-//                     <div className="max-w-6xl mx-auto">
-//                         <div className="text-center mb-12 animate-fadeIn">
-//                             <h2 className="text-3xl sm:text-4xl font-bold mb-3">Our Story</h2>
-//                             <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-6"></div>
-//                             <p className="text-gray-600 max-w-2xl mx-auto">
-//                                 From humble beginnings to becoming a leading streaming platform
-//                             </p>
-//                         </div>
-
-//                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-//                             <div className="rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-500 animate-fadeInLeft group relative">
-//                                 <Image
-//                                     width={100}
-//                                     height={100}
-//                                     src="https://images.unsplash.com/photo-1522071901873-411886a10004?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-//                                     alt="Team at work"
-//                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-//                                 />
-//                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-//                                     <p className="text-white p-4 text-lg font-semibold transform translate-y-10 group-hover:translate-y-0 transition-transform duration-300">
-//                                         Founded in 2018 with a simple mission
-//                                     </p>
-//                                 </div>
-//                             </div>
-
-//                             <div className="space-y-6 animate-fadeInRight">
-//                                 <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-4 border-red-600">
-//                                     <h3 className="text-2xl font-bold mb-3 text-red-600">Founded with Passion</h3>
-//                                     <p className="text-gray-600">
-//                                         Founded in 2018, ExclusiveStream began with a simple mission: to break down the
-//                                         barriers between audiences and premium entertainment. What started as a small
-//                                         team of tech enthusiasts and event lovers has now grown into a leading platform
-//                                         that serves millions of viewers worldwide.
-//                                     </p>
-//                                 </div>
-
-//                                 <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-4 border-red-600">
-//                                     <h3 className="text-2xl font-bold mb-3 text-red-600">Growth & Expansion</h3>
-//                                     <p className="text-gray-600">
-//                                         Over the first two years, we expanded from streaming local events to partnering
-//                                         with major venues and production companies across North America. By 2021, we had
-//                                         secured exclusive rights to stream concerts, theatrical performances, and
-//                                         sporting events from six continents.
-//                                     </p>
-//                                 </div>
-
-//                                 <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-l-4 border-red-600">
-//                                     <h3 className="text-2xl font-bold mb-3 text-red-600">Innovation at Our Core</h3>
-//                                     <p className="text-gray-600">
-//                                         Our technical team has consistently pushed the boundaries of streaming
-//                                         technology, developing proprietary systems for high-definition, low-latency
-//                                         streaming that works even in challenging network conditions. This commitment to
-//                                         innovation earned us the 2022 Streaming Technology Excellence Award.
-//                                     </p>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </section>
-
-                // {/* Our Team Section */}
-                // <Team/>
-//             </div>
-//         </div>
-//     )
-// }
-
-
-
-
-
-
-import React from "react"
-import Team from "./team"
-import Image from "next/image"
-import BannerHeader from "./BannerHeader"
-import Features from "./features"
+// pages/about.js
+import Head from 'next/head';
+import Link from 'next/link';
+import { UserPlus, Award, Target, Heart, Users, Globe, Zap, CheckCircle, UserRound, User } from 'lucide-react';
+import BannerHeader from './BannerHeader';
+import CTA from './CTA';
+import OurJourney from './OurJourney';
+import Image from 'next/image';
+import Team from './team';
 
 export const AboutUS = () => {
-    const img = 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80'
-    const tittle = 'About Us'
-    const header = 'Revolutionizing Live Streaming'
-    const subText = ' With state-of-the-art technology and on-demand payment choices, XONNECT brings you closer to the biggest live events in the world.'
-   
-    return (
-        <div id="webcrumbs">
-            <div className="w-full bg-black text-white font-sans">
-                {/* Header/Banner Section */}
-               <BannerHeader img={img} title={tittle} header={header} subText={subText}/>
+  return (
+    <div className="min-h-screen bg-white">
+    
+      {/* Hero Section */}
+      <BannerHeader H1='Our Story' Header='PLATFORM ABOUT' Desc='Bridging the gap between creators and audiences through meaningful live experiences.'/>
 
-                <section className="py-16 px-4 sm:px-8 bg-white">
-                    <div className="max-w-6xl mx-auto">
-                        <div className="mb-12 text-center">
-                            <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-black ">Our Story</h2>
-                            <p className="text-gray-600 max-w-3xl mx-auto">
-                            Established in 2025, Xonnect was founded with the straightforward goal of enabling everyone, wherever, to stream top-notch events live .
-                            With our unique concert coverage and on-demand payment method, we have completely transformed the streaming market.
-                            </p>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20">
-                            <div className="order-2 md:order-1">
-                                <h3 className="text-2xl font-bold mb-4 text-black">Our Mission</h3>
-                                <p className="text-gray-600 mb-6">
-                                We are dedicated to bridging the gap between artists and audiences by providing a seamless, accessible platform for live music, comedy, sport, and a wide range of exclusive experiences.
-                                 Our innovative payment system offers the freedom to enjoy premium content without the constraints of subscription commitments, empowering fans to discover and engage with their favorite performers on their own terms.
-                                 By removing traditional barriers, we aim to create a dynamic and inclusive environment where both artists and fans can thrive together.
-                                </p>
-                                <h3 className="text-2xl font-bold mb-4 text-black">Our Vision</h3>
-                                <p className="text-gray-600 mb-6">
-                                To become the world’s leading platform for live streaming, setting new standards for quality, accessibility, and meaningful connections across music, comedy, sports, and beyond. 
-                                We envision a future where anyone, regardless of location or circumstance, can experience the magic of live entertainment in all its forms, bringing fans and performers closer together like never before.
-                                </p>
-                                <div className="flex flex-wrap gap-4 mt-8">
-                                    <div className="bg-red-100 rounded-full px-4 py-2 text-red-700 font-medium flex items-center transform hover:scale-105 transition-all duration-300">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-5 w-5 mr-2"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                        Innovation
-                                    </div>
-                                    <div className="bg-red-100 rounded-full px-4 py-2 text-red-700 font-medium flex items-center transform hover:scale-105 transition-all duration-300">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-5 w-5 mr-2"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                        Accessibility
-                                    </div>
-                                    <div className="bg-red-100 rounded-full px-4 py-2 text-red-700 font-medium flex items-center transform hover:scale-105 transition-all duration-300">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-5 w-5 mr-2"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                        Quality
-                                    </div>
-                                    <div className="bg-red-100 rounded-full px-4 py-2 text-red-700 font-medium flex items-center transform hover:scale-105 transition-all duration-300">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-5 w-5 mr-2"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            stroke="currentColor"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                            />
-                                        </svg>
-                                        Community
-                                    </div>
-                                </div>
-                            </div>
-                            <div className=" relative  w-full h-[300px] md:h-[400px] lg:h-full md:order-2 order-1 group">
-                        
-                                <Image
-                                    src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                                    alt="Concert production"
-                                    fill
-                                    className=" absolute bg-red-700 rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-500"
-                                />
-                               
-                                <div className="absolute top-4 right-4 bg-red-600 text-white text-xs px-3 py-1 rounded-full rotate-3 animate-pulse">
-                                    EXCLUSIVE
-                                </div>
-                                <div className="absolute -bottom-5 -left-5 bg-white p-4 rounded-lg shadow-lg transform -rotate-6 group-hover:rotate-0 transition-all duration-300">
-                                    <p className="text-lg font-bold text-red-600">1M+</p>
-                                    <p className="text-sm text-gray-600">Global Viewers</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <Features/>
-                    </div>
-                </section>
-
-                 {/* Our Team Section */}
-                 <Team/>
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-16 text-black">
+        {/* Who We Are Section */}
+        <section className="mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold mb-6">Who We Are</h2>
+              <p className="text-lg text-gray-700 mb-6">
+                Xonnect was founded in 2023 with a simple yet powerful vision: to revolutionize how creators connect with their audiences. In an increasingly digital world, we recognized the need for more meaningful interactions between content creators and their communities.
+              </p>
+              <p className="text-lg text-gray-700 mb-6">
+                Our platform enables creators from all niches—gaming, education, arts, technology, and beyond—to host engaging live events, workshops, and interactive streams. We provide the tools and infrastructure that make it easy for creators to monetize their expertise while delivering exceptional value to their audiences.
+              </p>
+              <p className="text-lg text-gray-700">
+                Today, Xonnect hosts thousands of events monthly, supporting a diverse community of creators and millions of attendees worldwide.
+              </p>
             </div>
+            <div className="bg-gray-100 rounded-lg p-8 w-full h-full relative">
+              <Image src="/assets/woman.jpeg" alt=" Team" fill className=" rounded-lg shadow-lg absolute " />
+            </div>
+          </div>
+        </section>
+
+        {/* Mission & Vision Section */}
+        <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Our Mission & Vision</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto"></div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div className="bg-white p-8 rounded-lg shadow-md border-t-4 border-red-600">
+              <div className="mb-4">
+                <Target className="text-red-800 w-12 h-12" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
+              <p className="text-gray-700">
+                To empower creators with innovative tools and platforms that enable them to share their knowledge, talents, and passion while building sustainable businesses around their content.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-lg shadow-md border-t-4 border-black">
+              <div className="mb-4">
+                <Globe className="text-black w-12 h-12" />
+              </div>
+              <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+              <p className="text-gray-700">
+                To build a world where every creator has the opportunity to connect deeply with their audience, share their unique perspectives, and thrive professionally while doing what they love.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Core Values Section */}
+         <section className="mb-20">
+          <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold mb-4">Our Core Values</h2>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+            These principles guide everything we do as we build Creator Connect.
+          </p>
         </div>
-    )
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="text-center p-6">
+            <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <UserPlus className="text-red-800 w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Creator Empowerment</h3>
+            <p className="text-gray-700">
+              We build tools that give creators complete control over their content, commerce, and community while maximizing their earning potential.
+            </p>
+          </div>
+
+          <div className="text-center p-6">
+            <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <User className="text-red-800 w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Fans Empowerment</h3>
+            <p className="text-gray-700">
+            Fans can participate in exclusive event around the world, ensuring they never feel left out of the experience.
+            </p>
+          </div>
+
+          <div className="text-center p-6">
+            <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Zap className="text-red-800 w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-bold mb-3">Innovation</h3>
+            <p className="text-gray-700">
+              We continuously push boundaries to develop cutting-edge features that enhance content creation, sharing, and monetization for both creators and fans.
+            </p>
+          </div>
+        </div>
+      </section>
+
+       {/* <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Our Complete Platform</h2>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              Creator Connect offers a comprehensive suite of features designed to maximize creator expression and fan engagement.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-lg shadow-md border-l-4 border-red-600">
+              <div className="mb-4">
+                <Music className="text-red-600 w-10 h-10" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Exclusive Music</h3>
+              <p className="text-gray-700">
+                Artists release exclusive tracks, previews, and behind-the-scenes content directly to their most dedicated fans. Our high-quality streaming ensures the perfect listening experience.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-lg shadow-md border-l-4 border-red-600">
+              <div className="mb-4">
+                <ShoppingBag className="text-red-600 w-10 h-10" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Creator Marketplace</h3>
+              <p className="text-gray-700">
+                Our integrated e-commerce platform allows creators to sell merchandise, digital downloads, and exclusive products directly to fans with seamless transactions and fulfillment.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-lg shadow-md border-l-4 border-red-600">
+              <div className="mb-4">
+                <Video className="text-red-600 w-10 h-10" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Video Reels & Stories</h3>
+              <p className="text-gray-700">
+                Creators share short-form video content and temporary stories that give fans glimpses into their creative process and daily lives, fostering authentic connections.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-lg shadow-md border-l-4 border-red-600">
+              <div className="mb-4">
+                <Calendar className="text-red-600 w-10 h-10" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Live Events</h3>
+              <p className="text-gray-700">
+                From virtual concerts to workshops and Q&A sessions, our platform makes hosting and attending live events seamless and interactive for creators and fans alike.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-lg shadow-md border-l-4 border-red-600">
+              <div className="mb-4">
+                <Users className="text-red-600 w-10 h-10" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Community Groups</h3>
+              <p className="text-gray-700">
+                Dedicated spaces where fans connect with each other and coordinate meet-ups, event attendance, and collaborative initiatives around their shared interests.
+              </p>
+            </div>
+
+            <div className="bg-white p-8 rounded-lg shadow-md border-l-4 border-red-600">
+              <div className="mb-4">
+                <MessageSquare className="text-red-600 w-10 h-10" />
+              </div>
+              <h3 className="text-xl font-bold mb-3">Creator Journals</h3>
+              <p className="text-gray-700">
+                Long-form content where creators share in-depth thoughts, tutorials, and updates that engage fans on a deeper intellectual and emotional level.
+              </p>
+            </div>
+          </div>
+        </section> */}
+
+        {/* Impact Stats Section */}
+        {/* <section className="mb-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">Our Impact</h2>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              Since our founding, Creator Connect has helped transform the creator economy.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="p-6">
+              <p className="text-4xl font-bold text-red-600 mb-2">15K+</p>
+              <p className="text-lg font-medium">Active Creators</p>
+            </div>
+            <div className="p-6">
+              <p className="text-4xl font-bold text-red-600 mb-2">2.5M+</p>
+              <p className="text-lg font-medium">Audience Members</p>
+            </div>
+            <div className="p-6">
+              <p className="text-4xl font-bold text-red-600 mb-2">40K+</p>
+              <p className="text-lg font-medium">Events Hosted</p>
+            </div>
+            <div className="p-6">
+              <p className="text-4xl font-bold text-red-600 mb-2">$25M+</p>
+              <p className="text-lg font-medium">Creator Earnings</p>
+            </div>
+          </div>
+        </section> */}
+
+        {/* Team Section */}
+       <Team/>
+
+        {/* Timeline Section */}
+       <OurJourney/>
+
+        {/* CTA Section */}
+        <CTA/>
+      </main>
+
+  
+    </div>
+  );
 }
+
+

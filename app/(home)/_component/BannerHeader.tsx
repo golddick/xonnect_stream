@@ -1,39 +1,23 @@
-import Image from 'next/image'
+import { PlayCircle } from 'lucide-react'
 import React from 'react'
 
-interface BannerHeaderProps{
-    img: string;
-    title: string;
-    header: string;
-    subText: string;
+interface HeroSectionProps {
+  Header:string
+  H1:string
+  Desc:string
 }
 
-const BannerHeader = ({img,title,header,subText}:BannerHeaderProps) => {
+const BannerHeader = ({Header, H1, Desc}:HeroSectionProps) => {
   return (
-    <header className="relative h-[400px] overflow-hidden">
-    <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50 z-10"></div>
-    <div className=" relative  w-full h-full ">
-    <Image
-        className=" absolute  object-cover object-center"
-        fill
-        src={img}
-        alt="background"
-    />
-    </div>
-    
-   
-    <div className="absolute inset-0 flex flex-col justify-center items-center z-20 text-center px-4">
-        <div className="bg-black/50 p-6 rounded-xl backdrop-blur-sm max-w-4xl">
-            <p className="text-red-800 uppercase font-bold tracking-wider mb-2">{title}</p>
-            <header className="text-2xl sm:text-5xl md:text-4xl font-bold text-white mb-6 max-w-3xl leading-tight animate-fadeInDown">
-               {header}
-            </header>
-            <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl mx-auto animate-fadeInUp">
-               {subText}
-            </p>
+    <section className="pt-20 pb-16 bg-gradient-to-b from-white to-gray-50 text-black">
+        <div className="container mx-auto px-4 text-center">
+          <div className="inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-medium mb-6">{Header}</div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">{H1}</h1>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            {Desc}
+          </p>
         </div>
-    </div>
-</header>
+      </section>
   )
 }
 
