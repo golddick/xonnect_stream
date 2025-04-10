@@ -20,9 +20,9 @@ export default function BrowseLayout({
         <Container>
           <div className=" flex flex-col justify-between  relative">
           {children}
-          <SimpleFooter/>
           </div>
           </Container>
+          {/* <SimpleFooter/> */}
       </div>
     </>
   );

@@ -16,7 +16,7 @@ interface TopLiveSTreamProps{
 
 const TopLiveSTream = ({data}:TopLiveSTreamProps) => {
   return (
-    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+    <div className="p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
     {data.map((stream, index) => (
         <div
             key={index}
