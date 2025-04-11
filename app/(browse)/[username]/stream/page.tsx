@@ -7,6 +7,7 @@ import { isBlockedByUser } from "@/lib/block-service";
 import { StreamPlayer } from "@/components/stream-player";
 import { currentUser } from "@clerk/nextjs/server";
 import { toast } from "sonner";
+import { Eventplayer } from "@/app/(single-page)/_component/Eventplayer";
 
 interface UserPageProps {
   params: { username: string };
@@ -38,8 +39,11 @@ export default async function UserPage({
   if (isBlocked) notFound();
 
   return (
-    <StreamPlayer user={user} isFollowing={isFollowing} stream={user.stream}  schedule={user.schedules}
-    userId={externalUser?.id}  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
-    />
+    // <StreamPlayer user={user} isFollowing={isFollowing} stream={user.stream}  schedule={user.schedules}
+    // userId={externalUser?.id}  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
+    // />
+    <Eventplayer user={user} stream={user.stream} isFollowing={isFollowing}  schedule={user.schedules}
+            userId={externalUser?.id }  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
+        />
   );
 }

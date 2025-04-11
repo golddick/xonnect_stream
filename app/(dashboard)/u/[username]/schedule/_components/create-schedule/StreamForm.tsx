@@ -52,6 +52,8 @@ const ScheduleForm = () => {
       amount: 0,
       artists: '',
       organizers: '',
+      category: '',
+      tags:''
     },
   });
 
@@ -96,7 +98,7 @@ const ScheduleForm = () => {
                   name='title'
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Event Name</i></FormLabel>
+                      <FormLabel className="flex font-sans font-thin" >Event Name</FormLabel>
                       <FormControl>
                         <Input placeholder="Event Name" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                       </FormControl>
@@ -109,7 +111,7 @@ const ScheduleForm = () => {
                   name='address'
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Address</i></FormLabel>
+                      <FormLabel className="flex font-sans font-thin" >Address</FormLabel>
                       <FormControl>
                         <Input placeholder="Address" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                       </FormControl>
@@ -120,10 +122,56 @@ const ScheduleForm = () => {
               </div>
               <FormField
                 control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-thin">Category</FormLabel>
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <FormControl>
+                        <SelectTrigger className="bg-black border-none ">
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Categories</SelectLabel>
+                          <SelectItem className=" hover:bg-white hover:text-black" value="Music">Music</SelectItem>
+                          <SelectItem className=" hover:bg-white hover:text-black" value="Sport">Sport</SelectItem>
+                          <SelectItem className=" hover:bg-white hover:text-black" value="Talk Show">Talk Show</SelectItem>
+                          <SelectItem className=" hover:bg-white hover:text-black" value="Concert">Concert</SelectItem>
+                          <SelectItem className=" hover:bg-white hover:text-black" value="Comedy Show">Comedy Show</SelectItem>
+                          <SelectItem className=" hover:bg-white hover:text-black" value="Others">Others</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="tags"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-thin">Tags</FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder="comma, separated, tags" 
+                        {...field} 
+                        className="bg-black border-none" 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
                 name='description'
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Description</i></FormLabel>
+                    <FormLabel className="flex font-sans font-thin" >Description</FormLabel>
                     <FormControl>
                       <Textarea placeholder="max stream" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                     </FormControl>
@@ -140,7 +188,7 @@ const ScheduleForm = () => {
                        name="amount"
                        render={({ field }) => (
                          <FormItem className="w-full">
-                            <FormLabel className="flex font-sans font-thin text-[#b28228]" ><i>Price</i></FormLabel>
+                            <FormLabel className="flex font-sans font-thin " >Price</FormLabel>
                            <FormControl>
                              <div className="flex items-center gap-4 h-auto w-full overflow-hidden rounded-md p-1 bg-black">
                                <Image
@@ -188,7 +236,7 @@ const ScheduleForm = () => {
                 name='eventDateTime'
                 render={({ field: { onChange, value } }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Date & Time</i></FormLabel>
+                    <FormLabel className="flex font-sans font-thin">Date & Time</FormLabel>
                     <FormControl>
                       <div className='flex w-full items-center justify-between bg-black rounded-sm pr-2'>
                         <DatePicker
@@ -220,7 +268,7 @@ const ScheduleForm = () => {
                   name='artists'
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Artists</i></FormLabel>
+                      <FormLabel className="flex font-sans font-thin">Featuring starts</FormLabel>
                       <FormControl>
                         <Input placeholder="John , Frank" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                       </FormControl>
@@ -233,7 +281,7 @@ const ScheduleForm = () => {
                   name='organizers'
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Organizers</i></FormLabel>
+                      <FormLabel className="flex font-sans font-thin">Organizers</FormLabel>
                       <FormControl>
                         <Input placeholder="Mavin Entertainment, choc city" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                       </FormControl>
@@ -249,7 +297,7 @@ const ScheduleForm = () => {
                 name='thumbnailVideo'
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Video Url</i></FormLabel>
+                    <FormLabel className="flex font-sans font-thin">Video Url</FormLabel>
                     <FormControl>
                       <Input placeholder="Youtube Url" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                     </FormControl>
@@ -262,7 +310,7 @@ const ScheduleForm = () => {
                 name='orgEmail'
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Organization Email</i></FormLabel>
+                    <FormLabel className="flex font-sans font-thin">Organization Email</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="mavin@gmail.com" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                     </FormControl>
@@ -296,13 +344,13 @@ const ScheduleForm = () => {
                     />
                   ) : (
                     <div>
-                      <h3>Uploaded Image:</h3>
                       <Image
                         src={form.getValues("thumbnailImage") || ""}
                         width={200}
                         height={100}
                         alt="Event Image"
                         style={{ width: "200px", height: "auto" }}
+                        className=" "
                       />
                     </div>
                   )}
@@ -325,3 +373,8 @@ const ScheduleForm = () => {
 }
 
 export default ScheduleForm
+
+
+
+
+

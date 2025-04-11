@@ -67,7 +67,7 @@ export function Chat({
   };
 
   return (
-    <div className="flex flex-col bg-background border-l border-b pt-20  h-full">
+    <div className="flex flex-col bg-background border-l border-b   h-full">
       <ChatHeader />
       {variant === ChatVariant.CHAT && (
         <>

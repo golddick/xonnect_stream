@@ -24,9 +24,6 @@ export default async function CreatorPage({
 
   if (isBlocked) notFound();
 
-  console.log(externalUser?.id, 'ex id')
-  console.log(user.externalUserId, ' user ex id')
-
   return (
     <div className=" w-full ">
     <Eventplayer user={user} stream={user.stream} isFollowing={isFollowing}  schedule={user.schedules}

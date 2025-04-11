@@ -11,10 +11,14 @@ export const CreateScheduleStreamSchema = z.object({
     address: z.string({
       message:'Event Location Needed'
     }),
+    category: z.string({
+      message:'Event category Needed'
+    }),
     eventDateTime: z.date(),
     amount: z.union([z.string().transform((val) => parseFloat(val)), z.number()]).optional(),
     isFree: z.boolean().default(false),
     artists: z.string(),
+    tags: z.string(),
     organizers: z.string(),
     orgEmail: z.string({
       message:'Add Organization Email'
@@ -37,6 +41,8 @@ export const CreateScheduleStreamSchema = z.object({
       thumbnailImage: z.string().optional(),
       thumbnailVideo: z.string().optional(),
       orgEmail: z.string().optional(),
+      tags: z.string().optional(),
+      category: z.string().optional(),
     
       
     });

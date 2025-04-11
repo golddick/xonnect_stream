@@ -26,7 +26,7 @@ export function AddSchedule() {
         </Button>
       </Hint>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] h-[500px] overflow-scroll hidden-scrollbar">
+      <DialogContent className="w-[425px] lg:w-[700px] bg-gray-800 h-[500px] overflow-scroll hidden-scrollbar">
         <DialogHeader>
           <DialogTitle>Schedule Event</DialogTitle>
           <DialogDescription>
