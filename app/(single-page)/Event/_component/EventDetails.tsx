@@ -147,10 +147,25 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
               
 
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-center gap-2 text-gray-300">
+                  {/* <div className="flex items-center gap-2 text-gray-300">
                     <Calendar className="h-5 w-5" />
                     <span>{formatDate(data.eventDateTime.toISOString())}</span>
+                  </div> */}
+
+                  <div
+                    className="flex items-center gap-2 text-gray-300 cursor-pointer hover:text-white transition"
+                    onClick={() =>
+                      addToGoogleCalendar({
+                        title: data.title,
+                        description: data.description || '',
+                        eventDateTime: new Date(data.eventDateTime),
+                      })
+                    }
+                  >
+                    <CalendarPlus className="h-5 w-5" />
+                    <span>Add to Google Calendar</span>
                   </div>
+
 
 
                   <div className="flex items-center gap-2 text-gray-300">
@@ -211,7 +226,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
               <TabsList className="mb-6">
                 <TabsTrigger value="about">About</TabsTrigger>
                 <TabsTrigger value="host">Host</TabsTrigger>
-                <TabsTrigger value="discussion">Discussion</TabsTrigger>
+                <TabsTrigger value="comment">Comment</TabsTrigger>
               </TabsList>
 
               <TabsContent value="about" className="space-y-8">
@@ -361,8 +376,8 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                 </Card>
               </TabsContent>
 
-              <TabsContent value="discussion" className="space-y-8">
-                {/* Discussion Section */}
+              <TabsContent value="comment" className="space-y-8">
+                {/* comment Section */}
                 <EventComment scheduleId={data.id} comments={data.comments}/>
               </TabsContent>
             </Tabs>

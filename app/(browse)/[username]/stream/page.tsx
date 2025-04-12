@@ -39,9 +39,6 @@ export default async function UserPage({
   if (isBlocked) notFound();
 
   return (
-    // <StreamPlayer user={user} isFollowing={isFollowing} stream={user.stream}  schedule={user.schedules}
-    // userId={externalUser?.id}  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
-    // />
     <Eventplayer user={user} stream={user.stream} isFollowing={isFollowing}  schedule={user.schedules}
             userId={externalUser?.id }  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
         />
