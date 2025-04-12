@@ -1,36 +1,4 @@
-// import React from 'react';
-// import StreamHeader from './StreamHeader';
-// import { getSchedules } from '@/lib/schedule-service';
-// import StreamVideos from './StreamsVideos';
 
-// interface AllStreamProps {
-//   label: string;
-// }
-
-// const AllStream = async ({ label }: AllStreamProps) => {
-//   // Fetch all schedules
-//   const data = await getSchedules();
-
-//   // Get the current date and time
-//   const currentDate = new Date();
-
-//   // Filter schedules to include only upcoming events
-//   const upcomingEvents = data.filter((event) => {
-//     const eventDate = new Date(event.eventDateTime); 
-//     return eventDate > currentDate; 
-//   });
-
-//   console.log(upcomingEvents, 'Upcoming Events');
-
-//   return (
-//     <div className="justify-center w-full h-auto flex flex-col gap-4">
-//       <StreamHeader label={label} />
-//       <StreamVideos data={upcomingEvents} />
-//     </div>
-//   );
-// };
-
-// export default AllStream;
 
 
 

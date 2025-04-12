@@ -27,24 +27,44 @@ import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import StreamCountdown from "./stream-countdown"
 import Image from "next/image"
-import { Schedule, User } from "@prisma/client"
+import {  Comment, CommentLike, Schedule, User,  } from "@prisma/client"
 import { SchedulePurchaseBTN } from "@/components/purchaseBTN/SchedulePurchaseBTN"
 import ShareBTN from "@/components/share/ShareBTN"
 import { FeaturedArtist } from "./FeaturedArtist"
 import EventVideoPreview from "./EventVideoPreview"
 import { Actions } from "@/components/stream-player/actions"
 import { EditSchedule } from "@/app/(dashboard)/u/[username]/schedule/[scheduleId]/_component/edit-schedule/edit-schedule"
+import EventComment from "./EventComment"
+import FormattedComment from "@/lib/type"
+import { useEffect } from "react"
+
+
 
 
 interface Props {
-   data: (Schedule & { user?: User }) | null
-   scheduledEvent:Schedule[] | undefined | null
-  userId:string | undefined
-  selfName:string | undefined | null
-  selfEmail:string  | null | undefined
-  following: string[] 
-  followers: string[] 
+  data: (Schedule & {
+    user?: User
+    comments?: Comment[]
+  }) | null
+  scheduledEvent: Schedule[] | undefined | null
+  userId: string | undefined
+  selfName: string | undefined | null
+  selfEmail: string | null | undefined
+  following: string[]
+  followers: string[]
 }
+
+// interface Props {
+//    data: (Schedule & { user?: User }) | null
+//    scheduledEvent:Schedule[] | undefined | null
+//   userId:string | undefined
+//   selfName:string | undefined | null
+//   selfEmail:string  | null | undefined
+//   following: string[] 
+//   followers: string[] 
+//   comments:FormattedComment[] 
+ 
+// }
 
 
 export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEmail, selfName, following, followers}:Props) {
@@ -60,6 +80,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
   const followingCount = following?.length ?? 0;
 
     console.log(data, 'p')
+    console.log(data.comments, 'pcc')
 
 
   // Format date for display
@@ -342,89 +363,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
 
               <TabsContent value="discussion" className="space-y-8">
                 {/* Discussion Section */}
-                <Card>
-                  <CardContent className="p-6">
-                    <h2 className="text-xl font-bold mb-4 text-black">Discussion</h2>
-
-                    <div className="bg-gray-50 p-4 rounded-lg mb-6">
-                      <p className="text-gray-700">
-                        Join the conversation about this upcoming stream. Ask questions, share your excitement, or
-                        connect with other attendees!
-                      </p>
-                    </div>
-
-                    <div className="space-y-6">
-                      {/* Comment input placeholder */}
-                      <div className="flex items-start gap-3">
-                        <Avatar className="h-10 w-10">
-                          <AvatarImage src="/placeholder.svg?height=50&width=50&text=You" />
-                          <AvatarFallback>You</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1 bg-gray-100 rounded-lg p-3">
-                          <p className="text-gray-500">Add a comment or ask a question...</p>
-                        </div>
-                      </div>
-
-                      {/* Sample comments */}
-                      <div className="space-y-4">
-                        <div className="flex items-start gap-3">
-                          <Avatar className="h-10 w-10">
-                            <AvatarImage src="/placeholder.svg?height=50&width=50&text=JD" />
-                            <AvatarFallback>JD</AvatarFallback>
-                          </Avatar>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium text-black">John Doe</span>
-                              <span className="text-gray-500 text-sm">2 days ago</span>
-                            </div>
-                            <p className="text-gray-700 mb-2">
-                              Will we need any specific software for this workshop? I&apos;m currently using Procreate on
-                              iPad.
-                            </p>
-                            <div className="flex items-center gap-4 text-sm text-gray-500">
-                              <button className="flex items-center gap-1 hover:text-gray-700">
-                                <Heart className="h-4 w-4" />
-                                <span>5</span>
-                              </button>
-                              <button className="flex items-center gap-1 hover:text-gray-700">
-                                <MessageSquare className="h-4 w-4" />
-                                <span>Reply</span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="flex items-start gap-3 ml-12">
-                          <Avatar className="h-10 w-10">
-                            <AvatarImage src={data.user?.imageUrl} />
-                            <AvatarFallback>{data.user?.username.charAt(0)}</AvatarFallback>
-                          </Avatar>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <span className="font-medium text-black">{data.user?.username}</span>
-                              <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded-full">Host</span>
-                              <span className="text-gray-500 text-sm">1 day ago</span>
-                            </div>
-                            <p className="text-gray-700 mb-2">
-                              Great question, John! Procreate works perfectly for this workshop. I&apos;ll be demonstrating
-                              in both Procreate and Photoshop, so you can follow along with either one.
-                            </p>
-                            <div className="flex items-center gap-4 text-sm text-gray-500">
-                              <button className="flex items-center gap-1 hover:text-gray-700">
-                                <Heart className="h-4 w-4" />
-                                <span>8</span>
-                              </button>
-                              <button className="flex items-center gap-1 hover:text-gray-700">
-                                <MessageSquare className="h-4 w-4" />
-                                <span>Reply</span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <EventComment scheduleId={data.id} comments={data.comments}/>
               </TabsContent>
             </Tabs>
           </div>

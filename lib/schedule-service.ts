@@ -33,6 +33,7 @@ export const getSchedules = async () => {
         amount:true,
         address:true,
         artists:true,
+        perticipant:true,
         organizers:true,
         orgEmail:true,
         category:true,
@@ -69,6 +70,7 @@ export const getSchedules = async () => {
         address:true,
         artists:true,
         organizers:true,
+        perticipant:true,
         category:true,
         tags:true,
         orgEmail:true,
@@ -137,6 +139,7 @@ export const getSchedulesByUserID = async (userId?: string | null) => {
         address: true,
         artists: true,
         category:true,
+        perticipant:true,
         tags:true,
         organizers: true,
         orgEmail:true,
@@ -173,6 +176,7 @@ export const getSchedulesByUserID = async (userId?: string | null) => {
         address: true,
         artists: true,
         organizers: true,
+        perticipant:true,
         category:true,
         tags:true,
         orgEmail:true,
@@ -218,6 +222,7 @@ export const getScheduleById = async (scheduleId: string) => {
         address:true,
         artists:true,
         organizers:true,
+        perticipant:true,
         category:true,
         tags:true,
         orgEmail:true,
@@ -253,6 +258,36 @@ export const getScheduleById = async (scheduleId: string) => {
             scheduleId: true,
             ImageURL: true,
           }
+        },
+        comments:{
+          select:{
+            id:true,
+            content:true,
+            userId:true,
+            createdAt:true,
+            user:{
+              select:{
+                id:true,
+                imageUrl:true,
+                username:true
+              }
+            },
+            replies:{
+              select:{
+                id:true,
+                content:true,
+                createdAt:true,
+                user:{
+                  select:{
+                    id:true,
+                    imageUrl:true,
+                    username:true
+                  }
+                }
+              }
+            },
+            likes:true
+          }
         }
     },
   });
@@ -261,3 +296,50 @@ export const getScheduleById = async (scheduleId: string) => {
 };
 
 
+
+
+export const getComments = async (scheduleId: string) => {
+  try {
+    const comments = await db.comment.findMany({
+      where: { scheduleId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            imageUrl: true,
+            instagram: true,
+          }
+        },
+        schedule: true,
+        replies: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                username: true,
+                imageUrl: true,
+                instagram: true,
+              }
+            }
+          },
+          orderBy: { createdAt: 'asc' }
+        },
+        likes: true
+      },
+      orderBy: { createdAt: 'desc' }
+    });
+
+    // ✅ MAKE SURE TO RETURN THE MAPPED COMMENTS
+    return comments.map(comment => ({
+      ...comment,
+      replies: comment.replies.map(reply => ({
+        ...reply,
+        commentId: reply.commentId
+      }))
+    }));
+  } catch (error) {
+    console.error('[getComments]', error);
+    throw new Error('Failed to fetch comments');
+  }
+};

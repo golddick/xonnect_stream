@@ -213,3 +213,104 @@ export const deleteScheduledStream = async (scheduleId: string) => {
     throw new Error("Internal server error");
   }
 };
+
+
+
+export const createComment = async (scheduleId: string, content: string) => {
+  try {
+    const self = await getSelf();
+
+    const schedule = await db.schedule.findUnique({
+      where: { id: scheduleId },
+    });
+
+    if (!schedule) {
+      throw new Error("Schedule not found");
+    }
+
+    const comment = await db.comment.create({
+      data: {
+        content,
+        userId: self.id,
+        scheduleId,
+      },
+    });
+
+    revalidatePath(`/schedule/${scheduleId}`);
+
+    return { message: "Comment created successfully", comment };
+  } catch (error) {
+    console.error("createComment error", error);
+    throw new Error("Internal server error");
+  }
+};
+
+
+
+export async function createReply(commentId: string, content: string) {
+  const user = await getSelf()
+  if (!user) throw new Error('Not authenticated')
+
+    const parentComment = await db.comment.findUnique({
+      where: { id: commentId },
+    });
+
+    if (!parentComment) {
+      throw new Error("Parent comment not found");
+    }
+
+  const reply = await db.reply.create({
+    data: {
+      commentId,
+      userId: user.id,
+      content
+    },
+    include: {
+      user: true
+    }
+  })
+
+  revalidatePath(`/Event/${parentComment.scheduleId}`);
+
+  return { message: "Reply created successfully", reply };
+
+}
+
+
+
+
+export const likeComment = async (commentId: string) => {
+  const user = await getSelf()
+  if (!user) throw new Error('Not authenticated')
+
+  const existingLike = await db.commentLike.findFirst({
+    where: {
+      commentId,
+      userId: user.id,
+    },
+  })
+
+  if (existingLike) return // Prevent duplicate likes
+
+  const like = await db.commentLike.create({
+    data: {
+      commentId,
+      userId: user.id,
+    },
+  })
+
+  return like
+}
+
+export const unlikeComment = async (commentId: string) => {
+  const user = await getSelf()
+  if (!user) throw new Error('Not authenticated')
+
+  await db.commentLike.deleteMany({
+    where: {
+      commentId,
+      userId: user.id,
+    },
+  })
+}
+

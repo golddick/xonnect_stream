@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button";
 
 export function Actions() {
   return (
-    <div className="flex items-center justify-between lg:justify-end gap-x-2 ">
+    <div className="flex items-center justify-between lg:justify-end gap-x-2  ">
       <Button
         size="sm"
         variant="ghost"
-        className="text-muted-foreground hover:text-primary  hidden md:flex"
+        className="text-muted-foreground hover:text-primary  flex"
         asChild
       >
-        <Link href="/">
+        <Link href="/Stream">
           <LogOut className="h-5 w-5 mr-2" />
           Exit
         </Link>

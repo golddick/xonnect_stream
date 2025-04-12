@@ -33,6 +33,7 @@ export const getUserByUsername = async (username: string) => {
           createdAt: true,       
           updatedAt: true,    
           category:true,
+          perticipant:true,
           tags:true,    
           isLive: true,          
           userId: true,           
