@@ -37,7 +37,7 @@ const EventVideoPreview = ({ img , video }: EventVideoPreviewProps) => {
           ) : (
             <div className=' relative w-full h-full'>
                 <Image 
-              src={img  || 'xc.jpg'}
+              src={img  || '/assets/xc.jpg'}
               alt='Event preview'
               fill
               className=' absolute'

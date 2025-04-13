@@ -1,0 +1,7 @@
+-- CreateEnum
+CREATE TYPE "USER_ROLE" AS ENUM ('USER', 'CREATOR', 'ADMIN');
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "acceptCreatorTerms" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "acceptPlatformTerms" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "role" "USER_ROLE" NOT NULL DEFAULT 'USER';

@@ -19,6 +19,9 @@ model User {
   instagram      String? @db.Text
   twitter        String? @db.Text
   youtube        String? @db.Text
+  role       USER_ROLE @default(USER)
+  acceptPlatformTerms Boolean @default(false)
+  acceptCreatorTerms  Boolean @default(false)
 
   following  Follow[] @relation("Following")
   followedBy Follow[] @relation("FollowedBy")
@@ -31,6 +34,7 @@ model User {
 
   payments Payment[]
   schedules   Schedule[]  @relation(name: "scheduledBy")
+   physicalTicket          physicalTicketPayment[]
 
 
   comments     Comment[]   @relation("UserComments")
@@ -39,6 +43,12 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum USER_ROLE {
+  USER 
+  CREATOR
+  ADMIN
 }
 
 model Stream {
@@ -65,6 +75,7 @@ model Stream {
   updatedAt DateTime @updatedAt
   payments          Payment[] @relation("StreamPayments")
 
+
   @@index([userId])
   @@index([ingressId])
   // @@fulltext([name])
@@ -90,6 +101,25 @@ model Payment {
   @@index([scheduleId])
   @@index([streamId])
 }
+model physicalTicketPayment {
+  id         String            @id @default(uuid())
+  externalUserId     String
+  user       User              @relation(fields: [externalUserId], references: [externalUserId], onDelete: Cascade)
+  email      String
+  name       String
+  amount     Float
+  quantity     Float
+  reference  String?            @unique
+  scheduleId String?
+  schedule   Schedule?         @relation(fields: [scheduleId], references: [id], onDelete: Cascade)
+  status     SUBSCRIPTION_STATUS
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  @@index([externalUserId])
+  @@index([scheduleId])
+}
+
 
 
 
@@ -107,6 +137,8 @@ model Schedule {
   description     String?  
   eventDateTime   DateTime
   amount          Float ?
+  physicalTicketAmount  Float ?
+  availableSlots  Float ?
   isFree          Boolean @default(false)
   thumbnailImage  String?  
   thumbnailVideo  String?
@@ -121,9 +153,9 @@ model Schedule {
   isLive          Boolean @default(false) 
 
   payments        Payment[]
+  physicalTicket   physicalTicketPayment[]
   streams         Stream[]
   fileUploads     ScheduleFileUpload[]
-
    comments        Comment[] @relation("ScheduleComments")
 
   createdAt       DateTime @default(now())

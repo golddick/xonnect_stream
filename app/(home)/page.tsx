@@ -14,6 +14,7 @@ import HeroSection from './_component/Hero-section';
 import { GiftIcon, PenLineIcon, TicketIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import FeatureAvailabilityComponent from './_component/featuresAvailable';
+import { JoinASCreatorBTN } from '@/components/joinAsCreator/JoinASCreatorBTN';
 
 export default function Home() {
   return (
@@ -210,13 +211,10 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="mt-10">
-                {/* <button className="px-8 py-4 bg-red-600 text-white rounded-full text-lg font-semibold hover:bg-red-700 transition-all">
-                  Start Monetizing
-                </button> */}
-                <Button className='px-8 py-4  rounded-full text-lg font-semibold hover:bg-red-700 transition-all'>
-                Start Monetizing
-                </Button>
+              <div className="mt-10 text-white">
+                 <JoinASCreatorBTN 
+                  tittle='Start Monetizing'  
+                  />
               </div>
             </div>
           </div>

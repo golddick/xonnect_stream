@@ -19,6 +19,9 @@ export const CreateScheduleStreamSchema = z.object({
     isFree: z.boolean().default(false),
     artists: z.string(),
     tags: z.string(),
+    sellPhysicalTicket: z.boolean().default(false),
+    physicalTicketAmount: z.union([z.string().transform((val) => parseFloat(val)), z.number()]).optional(),
+    availableSlots: z.union([z.string().transform((val) => parseFloat(val)), z.number()]).optional(),
     organizers: z.string(),
     orgEmail: z.string({
       message:'Add Organization Email'

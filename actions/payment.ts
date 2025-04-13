@@ -141,3 +141,158 @@ export const verifyPayment = async (reference: string) => {
       return false;
     }
   };
+
+
+
+
+
+// 1. Create Physical Ticket Payment
+export const createPhysicalTicketPayment = async (paymentData: {
+  userId: string;
+  email: string;
+  name: string;
+  amount: number;
+  quantity: number;
+  status: "SUCCESSFUL" | "PENDING";
+  reference: string;
+  scheduleId: string;
+}) => {
+  try {
+    if (!paymentData.userId || !paymentData.email || !paymentData.name) {
+      throw new Error("Missing required user fields");
+    }
+
+    if (paymentData.amount <= 0 || paymentData.quantity <= 0) {
+      throw new Error("Invalid amount or quantity");
+    }
+
+    // Confirm user exists
+    const userExists = await db.user.findUnique({
+      where: { externalUserId: paymentData.userId },
+      select: { id: true },
+    });
+
+    if (!userExists) {
+      throw new Error(`User with ID ${paymentData.userId} not found`);
+    }
+
+    // Create ticket payment
+    const payment = await db.physicalTicketPayment.create({
+      data: {
+        externalUserId: paymentData.userId,
+        email: paymentData.email,
+        name: paymentData.name,
+        amount: paymentData.amount,
+        quantity: paymentData.quantity,
+        status: paymentData.status,
+        reference: paymentData.reference,
+        scheduleId: paymentData.scheduleId,
+      },
+    });
+
+    // Optional cache revalidation
+    revalidatePath(`/schedule/${paymentData.scheduleId}`);
+
+    return {
+      success: true,
+      payment: {
+        id: payment.id,
+        reference: payment.reference,
+        amount: payment.amount,
+        quantity: payment.quantity,
+        status: payment.status,
+      },
+    };
+  } catch (error) {
+    console.error("🛑 Physical Ticket Payment Error:", error);
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      return {
+        success: false,
+        error: "Database error occurred",
+        code: error.code,
+      };
+    }
+
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error occurred",
+    };
+  }
+};
+
+// 2. Check if Payment Exists
+export const checkPaymentExists = async (reference: string): Promise<boolean> => {
+  try {
+    const payment = await db.physicalTicketPayment.findUnique({
+      where: { reference },
+      select: { id: true },
+    });
+
+    return !!payment;
+  } catch (error) {
+    console.error("🛑 Payment existence check failed:", error);
+    return false;
+  }
+};
+
+// 3. Verify Physical Ticket Payment (with Paystack)
+// actions/payment.ts (or wherever your verify function is)
+export const verifyPhysicalTicketPayment = async (reference: string) => {
+    try {
+      const paymentExists = await checkPaymentExists(reference)
+      if (!paymentExists) {
+        console.error(`Payment with reference ${reference} not found`)
+        return false
+      }
+  
+      const response = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
+        headers: {
+          Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+        },
+      })
+  
+      const result = await response.json()
+      const data = result.data
+  
+      if (result.status && data.status === 'success') {
+        const existing = await db.physicalTicketPayment.findUnique({
+          where: { reference },
+        })
+  
+        if (!existing) throw new Error('Payment record not found')
+  
+        // ✅ Reduce the available slots atomically
+        await db.$transaction([
+          db.schedule.update({
+            where: { id: existing.scheduleId ?? undefined },
+            data: {
+              availableSlots: {
+                decrement: existing.quantity, // subtract quantity paid for
+              },
+            },
+          }),
+          db.physicalTicketPayment.update({
+            where: { reference },
+            data: {
+              status: 'SUCCESSFUL',
+            },
+          }),
+        ])
+  
+        return true
+      }
+  
+      // Update with failed or pending status
+      await db.physicalTicketPayment.update({
+        where: { reference },
+        data: { status: data.status.toUpperCase() },
+      })
+  
+      return false
+    } catch (error) {
+      console.error('Payment verification failed:', error)
+      return false
+    }
+  }
+  

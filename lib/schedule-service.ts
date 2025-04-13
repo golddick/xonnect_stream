@@ -31,6 +31,8 @@ export const getSchedules = async () => {
         thumbnailImage: true,
         thumbnailVideo:true,
         amount:true,
+        physicalTicketAmount:true,
+        availableSlots:true,
         address:true,
         artists:true,
         perticipant:true,
@@ -67,6 +69,8 @@ export const getSchedules = async () => {
         thumbnailImage: true,
         thumbnailVideo:true,
         amount:true,
+        physicalTicketAmount:true,
+        availableSlots:true,
         address:true,
         artists:true,
         organizers:true,
@@ -136,6 +140,8 @@ export const getSchedulesByUserID = async (userId?: string | null) => {
         thumbnailImage: true,
         thumbnailVideo: true,
         amount: true,
+        physicalTicketAmount:true,
+        availableSlots:true,
         address: true,
         artists: true,
         category:true,
@@ -173,6 +179,8 @@ export const getSchedulesByUserID = async (userId?: string | null) => {
         thumbnailImage: true,
         thumbnailVideo: true,
         amount: true,
+        physicalTicketAmount:true,
+        availableSlots:true,
         address: true,
         artists: true,
         organizers: true,
@@ -221,6 +229,8 @@ export const getScheduleById = async (scheduleId: string) => {
         amount:true,
         address:true,
         artists:true,
+        physicalTicketAmount:true,
+        availableSlots:true,
         organizers:true,
         perticipant:true,
         category:true,
@@ -240,7 +250,8 @@ export const getScheduleById = async (scheduleId: string) => {
             schedules:true,
             instagram:true,
             twitter:true,
-            youtube:true
+            youtube:true,
+            email:true,
           }
         },
         id: true,
@@ -296,8 +307,6 @@ export const getScheduleById = async (scheduleId: string) => {
 };
 
 
-
-
 export const getComments = async (scheduleId: string) => {
   try {
     const comments = await db.comment.findMany({
@@ -343,3 +352,40 @@ export const getComments = async (scheduleId: string) => {
     throw new Error('Failed to fetch comments');
   }
 };
+
+
+
+// /actions/schedule.ts
+export const getAvailablePhysicalSlots = async (scheduleId: string) => {
+  const schedule = await db.schedule.findUnique({
+    where: { id: scheduleId },
+    include: {
+      physicalTicket: true,
+    },
+  });
+
+  if (!schedule) throw new Error('Schedule not found');
+
+  const totalSlots = schedule.availableSlots ?? 0;
+  const soldSlots = schedule.physicalTicket.reduce((sum, payment) => sum + payment.quantity, 0);
+
+  return totalSlots - soldSlots;
+};
+
+
+// export const getAvailableSlots = async (eventID: string) => {
+//   try {
+//     const result = await db.schedule.findUnique({
+//       where: { id: eventID },
+//       select: {
+//         availableSlots: true,
+//       },
+//     })
+
+//     return result?.availableSlots ?? 0
+//   } catch (error) {
+//     console.error('Error fetching available slots:', error)
+//     return 0
+//   }
+// }
+

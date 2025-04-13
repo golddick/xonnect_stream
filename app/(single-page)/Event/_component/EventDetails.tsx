@@ -37,6 +37,7 @@ import { EditSchedule } from "@/app/(dashboard)/u/[username]/schedule/[scheduleI
 import EventComment from "./EventComment"
 import FormattedComment from "@/lib/type"
 import { useEffect } from "react"
+import PhysicalDetails from "./physicalDetails"
 
 
 
@@ -52,22 +53,12 @@ interface Props {
   selfEmail: string | null | undefined
   following: string[]
   followers: string[]
+  availableSlots:number
 }
 
-// interface Props {
-//    data: (Schedule & { user?: User }) | null
-//    scheduledEvent:Schedule[] | undefined | null
-//   userId:string | undefined
-//   selfName:string | undefined | null
-//   selfEmail:string  | null | undefined
-//   following: string[] 
-//   followers: string[] 
-//   comments:FormattedComment[] 
- 
-// }
 
 
-export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEmail, selfName, following, followers}:Props) {
+export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEmail, selfName, following, followers, availableSlots}:Props) {
 
     if (!data) {
         return null
@@ -79,8 +70,8 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
   const followersCount = followers?.length ?? 0;
   const followingCount = following?.length ?? 0;
 
-    console.log(data, 'p')
-    console.log(data.comments, 'pcc')
+   console.log(availableSlots, 'av')
+
 
 
   // Format date for display
@@ -147,24 +138,12 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
               
 
                 <div className="space-y-3 mb-6">
-                  {/* <div className="flex items-center gap-2 text-gray-300">
+                   <div className="flex items-center gap-2 text-gray-300">
                     <Calendar className="h-5 w-5" />
                     <span>{formatDate(data.eventDateTime.toISOString())}</span>
-                  </div> */}
+                  </div> 
 
-                  <div
-                    className="flex items-center gap-2 text-gray-300 cursor-pointer hover:text-white transition"
-                    onClick={() =>
-                      addToGoogleCalendar({
-                        title: data.title,
-                        description: data.description || '',
-                        eventDateTime: new Date(data.eventDateTime),
-                      })
-                    }
-                  >
-                    <CalendarPlus className="h-5 w-5" />
-                    <span>Add to Google Calendar</span>
-                  </div>
+                 
 
 
 
@@ -179,7 +158,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                     {data.isFree ? (
                       "Free" 
                     ) : (
-                      `Price: ${data.amount}` 
+                      `Virtual Ticket Price: ${data.amount}` 
                     )}
                   </span>
                   </div>
@@ -204,13 +183,13 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                     <ShareBTN/>
                 </div>
 
-                <div className="flex items-center justify-between bg-gray-800 p-3 rounded-lg">
+                {/* <div className="flex items-center justify-between bg-gray-800 p-3 rounded-lg">
                   <div className="flex items-center gap-2">
                     <Bell className="h-4 w-4 text-gray-300" />
                     <span className="text-gray-300 text-sm">Notify me before stream</span>
                   </div>
                   <Switch />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -242,6 +221,8 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
 
                 {/* Social Proof */}
                 <FeaturedArtist data={data.artists} streamDate={data.eventDateTime}/>
+              
+               
               
               </TabsContent>
 
@@ -386,8 +367,14 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
           {/* Right Column - Pricing and Registration */}
           <div className="space-y-6">
 
+            {/* Physical Details */}
+            {
+              data.physicalTicketAmount && data.availableSlots && (
+                <PhysicalDetails physicalTicketAmount={data.physicalTicketAmount } availableSlots={availableSlots || 0}  userEmail={data.user?.email} userId={data.user?.externalUserId} eventName={data.title} eventID={data.id} address={data.address}/>
+              )
+              }
             {/* What You'll Get */}
-            <Card>
+            {/* <Card>
               <CardContent className="p-6">
                 <h3 className="text-lg font-bold mb-4 text-black">What You&apos;ll Get</h3>
 
@@ -424,7 +411,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                   </li>
                 </ul>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Refund Policy */}
             <Card>
