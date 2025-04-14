@@ -21,7 +21,7 @@ const page = async ({params}:Props) => {
       
        const data = await getScheduleById( params?.scheduleId);
        const comments = await getComments(params?.scheduleId)
-       const availableSlots = await getAvailablePhysicalSlots(params?.scheduleId)
+       const {remainingSlots, totalSlots} = await getAvailablePhysicalSlots(params?.scheduleId)
 
        console.log(comments, 'cmm')
        console.log(data, 'ppl')
@@ -32,11 +32,6 @@ const page = async ({params}:Props) => {
 
   return (
     <>
-    {/* <ScheduledStreamPage
-     data={data as (Schedule & { user?: User }) | null} 
-    comments={eventComment || ''} 
-    scheduledEvent={schedules as Schedule[] | null | undefined} following={following} followers={folowers} userId={externalUser?.id} selfEmail={externalUser?.emailAddresses[0].emailAddress} selfName={externalUser?.username } /> */}
-
 
     <ScheduledStreamPage
       data={
@@ -52,7 +47,8 @@ const page = async ({params}:Props) => {
         }) | null
       }
       scheduledEvent={schedules as Schedule[]}
-      availableSlots={availableSlots}
+      availableSlots={totalSlots}
+      remainingSlots={remainingSlots}
       following={following}
       followers={folowers}
       userId={externalUser?.id}

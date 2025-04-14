@@ -54,11 +54,12 @@ interface Props {
   following: string[]
   followers: string[]
   availableSlots:number
+  remainingSlots:number
 }
 
 
 
-export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEmail, selfName, following, followers, availableSlots}:Props) {
+export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEmail, selfName, following, followers, availableSlots, remainingSlots}:Props) {
 
     if (!data) {
         return null
@@ -69,9 +70,6 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
   const streamCreator = data.user?.externalUserId === userId
   const followersCount = followers?.length ?? 0;
   const followingCount = following?.length ?? 0;
-
-   console.log(availableSlots, 'av')
-
 
 
   // Format date for display
@@ -103,7 +101,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                   <div className="absolute top-4 left-4 z-10 bg-red-700 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center">
                     {/* <DollarSign className="h-4 w-4 mr-1" /> */}
                     <span className="h-4 w-4 mr-1">₦</span> 
-                    <span>Premium Stream</span>
+                    <span>Premium</span>
                   </div>
                 )}
               </div>
@@ -220,7 +218,11 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                 </Card>
 
                 {/* Social Proof */}
-                <FeaturedArtist data={data.artists} streamDate={data.eventDateTime}/>
+                {
+                  data.artists && (
+                    <FeaturedArtist data={data.artists} streamDate={data.eventDateTime}/>
+                  )
+                }
               
                
               
@@ -242,7 +244,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                         <div className="flex items-center justify-between mb-3">
                           <div>
                             <h3 className="text-xl font-bold text-black">{data.user?.username}</h3>
-                            <p className="text-gray-500">{data.user?.username} stream channel</p>
+                            <p className="text-gray-500">{data.user?.username} streaming channel</p>
                           </div>
                           {
                             streamCreator && (
@@ -359,7 +361,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
 
               <TabsContent value="comment" className="space-y-8">
                 {/* comment Section */}
-                <EventComment scheduleId={data.id} comments={data.comments}/>
+                <EventComment userId={userId} scheduleId={data.id} comments={data.comments}/>
               </TabsContent>
             </Tabs>
           </div>
@@ -370,7 +372,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
             {/* Physical Details */}
             {
               data.physicalTicketAmount && data.availableSlots && (
-                <PhysicalDetails physicalTicketAmount={data.physicalTicketAmount } availableSlots={availableSlots || 0}  userEmail={data.user?.email} userId={data.user?.externalUserId} eventName={data.title} eventID={data.id} address={data.address}/>
+                <PhysicalDetails physicalTicketAmount={data.physicalTicketAmount } remainingSlots={remainingSlots} availableSlots={availableSlots || 0} ticketType={data.TicketType || 'Regular'}  userEmail={selfEmail} userId={userId} userName={selfName} eventName={data.title} eventID={data.id} address={data.address}/>
               )
               }
             {/* What You'll Get */}

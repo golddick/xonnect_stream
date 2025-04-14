@@ -36,6 +36,8 @@ export const createScheduledStream = async (values: Partial<Schedule>) => {
         physicalTicketAmount:values.physicalTicketAmount,
         availableSlots:values.availableSlots,
         category:values.category,
+        TicketType:values.TicketType,
+        remainingSlots:values.availableSlots,
         tags: values.tags,
         thumbnailImage: values.thumbnailImage || null,
         thumbnailVideo: values.thumbnailVideo || null,
@@ -78,8 +80,6 @@ export const createScheduledStream = async (values: Partial<Schedule>) => {
   }
 
 
-
-
 // Function to update an existing schedule
 export const updateScheduledStream = async (scheduleID: string, values: Partial<Schedule>) => {
   try {
@@ -113,6 +113,7 @@ export const updateScheduledStream = async (scheduleID: string, values: Partial<
       eventDateTime: values.eventDateTime || schedule.eventDateTime,
       category:values.category || schedule.category,
       tags: values.tags || schedule.tags,
+      TicketType:values.TicketType || schedule.TicketType,
       amount: values.amount || schedule.amount,
       physicalTicketAmount:values.physicalTicketAmount || schedule.physicalTicketAmount,
       availableSlots:values.availableSlots || schedule.availableSlots,

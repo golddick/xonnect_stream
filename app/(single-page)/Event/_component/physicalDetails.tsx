@@ -17,11 +17,14 @@ import {
 interface PhysicalDetailsProps {
   physicalTicketAmount: number
   availableSlots: number
-  userEmail?: string
+  remainingSlots: number
+  userEmail?: string | null | undefined
+  userName?: string | null | undefined
   userId?: string
   eventName?: string
   eventID?: string
   address?: string
+  ticketType?: string
 }
 
 const POLL_INTERVAL = 5000 // 5 seconds
@@ -35,12 +38,20 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
   userId,
   eventName,
   eventID,
-  address
+  address,
+  userName,
+  remainingSlots,
+  ticketType
 }) => {
   const [quantity, setQuantity] = useState(1)
   const [isPending, startTransition] = useTransition()
-  const [slotsLeft, setSlotsLeft] = useState(availableSlots)
+  const [slotsLeft, setSlotsLeft] = useState(remainingSlots)
   const [currentReference, setCurrentReference] = useState<string | null>(null)
+
+
+  console.log(slotsLeft, 'left')
+  console.log(availableSlots, 'ava')
+  console.log(remainingSlots, 'remain')
 
   // 🔁 Retry logic for verifying payment
   const verifyPaymentWithRetry = async (reference: string, attempts = MAX_RETRIES) => {
@@ -95,26 +106,22 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
 
   const totalAmount = physicalTicketAmount * quantity * 100
   const soldTickets = Math.max(0, availableSlots - slotsLeft)
-    const progressPercentage = (availableSlots > 0)
-    ? (soldTickets / availableSlots) * 100
-    : 0
-
 
   const handlePay = () => {
     const paystackKey = process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY
 
     if (!paystackKey) {
-      toast.error('⚠️ Payment gateway configuration error')
+      toast.error(' Payment gateway configuration error')
       return
     }
 
-    if (!userId || !userEmail || !eventID) {
-      toast.error('⚠️ Login required to buy tickets')
+    if (!userId || !userEmail || !eventID || !userName) {
+      toast.error(' Login required to buy tickets')
       return
     }
 
     if (quantity > slotsLeft) {
-      toast.error('⚠️ Not enough tickets available')
+      toast.error(' Not enough tickets available')
       return
     }
 
@@ -128,7 +135,7 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
       metadata: {
         custom_fields: [
           { display_name: 'Quantity', variable_name: 'quantity', value: quantity },
-          { display_name: 'User Name', variable_name: 'user name', value: userId },
+          { display_name: 'User Name', variable_name: 'user name', value: userName },
           { display_name: 'Event Name', variable_name: 'event name', value: `${eventName} physical ticket` },
         ],
       },
@@ -152,17 +159,17 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
               throw new Error('Failed to create payment record')
             }
 
-            console.log('📦 Payment record created:', createdPayment.payment?.reference || 'undefined reference')
-            toast.success(`💳 Payment initiated! Ref: ${transaction.reference.slice(0, 8)}`)
+            console.log(' Payment record created:', createdPayment.payment?.reference || 'undefined reference')
+            toast.success(` Payment initiated! Ref: ${transaction.reference.slice(0, 8)}`)
           } catch (error) {
             console.error('Payment processing error:', error)
-            toast.error('❌ Payment processing failed')
+            toast.error(' Payment processing failed')
             setCurrentReference(null)
           }
         })
       },
       onCancel: () => {
-        toast.error('⚠️ Payment cancelled by user')
+        toast.error(' Payment cancelled by user')
         setCurrentReference(null)
       },
     })
@@ -173,10 +180,30 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
       <CardContent className="p-6 space-y-4">
         <h2 className="text-xl font-bold text-black">Physical Ticket Details</h2>
 
-        <div className="text-gray-700">
-          <p>Price per Ticket: <span className="font-semibold">₦{physicalTicketAmount}</span></p>
-          <p>Available Slots: <span className="font-semibold">{slotsLeft}</span></p>
-          <p>Event Address: <span className="font-semibold">{address}</span></p>
+        <div className=" gap-4">
+                <div className='flex  gap-2 items-center'>
+                <p className=' text-muted-foreground text-[13px]'>Price per Ticket</p>
+                <span className="font-normal text-black">₦{physicalTicketAmount}</span>
+                </div>
+                <div className='flex  gap-2 items-center'>
+                <p className=' text-muted-foreground text-[13px]'>Initial slot</p>
+                <span className="font-normal text-black">{availableSlots}</span>
+                </div>
+                <div className='flex  gap-2 items-center'>
+                <p className=' text-muted-foreground text-[13px]'>Ticket Type</p>
+                <span className="font-normal text-black">{ticketType}</span>
+                </div>
+                <div className='flex gap-2 items-center'>
+                <p className=' text-muted-foreground text-[13px]'>Available Slots</p>
+                <span className="font-normal text-black">{slotsLeft}</span>
+                </div>
+           <div className='flex gap-2 items-center'>
+           <p className=' text-muted-foreground text-[13px]'>Event Address</p>
+           <span className="font-normal text-black">{address}</span>
+           </div>
+          {/* <p>Price per Ticket: <span className="font-semibold">₦{physicalTicketAmount}</span></p> */}
+          {/* <p>Available Slots: <span className="font-semibold">{slotsLeft}</span></p> */}
+          {/* <p className=' text-muted-foreground '>Event Address: <span className="font-semibold text-black">{address}</span></p> */}
 
         </div>
 
@@ -191,7 +218,7 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
             onChange={(e) => setQuantity(Math.max(1, Math.min(slotsLeft, Number(e.target.value))))}
             className="bg-black text-white"
           />
-          <p>Total: ₦{(quantity * physicalTicketAmount).toLocaleString()}</p>
+          <p className=' text-black'>Total: ₦{(quantity * physicalTicketAmount).toLocaleString()}</p>
         </div>
 
         <Button

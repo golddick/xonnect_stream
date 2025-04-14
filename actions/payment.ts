@@ -237,38 +237,37 @@ export const checkPaymentExists = async (reference: string): Promise<boolean> =>
 };
 
 // 3. Verify Physical Ticket Payment (with Paystack)
-// actions/payment.ts (or wherever your verify function is)
 export const verifyPhysicalTicketPayment = async (reference: string) => {
     try {
-      const paymentExists = await checkPaymentExists(reference)
+      const paymentExists = await checkPaymentExists(reference);
       if (!paymentExists) {
-        console.error(`Payment with reference ${reference} not found`)
-        return false
+        console.error(`Payment with reference ${reference} not found`);
+        return false;
       }
   
       const response = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
         headers: {
           Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
         },
-      })
+      });
   
-      const result = await response.json()
-      const data = result.data
+      const result = await response.json();
+      const data = result.data;
   
       if (result.status && data.status === 'success') {
         const existing = await db.physicalTicketPayment.findUnique({
           where: { reference },
-        })
+        });
   
-        if (!existing) throw new Error('Payment record not found')
+        if (!existing) throw new Error('Payment record not found');
   
-        // ✅ Reduce the available slots atomically
+        // ✅ Reduce remainingSlots (not the original availableSlots)
         await db.$transaction([
           db.schedule.update({
             where: { id: existing.scheduleId ?? undefined },
             data: {
-              availableSlots: {
-                decrement: existing.quantity, // subtract quantity paid for
+              remainingSlots: {
+                decrement: existing.quantity, // ✅ Only this field is affected
               },
             },
           }),
@@ -278,21 +277,79 @@ export const verifyPhysicalTicketPayment = async (reference: string) => {
               status: 'SUCCESSFUL',
             },
           }),
-        ])
+        ]);
   
-        return true
+        return true;
       }
   
-      // Update with failed or pending status
+      // ❌ If failed or pending, update payment status only
       await db.physicalTicketPayment.update({
         where: { reference },
         data: { status: data.status.toUpperCase() },
-      })
+      });
   
-      return false
+      return false;
     } catch (error) {
-      console.error('Payment verification failed:', error)
-      return false
+      console.error('Payment verification failed:', error);
+      return false;
     }
-  }
+  };
+  
+// export const verifyPhysicalTicketPayment = async (reference: string) => {
+//     try {
+//       const paymentExists = await checkPaymentExists(reference)
+//       if (!paymentExists) {
+//         console.error(`Payment with reference ${reference} not found`)
+//         return false
+//       }
+  
+//       const response = await fetch(`https://api.paystack.co/transaction/verify/${reference}`, {
+//         headers: {
+//           Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+//         },
+//       })
+  
+//       const result = await response.json()
+//       const data = result.data
+  
+//       if (result.status && data.status === 'success') {
+//         const existing = await db.physicalTicketPayment.findUnique({
+//           where: { reference },
+//         })
+  
+//         if (!existing) throw new Error('Payment record not found')
+  
+//         // ✅ Reduce the available slots atomically
+//         await db.$transaction([
+//           db.schedule.update({
+//             where: { id: existing.scheduleId ?? undefined },
+//             data: {
+//               availableSlots: {
+//                 decrement: existing.quantity, // subtract quantity paid for
+//               },
+//             },
+//           }),
+//           db.physicalTicketPayment.update({
+//             where: { reference },
+//             data: {
+//               status: 'SUCCESSFUL',
+//             },
+//           }),
+//         ])
+  
+//         return true
+//       }
+  
+//       // Update with failed or pending status
+//       await db.physicalTicketPayment.update({
+//         where: { reference },
+//         data: { status: data.status.toUpperCase() },
+//       })
+  
+//       return false
+//     } catch (error) {
+//       console.error('Payment verification failed:', error)
+//       return false
+//     }
+//   }
   

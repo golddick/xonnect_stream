@@ -61,7 +61,9 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
       artists: schedule?.artists || "",
       organizers: schedule?.organizers || "",
       orgEmail:schedule?.orgEmail || '',
-      thumbnailVideo:schedule?.thumbnailVideo || ''
+      thumbnailVideo:schedule?.thumbnailVideo || '',
+      physicalTicketAmount:schedule?.physicalTicketAmount || 0,
+      availableSlots:schedule?.availableSlots || 0,
     },
   });
 
@@ -90,7 +92,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
   if (!isClient) return null;
 
   return (
-    <ScrollArea className="flex justify-center w-full h-[500px] lg:h-[600px] ">
+    <ScrollArea className="flex justify-center w-full h-auto "> 
       <Form {...form}>
         <form className="flex flex-col gap-4 w-full p-2" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6 overflow-scroll hidden-scrollbar mb-10">
@@ -102,7 +104,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                   name='title'
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Event Name</i></FormLabel>
+                      <FormLabel className="flex font-sans font-thin">Event Name</FormLabel>
                       <FormControl>
                         <Input placeholder="Event Name" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                       </FormControl>
@@ -115,7 +117,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                   name='address'
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Address</i></FormLabel>
+                      <FormLabel className="flex font-sans font-thin">Address</FormLabel>
                       <FormControl>
                         <Input placeholder="Address" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                       </FormControl>
@@ -124,12 +126,42 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                   )}
                 />
               </div>
+
+              <div className="flex w-full gap-6">
+                <FormField
+                  control={form.control}
+                  name='physicalTicketAmount'
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel className="flex font-sans font-thin" >Physical Ticket Amount</FormLabel>
+                      <FormControl>
+                        <Input placeholder="10000" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name='availableSlots'
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel className="flex font-sans font-thin">Available Slots</FormLabel>
+                      <FormControl>
+                        <Input placeholder="1" min={1} type="number" disabled readOnly {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               <FormField
                 control={form.control}
                 name='description'
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Description</i></FormLabel>
+                    <FormLabel className="flex font-sans font-thin">Description</FormLabel>
                     <FormControl>
                       <Textarea placeholder="max stream" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                     </FormControl>
@@ -194,7 +226,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                 name='eventDateTime'
                 render={({ field: { onChange, value } }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Date & Time</i></FormLabel>
+                    <FormLabel className="flex font-sans font-thin" >Date & Time</FormLabel>
                     <FormControl>
                       <div className='flex w-full items-center justify-between bg-black rounded-sm pr-2'>
                         <DatePicker
@@ -226,7 +258,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                   name='artists'
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Artists</i></FormLabel>
+                      <FormLabel className="flex font-sans font-thin" >Artists</FormLabel>
                       <FormControl>
                         <Input placeholder="John , Frank" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                       </FormControl>
@@ -239,7 +271,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                   name='organizers'
                   render={({ field }) => (
                     <FormItem className="w-full">
-                      <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Organizers</i></FormLabel>
+                      <FormLabel className="flex font-sans font-thin">Organizers</FormLabel>
                       <FormControl>
                         <Input placeholder="Mavin Entertainment, choc city" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                       </FormControl>
@@ -255,7 +287,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                 name='thumbnailVideo'
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Video Url</i></FormLabel>
+                    <FormLabel className="flex font-sans font-thin" >Video Url</FormLabel>
                     <FormControl>
                       <Input placeholder="Youtube Url" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                     </FormControl>
@@ -268,7 +300,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                 name='orgEmail'
                 render={({ field }) => (
                   <FormItem className="w-full">
-                    <FormLabel className="flex font-sans font-thin" style={{ fontSize: '11px', fontWeight: '500', color: '#b28228' }}><i>Organization Email</i></FormLabel>
+                    <FormLabel className="flex font-sans font-thin" >Organization Email</FormLabel>
                     <FormControl>
                       <Input type="email" placeholder="mavin@gmail.com" {...field} className="focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 rounded-l-sm border-none bg-black" />
                     </FormControl>
@@ -283,7 +315,6 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
               type="submit"
               size='lg'
               variant='ghost'
-              className="from-[red] font-medium to-[black] bg-gradient-to-br border-r border-b"
             >
               {form.formState.isSubmitting ? ('submitting...') : ` Register`}
             </Button>

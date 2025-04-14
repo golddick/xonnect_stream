@@ -25,7 +25,7 @@ export const FeaturedArtist = ({ data, streamDate }: Props) => {
         <div className="w-[800px] bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl shadow-lg overflow-hidden border-2  border-black">
           <div className="p-8">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-primary-800">Featured Artists</h2>
+              <h2 className="text-3xl font-bold text-primary-800">Event Featuring Stars</h2>
             </div>
             <div className="space-y-4">
               <p className="text-gray-500">No featured artists available at the moment.</p>
@@ -41,7 +41,7 @@ export const FeaturedArtist = ({ data, streamDate }: Props) => {
       <CardContent className=" p-6">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-xl font-bold text-black">
-              {isStreamUpcoming ? "Futuring Artists" : "Featured Artists"}
+              {isStreamUpcoming ? "Futuring Stars" : "Featured Stars"}
             </h2>
           </div>
 

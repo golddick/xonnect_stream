@@ -58,6 +58,7 @@ const ScheduleForm = () => {
       orgEmail: '',
       thumbnailImage: '',
       thumbnailVideo: '',
+      TicketType: '',
       sellPhysicalTicket: false,
       physicalTicketAmount: 0,
       availableSlots: 0
@@ -135,10 +136,10 @@ const ScheduleForm = () => {
                     <SelectContent>
                       <SelectGroup>
                         <SelectLabel>Categories</SelectLabel>
-                        <SelectItem value="Music">Music</SelectItem>
+                        <SelectItem value="Music">Music Concert</SelectItem>
                         <SelectItem value="Sport">Sport</SelectItem>
                         <SelectItem value="Talk Show">Talk Show</SelectItem>
-                        <SelectItem value="Concert">Concert</SelectItem>
+                        <SelectItem value="Festival Concert">Festival Concert</SelectItem>
                         <SelectItem value="Comedy Show">Comedy Show</SelectItem>
                         <SelectItem value="Others">Others</SelectItem>
                       </SelectGroup>
@@ -180,7 +181,7 @@ const ScheduleForm = () => {
             />
 
             {/* Price and Free Ticket */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 w-full">
               <FormField
                 control={form.control}
                 name="amount"
@@ -204,7 +205,7 @@ const ScheduleForm = () => {
                   <FormItem>
                     <FormControl>
                       <div className="flex items-center">
-                        <label htmlFor="isFree" className="pr-3">Free Ticket</label>
+                        <label htmlFor="isFree" className="pr-3">Free?</label>
                         <Checkbox onCheckedChange={field.onChange} checked={field.value} id="isFree" className="mr-2 h-5 w-5 bg-transparent" />
                       </div>
                     </FormControl>
@@ -235,7 +236,7 @@ const ScheduleForm = () => {
                   name="physicalTicketAmount"
                   render={({ field }) => (
                     <FormItem className="w-full ">
-                      <FormLabel>Physical Ticket Amount</FormLabel>
+                      <FormLabel>Ticket Amount</FormLabel>
                       <FormControl>
                         <Input type="number" placeholder="Amount" {...field} className="bg-black border-none" />
                       </FormControl>
@@ -251,6 +252,19 @@ const ScheduleForm = () => {
                       <FormLabel>Available Slots</FormLabel>
                       <FormControl>
                         <Input type="number" placeholder="Slots" {...field} className="bg-black border-none" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="TicketType"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Ticket Type</FormLabel>
+                      <FormControl>
+                        <Input type="text" placeholder="Regular,VIP" {...field} className="bg-black border-none" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

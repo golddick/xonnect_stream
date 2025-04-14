@@ -28,12 +28,12 @@ export function EditSchedule({data}:EditScheduleProps) {
     <Dialog>
       <DialogTrigger >
       <Hint label="Edit Event" asChild>
-        <Button variant={'ghost'}  className=" shadow-md shadow-neutral-600  rounded-lg ">
+        <Button variant={'ghost'}  className=" shadow-md shadow-neutral-600  rounded-lg  text-black">
         <Settings/>
         </Button>
       </Hint>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] h-[500px] overflow-scroll hidden-scrollbar text-white">
+      <DialogContent className="w-[425px] lg:w-[700px] bg-gray-800 h-[500px] overflow-scroll hidden-scrollbar">
         <DialogHeader>
           <DialogTitle>Edit Event</DialogTitle>
           <DialogDescription>

@@ -16,7 +16,7 @@ const page = async ({params}:Props) => {
         
       
        const data = await getScheduleById( params?.eventID);
-      const availableSlots = await getAvailablePhysicalSlots(params?.eventID)
+      const {remainingSlots, totalSlots} = await getAvailablePhysicalSlots(params?.eventID)
 
        const schedules = data?.user.schedules
        const following = data?.user.following?.map(f => f.followingId) || [];
@@ -25,7 +25,7 @@ const page = async ({params}:Props) => {
 
   return (
     <>
-    <ScheduledStreamPage availableSlots={availableSlots} data={data as (Schedule & { user?: User }) | null} scheduledEvent={schedules as Schedule[] | null | undefined}  following={following} followers={folowers} userId={externalUser?.id} selfEmail={externalUser?.emailAddresses[0].emailAddress} selfName={externalUser?.username } />
+    <ScheduledStreamPage availableSlots={totalSlots} remainingSlots={remainingSlots}  data={data as (Schedule & { user?: User }) | null} scheduledEvent={schedules as Schedule[] | null | undefined}  following={following} followers={folowers} userId={externalUser?.id} selfEmail={externalUser?.emailAddresses[0].emailAddress} selfName={externalUser?.username } />
 
     </>
   )

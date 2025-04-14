@@ -26,7 +26,7 @@ export function Wrapper({ children }: { children: React.ReactNode }) {
   return (
     <aside
       className={cn(
-        "fixed left-0  flex-col w-60 h-full border-r border-[#2D2E35] z-50   bg-gradient-to-b from-[black]  via-[#171717] to-[red] hidden md:block ",
+        "fixed left-0  flex-col w-60 h-full border-r border-[#2D2E35] z-50   bg-gradient-to-b from-[black]  via-[#f52626bb] to-[black] hidden md:block ",
         collapsed && "w-[70px]"
       )}
     >
@@ -35,7 +35,7 @@ export function Wrapper({ children }: { children: React.ReactNode }) {
       gap-y-5
        w-full 
        h-full 
-       p-3 
+       p-0
        bg-[#000] 
        bg-opacity-70 
        bg-clip-padding 

@@ -35,20 +35,18 @@ const AllStream = async ({ label, type }: AllStreamProps) => {
   });
 
   if (filteredEvents.length === 0) {
-    return (
-      <div className="justify-center w-full h-auto flex flex-col gap-4">
-        <StreamHeader label={label} />
-        <p className="text-center text-gray-500">
-          {type === 'upcoming' ? 'No upcoming events found.' : 'No past events found.'}
-        </p>
-      </div>
-    );
+    return null
   }
 
   return (
     <div className="justify-center w-full h-auto flex flex-col gap-4">
       <StreamHeader label={label} />
-      <StreamVideos data={filteredEvents} />
+      {
+        filteredEvents && (
+
+          <StreamVideos data={filteredEvents} />
+        )
+      }
     </div>
   );
 };

@@ -148,7 +148,7 @@ export function SchedulePurchaseBTN({ data, selfName, selfEmail, userId }: Purch
         >
             {isPending ? "Processing..." : hasPurchased ? <div className=" flex items-center gap-2">
                 <CheckCheck className="text-gold" size={16} /> Purchased
-            </div>: "Get Ticket"}
+            </div>: "Get Streaming pass"}
         </Button>
     );
 }

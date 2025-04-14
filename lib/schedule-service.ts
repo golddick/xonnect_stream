@@ -33,6 +33,8 @@ export const getSchedules = async () => {
         amount:true,
         physicalTicketAmount:true,
         availableSlots:true,
+        remainingSlots:true,
+        TicketType:true,
         address:true,
         artists:true,
         perticipant:true,
@@ -71,6 +73,8 @@ export const getSchedules = async () => {
         amount:true,
         physicalTicketAmount:true,
         availableSlots:true,
+        remainingSlots:true,
+        TicketType:true,
         address:true,
         artists:true,
         organizers:true,
@@ -142,6 +146,8 @@ export const getSchedulesByUserID = async (userId?: string | null) => {
         amount: true,
         physicalTicketAmount:true,
         availableSlots:true,
+        remainingSlots:true,
+        TicketType:true,
         address: true,
         artists: true,
         category:true,
@@ -181,6 +187,8 @@ export const getSchedulesByUserID = async (userId?: string | null) => {
         amount: true,
         physicalTicketAmount:true,
         availableSlots:true,
+        remainingSlots:true,
+        TicketType:true,
         address: true,
         artists: true,
         organizers: true,
@@ -231,6 +239,8 @@ export const getScheduleById = async (scheduleId: string) => {
         artists:true,
         physicalTicketAmount:true,
         availableSlots:true,
+        remainingSlots:true,
+        TicketType:true,
         organizers:true,
         perticipant:true,
         category:true,
@@ -354,38 +364,19 @@ export const getComments = async (scheduleId: string) => {
 };
 
 
-
-// /actions/schedule.ts
 export const getAvailablePhysicalSlots = async (scheduleId: string) => {
   const schedule = await db.schedule.findUnique({
     where: { id: scheduleId },
-    include: {
-      physicalTicket: true,
+    select: {
+      availableSlots: true,
+      remainingSlots: true,
     },
   });
 
   if (!schedule) throw new Error('Schedule not found');
 
-  const totalSlots = schedule.availableSlots ?? 0;
-  const soldSlots = schedule.physicalTicket.reduce((sum, payment) => sum + payment.quantity, 0);
-
-  return totalSlots - soldSlots;
+  return {
+    totalSlots: schedule.availableSlots ?? 0,
+    remainingSlots: schedule.remainingSlots ?? 0,
+  };
 };
-
-
-// export const getAvailableSlots = async (eventID: string) => {
-//   try {
-//     const result = await db.schedule.findUnique({
-//       where: { id: eventID },
-//       select: {
-//         availableSlots: true,
-//       },
-//     })
-
-//     return result?.availableSlots ?? 0
-//   } catch (error) {
-//     console.error('Error fetching available slots:', error)
-//     return 0
-//   }
-// }
-

@@ -139,6 +139,8 @@ model Schedule {
   amount          Float ?
   physicalTicketAmount  Float ?
   availableSlots  Float ?
+  remainingSlots  Float ?
+  TicketType     String?
   isFree          Boolean @default(false)
   thumbnailImage  String?  
   thumbnailVideo  String?

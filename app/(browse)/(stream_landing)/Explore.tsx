@@ -1,16 +1,17 @@
 
-import { getStreams } from "@/lib/feed-service";
+import { getStreams, getTopStreams } from "@/lib/feed-service";
 import React from "react"
 import SponsorCard from "./Stream/_components/ads-card/sponsor-card";
 import TopLiveSTream from "./Stream/_components/StreamRow/TopLiveSTream";
 import AllStream from "./Stream/_components/StreamVideos/AllStream";
 import { Results } from "./Stream/_components/results";
+import { Button } from "@/components/ui/button";
 
 
 
 export default async function StreamExplore() {
 
-    const stream = await getStreams();
+    const stream = await getTopStreams();
 
     return (
         <div id="xonnect">
@@ -37,33 +38,36 @@ export default async function StreamExplore() {
                             </button>
                            
                         </div>
-                        <h2 className="text-white text-xl font-bold mb-4">Top Stream Channel</h2>
+                        <h2 className="text-white text-xl font-bold mb-4">Top Channel</h2>
                        <TopLiveSTream data={stream}/>
 
-                       {/* <Results label="Creators" /> */}
 
                         <AllStream label="Coming Up" type='upcoming'/>
 
-
                      {/* Second Ad Banner */}
-                    <div className="w-full bg-gradient-to-r from-red-900 to-black border border-red-700 rounded-lg p-4 mb-8">
-                    <div className="flex flex-col md:flex-row items-center justify-between">
-                        <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2">XONNECT Gaming Championship</h3>
-                        <p className="text-gray-300 text-sm">Watch the biggest gaming event of the year. Exclusive coverage only on XONNECT.</p>
-                        </div>
-                        <div className="mt-4 md:mt-0">
-                        <button className="bg-red-700 hover:bg-red-800 transition text-white px-6 py-2 rounded-full text-sm font-medium">
+                    <div className="w-full  bg-gradient-to-b from-[black]  via-[#f52626bb] to-[black] rounded-lg ">
+                    <div
+                        className="flex flex-col gap-y-5 w-full h-full p-4 bg-[#000] bg-opacity-70  bg-clip-padding  backdrop-filter backdrop--blur__safari backdrop-blur-3xl"
+                    >
+                        <div className="flex flex-col md:flex-row items-center justify-between">
+                            <div className="flex-1">
+                            <h3 className="text-xl font-bold mb-2">XONNECT Gaming Championship</h3>
+                            <p className="text-gray-300 text-sm">Watch the biggest gaming event of the year. Exclusive coverage only on XONNECT.</p>
+                            </div>
+                            <div className="mt-4 md:mt-0">
+                            {/* <button className="bg-red-700 hover:bg-red-800 transition text-white px-6 py-2 rounded-full text-sm font-medium">
+                                Watch Now
+                            </button> */}
+                            <Button>
                             Watch Now
-                        </button>
+                            </Button>
+                            </div>
                         </div>
-                    </div>
+                        </div>
                     </div>
 
                         <AllStream label="Past Event" type='past'/>
                         
-
-
                     </div>
                 </div>
                  {/* Feature Promotion Banner */}
