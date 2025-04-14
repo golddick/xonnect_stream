@@ -23,7 +23,7 @@ export default function Pricing() {
         <div className="container mx-auto text-center px-4">
           
           {/* Tab Selector */}
-          <div className="inline-flex bg-gray-100 rounded-lg p-1 mb-16">
+          <div className="inline-flex bg-gray-100 rounded-lg p-1 mb-6 lg:mb-16">
             <button
               onClick={() => setActiveTab('viewers')}
               className={`px-6 py-3 rounded-md ${
@@ -46,9 +46,9 @@ export default function Pricing() {
 
       {/* Pricing Section - Viewers */}
       {activeTab === 'viewers' && (
-        <section className="py-16 px-4">
+        <section className="py-6 lg:py-16 px-4">
           <div className="container mx-auto">
-            <div className="grid md:grid-cols-2 gap-8 w-[80%] mx-auto">
+            <div className="grid md:grid-cols-2 gap-8 w-full lg:w-[80%] mx-auto">
               {/* Pay Per Stream */}
               <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg transition-transform hover:scale-105">
                 <div className="p-8">

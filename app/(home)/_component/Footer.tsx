@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-black text-white py-24 backdrop-blur-sm ">
         <div className="max-w-6xl mx-auto px-8">
-            <div className="flex flex-wrap gap-2 justify-between items-start mb-4">
+            <div className=" grid md:grid-cols-2 items-center gap-12 justify-between  py-12">
                 <div className="max-w-sm ">
                     <div className="flex items-center gap-3 mb-6">
                         <svg className="w-8 h-8 text-red-800" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -16,7 +16,7 @@ const Footer = () => {
                     <p className="text-white/70">The premier platform for streaming exclusive content, live events, concerts and more with no commitments.</p>
                 </div>
 
-                <div className=" flex flex-wrap gap-6 md:gap-16 text-white ">
+                <div className=" flex flex-wrap gap-4 lg:gap-16 text-white  w-full md:justify-between ">
                     {[ 
                         {
                             title: "Platform",
@@ -29,16 +29,16 @@ const Footer = () => {
                         {
                             title: "Support",
                             links: [
-                                { name: "Contact Us", url: "/contact-us" },
+                                // { name: "Contact Us", url: "/contact-us" },
                                 { name: "FAQ", url: "/faq" },
-                                { name: "Streaming Guide", url: "/streaming-guide" }
+                                { name: "Platfrom Guide", url: "/platfrom-guide" }
                             ]
                         },
                         {
                             title: "Company",
                             links: [
                                 { name: "About Us", url: "/about-us" },
-                                { name: "Partners", url: "/partners" },
+                                { name: "partners", url: "/partners" },
                                 { name: "Legal", url: "/legal" }
                             ]
                         }
@@ -63,7 +63,7 @@ const Footer = () => {
                 <p className="text-white/50">© 2025 xonnect. All rights reserved.</p>
                 
                 <div className="flex gap-4 md:gap-8">
-                {[<Twitter key="twitter" />, <Instagram key="instagram" />, <Youtube key="youtube" />].map(
+                {/* {[<Twitter key="twitter" />, <Instagram key="instagram" />, <Youtube key="youtube" />].map(
                     (social, index) => (
                     <a
                         key={index}
@@ -73,7 +73,8 @@ const Footer = () => {
                         <i>{social}</i>
                     </a>
                     )
-                )}
+                )} */}
+                g
                 </div>
             </div>
         </div>

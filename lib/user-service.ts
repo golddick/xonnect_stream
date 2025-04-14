@@ -97,3 +97,41 @@ export const getUserById = async (id: string) => {
 
   return user;
 };
+
+
+
+// Define the CheckUserOptions type
+interface CheckUserOptions {
+  username?: string;
+  email?: string;
+  externalUserId?: string;
+}
+
+export async function checkUser(options: CheckUserOptions) {
+  const { username, email, externalUserId } = options;
+
+  if (!username && !email && !externalUserId) {
+    throw new Error('Must provide at least one identifier to check user.');
+  }
+
+  const user = await db.user.findFirst({
+    where: {
+      OR: [
+        ...(username ? [{ username }] : []),
+        ...(email ? [{ email }] : []),
+        ...(externalUserId ? [{ externalUserId }] : []),
+      ],
+    },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      externalUserId: true,
+      role: true,
+      acceptPlatformTerms: true,
+      acceptCreatorTerms: true,
+    },
+  });
+
+  return user;
+}

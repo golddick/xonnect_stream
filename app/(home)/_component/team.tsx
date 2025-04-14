@@ -43,7 +43,7 @@ const Team = () => {
                 </div>
                
                 <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                <p className="text-red-800 font-medium mb-3">{member.title}</p>
+                <p className="text-red-700 font-medium mb-3">{member.title}</p>
                 <p className="text-gray-700">{member.bio}</p>
               </div>
             ))}

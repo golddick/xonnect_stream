@@ -71,7 +71,7 @@ export default function PlatformFeatures() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold">Mobile Application</h3>
-                    <p className="text-gray-600">Experience Xonnect on the go with our feature-rich mobile app</p>
+                    <p className="text-gray-600">Experience <span className='text-red-700'>X</span>onnect on the go with our feature-rich mobile app</p>
                   </div>
                 </div>
                 

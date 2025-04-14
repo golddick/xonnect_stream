@@ -27,6 +27,11 @@ const nextConfig = {
         hostname: 'gratisography.com', 
         pathname: '**',
       }, 
+      {
+        protocol: 'https',
+        hostname: '2ysecm1ojd.ufs.sh', 
+        pathname: '/f/**',     
+      },
 
     ],
   },

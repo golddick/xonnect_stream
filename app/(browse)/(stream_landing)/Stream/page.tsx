@@ -1,41 +1,57 @@
-// import React, { Suspense } from "react";
-// import { Metadata } from "next";
-// import { Results, ResultsSkeleton } from "./_components/results";
-// import VideoBox from "./_components/video-box";
-// import AdsBanner from "./_components/AdsBanner";
-// import AllStream from "./_components/StreamVideos/AllStream";
 
 
-// export const metadata: Metadata = {
-//   title: "Home",
-// };
+// import React from 'react'
+// import XonnectExplorePage from '../StreamExplore'
+// import StreamExplore from '../Explore'
 
-// export default function Home() {
+// const page = () => {
 //   return (
-//     <div className="h-full p-4 lg:p-8 max-w-screen-2xl mx-auto bg-black w-full  overflow-auto flex flex-col gap-6 hidden-scrollbar">
-//       <Suspense fallback={<ResultsSkeleton />}>
-//         <VideoBox/>
-//         {/* <AdsBanner/> */}
-//         <Results label="Creators" />
-//         <AllStream label="Coming Up"/>
-//       </Suspense>
-//     </div>
-//   );
+//     <>
+//       {/* <XonnectExplorePage/> */}
+//       <StreamExplore/>
+//     </>
+//   )
 // }
 
+// export default page
 
 
-import React from 'react'
-import XonnectExplorePage from '../StreamExplore'
-import StreamExplore from '../Explore'
 
-const page = () => {
+
+// app/yourPagePath/page.tsx
+import { redirect } from 'next/navigation';
+import StreamExplore from '../Explore'; 
+import { checkUser } from '@/lib/user-service';
+import { currentUser } from '@clerk/nextjs/server';
+
+
+const Page = async () => {
+  const sessionUser = await currentUser(); 
+
+  if (!sessionUser) {
+    redirect('/sign-in'); 
+  }
+
+  const user = await checkUser({ externalUserId: sessionUser.id });
+
+  console.log(user, 'user user')
+
+  if (!user) {
+    redirect('/sign-up');
+  }
+
+  if (!user.acceptPlatformTerms  ) {
+    redirect('/legal?showToast=true'); // pass param
+  }
+  if (!user.acceptCreatorTerms  ) {
+    redirect('/legal/creator?showToast=true'); // pass param
+  }
+
   return (
     <>
-      {/* <XonnectExplorePage/> */}
-      <StreamExplore/>
+      <StreamExplore />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default Page;

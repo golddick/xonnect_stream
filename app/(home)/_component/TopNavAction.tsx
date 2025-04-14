@@ -6,12 +6,13 @@ import { SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { currentUser } from "@clerk/nextjs/server";
 import { ThemeToggle } from "@/components/ThemeToggleBTN";
+import { getSelf } from "@/lib/auth-service";
 
 export async function HomeNavActions() {
-  const user = await currentUser();
+  const user = await getSelf();
 
   // const adminEMail = 'golddick60@gmail.com'
-  // const admin = user?.emailAddresses[0].emailAddress === adminEMail
+  const Creator = user.role === 'CREATOR'
 
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
@@ -23,21 +24,15 @@ export async function HomeNavActions() {
       )}
       {!!user && (
         <div className="flex items-center gap-x-4">
-          <UserButton afterSignOutUrl="/" />
-    
-               <Link href="/Stream">
-               <Button  className="lg:px-10 py-2 bg-gradient-to-br hover:opacity-80 text-white rounded-full from-[red] font-medium to-[#5e4646]">
-                 Explore
-               </Button>
-             </Link>
+          <UserButton afterSignOutUrl="/" />  
       
-          {/* {admin && (
+          {Creator && (
                <Link href="/Stream">
-               <Button className="lg:px-10 py-6 bg-gradient-to-br hover:opacity-80 text-white rounded-full from-[red] font-medium to-[black]">
+               <Button className="lg:px-10 py-2">
                  Explore
                </Button>
              </Link>
-          )} */}
+          )}
          
         </div>
       )}

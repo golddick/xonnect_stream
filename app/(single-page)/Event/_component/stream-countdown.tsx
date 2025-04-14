@@ -51,7 +51,7 @@ export default function StreamCountdown({ streamDate }: StreamCountdownProps) {
 
   if (isLive) {
     return (
-      <div className="bg-red-600 text-white p-3 rounded-lg text-center">
+      <div className="bg-red-800 text-white p-3 rounded-lg text-center">
         <p className="font-bold">Stream is Live Now!</p>
       </div>
     )

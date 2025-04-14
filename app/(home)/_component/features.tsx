@@ -97,7 +97,7 @@ const Features = () => {
           Everything creators and fans need
         </p>
         <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-          Xonnect offers a comprehensive suite of tools designed to connect creators with their audience through multiple channels.
+          Xonnect offers me a comprehensive suite of tools designed to connect creators with their audience through multiple channels.
         </p>
       </div>
 

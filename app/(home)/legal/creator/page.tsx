@@ -1,13 +1,13 @@
 import React from 'react'
-import { XFeatures } from '../_component/XFeatures'
+import CreatorsAgreement from '../_component/CreatorAgreement'
+
 
 const page = () => {
   return (
     <>
-      <XFeatures/>
+      <CreatorsAgreement/>
     </>
   )
 }
 
 export default page
- 

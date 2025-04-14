@@ -176,52 +176,51 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
   }
 
   return (
-    <Card>
-      <CardContent className="p-6 space-y-4">
-        <h2 className="text-xl font-bold text-black">Physical Ticket Details</h2>
+    <Card >
+    <CardContent className="relative p-4 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 text-black bg-white">
 
-        <div className=" gap-4">
-                <div className='flex  gap-2 items-center'>
-                <p className=' text-muted-foreground text-[13px]'>Price per Ticket</p>
-                <span className="font-normal text-black">₦{physicalTicketAmount}</span>
-                </div>
-                <div className='flex  gap-2 items-center'>
-                <p className=' text-muted-foreground text-[13px]'>Initial slot</p>
-                <span className="font-normal text-black">{availableSlots}</span>
-                </div>
-                <div className='flex  gap-2 items-center'>
-                <p className=' text-muted-foreground text-[13px]'>Ticket Type</p>
-                <span className="font-normal text-black">{ticketType}</span>
-                </div>
-                <div className='flex gap-2 items-center'>
-                <p className=' text-muted-foreground text-[13px]'>Available Slots</p>
-                <span className="font-normal text-black">{slotsLeft}</span>
-                </div>
-           <div className='flex gap-2 items-center'>
-           <p className=' text-muted-foreground text-[13px]'>Event Address</p>
-           <span className="font-normal text-black">{address}</span>
-           </div>
-          {/* <p>Price per Ticket: <span className="font-semibold">₦{physicalTicketAmount}</span></p> */}
-          {/* <p>Available Slots: <span className="font-semibold">{slotsLeft}</span></p> */}
-          {/* <p className=' text-muted-foreground '>Event Address: <span className="font-semibold text-black">{address}</span></p> */}
 
+    <h2 className="text-xl font-bold mb-6 border-b flex items-center">Physical Ticket Details</h2>
+
+    <div className="">
+        <div className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
+            <span className="text-gray-500 w-32 flex items-center">Price per Ticket</span>
+            <span className="font-medium text-primary-600">₦{physicalTicketAmount}</span>
+        </div>
+        <div className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
+            <span className="text-gray-500 w-32 flex items-center">Initial slot</span>
+            <span className="font-medium">{availableSlots}</span>
+        </div>
+        <div className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
+            <span className="text-gray-500 w-32 flex items-center">Ticket Type</span>
+            <span className="font-medium">{ticketType}</span>
+        </div>
+        <div className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
+            <span className="text-gray-500 w-32 flex items-center">Event Addres</span>
+            <span className="font-medium">{address}</span>
         </div>
 
-
-        <div className="flex flex-col gap-2">
-          <label className="text-sm text-gray-600">Tickets Quantity</label>
-          <Input
-            type="number"
-            min={1}
-            max={slotsLeft}
-            value={quantity}
-            onChange={(e) => setQuantity(Math.max(1, Math.min(slotsLeft, Number(e.target.value))))}
-            className="bg-black text-white"
-          />
-          <p className=' text-black'>Total: ₦{(quantity * physicalTicketAmount).toLocaleString()}</p>
-        </div>
-
-        <Button
+        <div>
+            <div className=" flex flex-col  gap-2">
+                <div className="flex justify-between items-center border-t pt-4">
+                    <span className="text-gray-700 font-medium">Available Slots</span>
+                    <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                    {slotsLeft}
+                    </span>
+                </div>
+                <div className="flex flex-col gap-2">
+              <label className="text-sm text-gray-600"> Quantity</label>
+              <Input
+                type="number"
+                min={1}
+                max={slotsLeft}
+                value={quantity}
+                onChange={(e) => setQuantity(Math.max(1, Math.min(slotsLeft, Number(e.target.value))))}
+                className="bg-black text-white"
+              />
+              <p className=' text-black'>Total: ₦{(quantity * physicalTicketAmount).toLocaleString()}</p>
+            </div>
+            <Button
           className="w-full bg-black text-white hover:bg-gray-800 transition"
           onClick={handlePay}
           disabled={isPending || slotsLeft === 0 || !!currentReference}
@@ -238,10 +237,82 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
             `Buy Now (${slotsLeft} left)`
           )}
         </Button>
-      </CardContent>
-    </Card>
+            </div>
+        </div>
+    </div>
+    </CardContent>
+</Card>
   )
 }
 
 export default PhysicalDetails
 
+
+
+
+// import React from "react"
+
+// export const PhysicalDetails = () => {
+//     return (
+//         <div id="webcrumbs">
+//             <div className="relative p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300 max-w-md lg:min-w-[420px] bg-white">
+//                 <h2 className="text-xl font-bold mb-6 border-b pb-3 flex items-center">Physical Ticket Details</h2>
+
+//                 <div className="space-y-4 mb-6">
+//                     <div className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
+//                         <span className="text-gray-500 w-32 flex items-center">Price per Ticket</span>
+//                         <span className="font-medium text-primary-600">₦5000</span>
+//                     </div>
+//                     <div className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
+//                         <span className="text-gray-500 w-32 flex items-center">Initial slot</span>
+//                         <span className="font-medium">40</span>
+//                     </div>
+
+//                     <div>
+//                         <div className="mt-8 flex flex-col space-y-4">
+//                             <div className="flex justify-between items-center border-t pt-4">
+//                                 <span className="text-gray-700 font-medium">Available Slots</span>
+//                                 <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+//                                     22 left
+//                                 </span>
+//                             </div>
+//                             <div>
+//                                 <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
+//                                     Quantity
+//                                 </label>
+//                                 <div className="flex items-center">
+//                                     <button className="bg-gray-200 hover:bg-gray-300 rounded-l-md p-2 transition-colors duration-200">
+//                                         <span className="material-symbols-outlined">remove</span>
+//                                     </button>
+//                                     <input
+//                                         type="number"
+//                                         id="quantity"
+//                                         className="border-y border-gray-200 p-2 w-full text-center focus:outline-none focus:ring-2 focus:ring-primary-500"
+//                                         value="1"
+//                                         min="1"
+//                                         max="22"
+//                                     />
+//                                     <button className="bg-gray-200 hover:bg-gray-300 rounded-r-md p-2 transition-colors duration-200">
+//                                         <span className="material-symbols-outlined">add</span>
+//                                     </button>
+//                                 </div>
+//                             </div>
+//                             <div className="flex justify-between items-center border-t pt-4">
+//                                 <span className="text-gray-700 font-medium">Total:</span>
+//                                 <span className="text-xl font-bold text-primary-600">₦5,000</span>
+//                             </div>
+//                             <button className="mt-4 bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-md transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center">
+//                                 <span className="material-symbols-outlined mr-2">shopping_cart</span>
+//                                 Buy Now
+//                             </button>
+//                         </div>
+//                     </div>
+//                     <div className="flex items-center p-2 rounded-md hover:bg-gray-50 transition-colors duration-200">
+//                         <span className="text-gray-500 w-32 flex items-center">Event Address</span>
+//                         <span className="font-medium">Ibadan UI</span>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
