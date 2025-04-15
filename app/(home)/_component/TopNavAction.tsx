@@ -6,13 +6,14 @@ import { SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { currentUser } from "@clerk/nextjs/server";
 import { ThemeToggle } from "@/components/ThemeToggleBTN";
-import { getSelf } from "@/lib/auth-service";
+// import { getSelf } from "@/lib/auth-service";
 
 export async function HomeNavActions() {
-  const user = await getSelf();
+  const user = await currentUser();
 
-  // const adminEMail = 'golddick60@gmail.com'
-  const Creator = user.role === 'CREATOR'
+  const adminEMail = 'golddick60@gmail.com'
+  const Creator = user?.emailAddresses[0].emailAddress === adminEMail
+  // const Creator = user?.emailAddresses[].emailAddress === 'CREATOR' || 'ADMIN'
 
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">

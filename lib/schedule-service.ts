@@ -380,3 +380,6 @@ export const getAvailablePhysicalSlots = async (scheduleId: string) => {
     remainingSlots: schedule.remainingSlots ?? 0,
   };
 };
+
+
+

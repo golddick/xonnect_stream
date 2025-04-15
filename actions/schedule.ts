@@ -182,8 +182,6 @@ export const updateScheduleWithFiles = async (scheduleId: string, fileUrls: stri
   }
 };
 
-
-
 // Function to delete a scheduled stream
 export const deleteScheduledStream = async (scheduleId: string) => {
   try {
