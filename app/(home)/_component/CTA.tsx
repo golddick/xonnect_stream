@@ -14,7 +14,7 @@ const CTA = async ({bgColor}:Props) => {
           <h2 className="text-3xl font-bold mb-4">Join <span className='text-red-700'>X</span>ONNECT Community</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Whether you&apos;re a creator looking to connect with your audience or a fan seeking unique experiences,
-            Creator Connect is the platform for you.
+            <span className='text-red-700'>X</span>onnect is the platform for you.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <JoinASCreatorBTN 

@@ -52,7 +52,7 @@ export const createScheduledStream = async (values: Partial<Schedule>) => {
           create:{
             name:`creator ${self.username}`,
             status:'SUCCESSFUL',
-            amount:values.amount || 0,
+            amount: 0,
             email:self.email,
             externalUserId:self.externalUserId,
             streamId:self.streamId || selfStream?.id

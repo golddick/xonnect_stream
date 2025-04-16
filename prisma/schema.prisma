@@ -168,7 +168,37 @@ model Schedule {
 }
 
 
+enum IndustryType {
+  ENTERTAINMENT
+  LOGISTICS
+  MANUFACTURING
+  HEALTHCARE
+  FINANCE
+  TECHNOLOGY
+  OTHER
+}
 
+model Partner {
+  id          String       @id @default(cuid())
+  companyName String
+  contactName String
+  logo        String?
+  email       String       @unique
+  phone       String
+  website     String?
+  description String?
+  status      PARTNER_STATUS   @default(PENDING)
+  industry    IndustryType @default(OTHER)
+  createdAt   DateTime     @default(now())
+
+  @@map("partners")
+}
+
+enum PARTNER_STATUS {
+  PENDING 
+  APPROVED
+  REJECTED
+}
 
 model Comment {
   id         String     @id @default(uuid())

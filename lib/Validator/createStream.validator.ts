@@ -52,3 +52,31 @@ export const CreateScheduleStreamSchema = z.object({
     
       
     });
+
+
+  export const CreatePartner = z.object({
+      companyName: z.string(),
+      contactName: z.string(),
+      email: z.string({
+        message:'Partner must add email'
+      }),
+      phone: z.string(),
+      logo: z.string(),
+      website: z.string().optional(),
+      description: z.string().optional(),
+      industry: z.string(),
+    
+      
+    });
+
+    export type CreatePartnerData = {
+      companyName: string;
+      contactName: string;
+      email: string;
+      phone: string;
+      logo: string;
+      website?: string;
+      description?: string;
+      industry: string;
+    };
+    
