@@ -64,11 +64,13 @@ const CreatorInfoCard = ({
                 {isVerified && <CheckCircle className="h-4 w-4 text-gold" />}
               </div>
 
-                 <Actions
+                <div className='w-[200px]'>
+                <Actions
                     hostIdentity={hostIdentity}
                     isFollowing={isFollowing}
                     isHost={isHost}
                     />
+                </div>
              </div>
               <p className="text-gray-400 mb-2">{username}</p>
 

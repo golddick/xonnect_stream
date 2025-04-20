@@ -19,6 +19,7 @@ import { About_Tab } from "./about-info-cad";
 import { Schedule, User } from "@prisma/client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { Button } from "../ui/button";
 
 type CustomStream = {
   id: string;
@@ -66,6 +67,9 @@ export function StreamPlayer({
 }) {
   const { identity, name, token } = useViewerToken(user.id);
   const { collapsed } = useChatSidebar((state) => state);
+  const [showInfo, setShowInfo] = React.useState(false);
+  const [showMobileChat, setShowMobileChat] = React.useState(false);
+
   const  route = useRouter()
   if (!token || !identity || !name) {
     return <StreamPlayerSkeleton />;
@@ -83,7 +87,7 @@ export function StreamPlayer({
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL}
         className={cn(
-          "grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full",
+          "grid bg-black relative grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full",
           collapsed && "lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2"
         )}
       >
@@ -97,27 +101,42 @@ export function StreamPlayer({
             name={stream.name}
             viewerIdentity={identity}
           />
+          <div className="flex justify-start px-4 pt-2">
+          <Button
+            onClick={() => setShowInfo((prev) => !prev)}
+            className="text-white bg-black hover:bg-gray-700 px-3 py-1 rounded text-sm transition"
+          >
+            {showInfo ? "Hide Info" : "Show Info"}
+          </Button>
+        </div>
+
          
-          <About_Tab
-           hostName={user.username}
-           hostIdentity={user.id}
-           viewerIdentity={identity}
-           bio={user.bio}
-           instagram={user.instagram}
-           youtube={user.youtube}
-           twitter={user.twitter}
-           followedByCount={user._count.followedBy}
-           schedule={schedule}
-          />
-           <InfoCard
-            hostIdentity={user.id}
-            viewerIdentity={identity}
-            name={stream.name}
-            thumbnailUrl={stream.thumbnailUrl}
-          />
+        {showInfo && (
+          < div className=" container">
+            <About_Tab
+              hostName={user.username}
+              hostIdentity={user.id}
+              viewerIdentity={identity}
+              bio={user.bio}
+              instagram={user.instagram}
+              youtube={user.youtube}
+              twitter={user.twitter}
+              followedByCount={user._count.followedBy}
+              schedule={schedule}
+            />
+            <InfoCard
+              hostIdentity={user.id}
+              viewerIdentity={identity}
+              name={stream.name}
+              thumbnailUrl={stream.thumbnailUrl}
+            />
+          </div>
+        )}
+
           
         </div>
-        <div className={cn(" hidden lg:block", collapsed && "lg:hidden")}>
+        {/* <div className={cn('hidden lg:block', collapsed && 'hidden')}> */}
+        <div className={cn('col-span-1  hidden  fixed right-0 w-[300px] h-full  ', collapsed && 'hidden  md:hidden', !collapsed && 'lg:block ') }>
           <Chat
             viewerName={name}
             hostName={user.username}

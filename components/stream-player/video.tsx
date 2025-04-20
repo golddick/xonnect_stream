@@ -86,7 +86,7 @@ export function Video({
   }
 
 
-  return <div className="aspect-video  group relative h-[calc(100vh-100px)] w-full">{content}</div>;
+  return <div className="aspect-video  group relative  h-[500px] lg:h-[calc(100vh-400px)] border-red-700 border-b-2 w-full">{content}</div>;
 
 }
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { updatePartnerStatus } from '@/lib/partners'
+import { updatePartnerStatus } from '@/lib/Adminpartners'
 import { PARTNER_STATUS } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { useTransition, useState } from 'react'

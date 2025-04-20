@@ -30,9 +30,6 @@ export const updateUser = async (values: Partial<User>) => {
 };
 
 
-
-
-
 export const updateCreatorTerms = async () => {
   const self = await getSelf();
   if (!self) return { success: false }
@@ -67,17 +64,17 @@ export const getUserCreatorAgreementStatus = async () => {
 
 
 
-export const updateUserToCreator = async () => {
-  const self = await getSelf();
-  if (!self) throw new Error('Not authenticated')
+// export const updateUserToCreator = async () => {
+//   const self = await getSelf();
+//   if (!self) throw new Error('Not authenticated')
 
-  await db.user.update({
-    where: { id: self.id },
-    data: { role: 'CREATOR' },
-  })
+//   await db.user.update({
+//     where: { id: self.id },
+//     data: { role: 'CREATOR' },
+//   })
 
-  return true
-}
+//   return true
+// }
 
 
 export const getUserPlatfromAgreementStatus = async () => {
@@ -102,4 +99,32 @@ export const updatePlatformTerms = async () => {
   })
 
   return { success: true }
+}
+
+// Create a new creator request
+export async function requestCreatorRole() {
+  const session = await getSelf();
+
+  if (!session?.id) {
+    throw new Error("Unauthorized");
+  }
+
+  const existing = await db.creatorRequest.findFirst({
+    where: {
+      userId: session.id,
+      status: "PENDING",
+    },
+  });
+
+  if (existing) {
+    throw new Error("Request already submitted.");
+  }
+
+  await db.creatorRequest.create({
+    data: {
+      userId: session.id,
+    },
+  });
+
+  revalidatePath("/"); // or wherever you want to refresh
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { getApprovedPartners } from '@/lib/partners';
+import { getApprovedPartners } from '@/lib/Adminpartners';
 import Image from 'next/image';
 import { useEffect, useState } from 'react'
 

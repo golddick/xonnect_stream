@@ -7,6 +7,7 @@ import React from 'react'
 const navItems = [
     { label: 'Dashboard', href: '/xontrol' },
     { label: 'Partners', href: '/xontrol/partners' },
+    { label: 'Creators ', href: '/xontrol/creator-requests' },
     { label: 'Events', href: '/xontrol/events' },
   ];
 

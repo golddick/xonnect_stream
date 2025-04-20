@@ -164,7 +164,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
               </div>
 
               <div className="space-y-4">
-                <StreamCountdown streamDate={data.eventDateTime.toISOString()} />
+                <StreamCountdown streamDate={data.eventDateTime.toISOString()}  isLive={data.isLive}/>
 
                 <div className=" flex w-full items-center justify-between gap-6">
                   <Link href={`/channel/${data.user?.username}`} className=" w-full">

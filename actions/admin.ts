@@ -1,70 +1,11 @@
-// 'use server'
-
-// import { getSelf } from "@/lib/auth-service";
-// import { db } from '@/lib/db'
-// import { getAvailablePhysicalSlots } from "@/lib/schedule-service";
-
-// export const getAdminScheduleSummary = async () => {
-//     const session = await getSelf()
-  
-//     if (!session || session.role !== 'ADMIN') {
-//       throw new Error('Unauthorized')
-//     }
-  
-//     const schedules = await db.schedule.findMany({
-//       include: {
-//         payments: {
-//           where: { status: 'SUCCESSFUL' },
-//           select: { amount: true },
-//         },
-//         physicalTicket: {
-//           where: { status: 'SUCCESSFUL' },
-//           select: { amount: true },
-//         },
-//       },
-//     })
-  
-//     let totalStreamRevenue = 0
-//     let totalPhysicalRevenue = 0
-  
-//     const events = await Promise.all(
-//       schedules.map(async (schedule) => {
-//         const streamTotal = schedule.payments.reduce((sum, p) => sum + p.amount, 0)
-//         const physicalTotal = schedule.physicalTicket.reduce((sum, p) => sum + p.amount, 0)
-  
-//         const slots = await getAvailablePhysicalSlots(schedule.id)
-  
-//         totalStreamRevenue += streamTotal
-//         totalPhysicalRevenue += physicalTotal
-  
-//         return {
-//           id: schedule.id,
-//           name: schedule.title,
-//           date: schedule.eventDateTime,
-//           physicalTotal,
-//           streamTotal,
-//           totalRevenue: physicalTotal + streamTotal,
-//           physicalSlots: slots,
-//         }
-//       })
-//     )
-  
-//     return {
-//       events,
-//       totals: {
-//         totalStreamRevenue,
-//         totalPhysicalRevenue,
-//         combinedTotal: totalStreamRevenue + totalPhysicalRevenue,
-//       },
-//     }
-//   }
-
 
 
 'use server'
 
 import { db } from '@/lib/db'
 import { getSelf } from "@/lib/auth-service";
+import { revalidatePath } from 'next/cache';
+import { REQUEST_STATUS } from '@prisma/client';
 
 const PLATFORM_FEE_PERCENTAGE = 0.3 // 30%
 
@@ -172,83 +113,80 @@ export const getAdminScheduleSummary = async () => {
     }
   }
 
-// export const getAdminScheduleSummary = async () => {
-//   const session = await getSelf();
 
-//   if (!session || session.role !== 'ADMIN') {
-//     throw new Error('Unauthorized');
-//   }
+  export async function fetchAllCreatorRequests() {
+    const session = await getSelf();
+  
+    if (!session || session.role !== "ADMIN") {
+      throw new Error("Unauthorized");
+    }
+  
+    const requests = await db.creatorRequest.findMany({
+      include: {
+        user: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  
+    return requests;
+  }
 
-//   const schedules = await db.schedule.findMany({
-//     include: {
-//       payments: {
-//         where: { status: 'SUCCESSFUL' },
-//         select: { amount: true },
-//       },
-//       physicalTicket: {
-//         where: { status: 'SUCCESSFUL' },
-//         select: { amount: true },
-//       },
-//     },
-//   });
 
-//   let totalRawStreamRevenue = 0;
-//   let totalRawPhysicalRevenue = 0;
+  
+export async function updateCreatorRequestStatus({
+  requestId,
+  status,
+}: {
+  requestId: string;
+  status: REQUEST_STATUS;
+}) {
+  const session = await getSelf();
 
-//   const events = await Promise.all(
-//     schedules.map(async (schedule) => {
-//       const streamTotalRaw = schedule.payments.reduce((sum, p) => sum + p.amount, 0);
-//       const physicalTotalRaw = schedule.physicalTicket.reduce((sum, p) => sum + p.amount, 0);
+  if (!session || session.role !== 'ADMIN') {
+    return { success: false, error: 'Unauthorized' };
+  }
 
-//       const streamNet = streamTotalRaw * (1 - PLATFORM_FEE_PERCENTAGE);
-//       const physicalNet = physicalTotalRaw * (1 - PLATFORM_FEE_PERCENTAGE);
+  try {
+    const updated = await db.creatorRequest.update({
+      where: { id: requestId },
+      data: { status },
+    });
 
-//       totalRawStreamRevenue += streamTotalRaw;
-//       totalRawPhysicalRevenue += physicalTotalRaw;
+    if (status === 'APPROVED') {
+      await db.user.update({
+        where: { id: updated.userId },
+        data: { role: 'CREATOR' },
+      });
+    }
 
-//       const slots = await getAvailablePhysicalSlots(schedule.id);
+    return { success: true };
+  } catch (error) {
+    console.error('Update failed:', error);
+    return { success: false };
+  }
+}
 
-//       return {
-//         id: schedule.id,
-//         name: schedule.title,
-//         date: schedule.eventDateTime,
-//         slots,
-//         totals: {
-//           stream: {
-//             raw: streamTotalRaw,
-//             net: streamNet,
-//           },
-//           physical: {
-//             raw: physicalTotalRaw,
-//             net: physicalNet,
-//           },
-//           combined: {
-//             raw: streamTotalRaw + physicalTotalRaw,
-//             net: streamNet + physicalNet,
-//           },
-//         },
-//       };
-//     })
-//   );
+export const revertUserRole = async (userId: string) => {
+  try {
+    const updatedUser = await db.user.update({
+      where: { id: userId },
+      data: { role: 'USER' }, // Set role back to USER
+    });
 
-//   const totalNetStreamRevenue = totalRawStreamRevenue * (1 - PLATFORM_FEE_PERCENTAGE);
-//   const totalNetPhysicalRevenue = totalRawPhysicalRevenue * (1 - PLATFORM_FEE_PERCENTAGE);
+    if (!updatedUser) {
+      return { success: false, error: 'User not found' };
+    }
 
-//   return {
-//     events,
-//     totals: {
-//       stream: {
-//         raw: totalRawStreamRevenue,
-//         net: totalNetStreamRevenue,
-//       },
-//       physical: {
-//         raw: totalRawPhysicalRevenue,
-//         net: totalNetPhysicalRevenue,
-//       },
-//       combined: {
-//         raw: totalRawStreamRevenue + totalRawPhysicalRevenue,
-//         net: totalNetStreamRevenue + totalNetPhysicalRevenue,
-//       },
-//     },
-//   };
-// };
+    return { success: true };
+  } catch (error) {
+    console.error('Error reverting user role:', error);
+    return { 
+      success: false, 
+      error: error instanceof Error 
+        ? error.message 
+        : 'Failed to revert user role' 
+    };
+  }
+};

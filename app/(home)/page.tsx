@@ -11,7 +11,7 @@ import NewsLetter from './_component/NewsLetter';
 import FAQ from './_component/faq';
 import CTA from './_component/CTA';
 import HeroSection from './_component/Hero-section';
-import { GiftIcon, PenLineIcon, TicketIcon } from 'lucide-react';
+import { GiftIcon, PenLineIcon, Star, TicketIcon } from 'lucide-react';
 import { JoinASCreatorBTN } from '@/components/joinAsCreator/JoinASCreatorBTN';
 import ContactForm from './_component/contact-form';
 
@@ -196,7 +196,7 @@ export default function Home() {
       </section>
 
       {/* Music & E-commerce Showcase */}
-      <section className="py-24 bg-gray-50">
+      {/* <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Beyond Live Streaming</h2>
@@ -206,7 +206,7 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-12">
-            {/* Music Platform */}
+            Music Platform
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <div className="relative h-64">
                 <Image 
@@ -254,7 +254,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* E-commerce */}
+            E-commerce
             <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
               <div className="relative h-64">
                 <Image 
@@ -303,10 +303,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Community Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
             <div className="lg:w-1/2 w-full">
@@ -407,7 +407,7 @@ export default function Home() {
       <NewsLetter/>
 
       {/* What viewers say Section */}
-      <section className="bg-white py-24 text-black">
+      <section className="bg-gray-50 py-24 text-black">
       <div className="container mx-auto px-8">
           <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">What Our Viewers Say</h2>
@@ -417,20 +417,16 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center mb-4">
                       <div className="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                          <span className="material-symbols-outlined text-primary-800">person</span>
+                          <div className=' relative w-[40px] h-[40px] rounded-full overflow-hidden'>
+                            <Image src={'/assets/woman.jpeg'} alt='img'  fill className=' absolute object-cover'/>
+                          </div>
                       </div>
                       <div>
                           <h4 className="font-bold">Sarah Johnson</h4>
-                          <div className="flex text-yellow-400">
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                          </div>
+                         
                       </div>
                   </div>
                   <p className="text-gray-600">
@@ -439,47 +435,39 @@ export default function Home() {
                   </p>
               </div>
 
-              <div className="bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center mb-4">
                       <div className="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                          <span className="material-symbols-outlined text-primary-800">person</span>
+                          <div className=' relative w-[40px] h-[40px] rounded-full overflow-hidden'>
+                            <Image src={'/assets/woman.jpeg'} alt='img'  fill className=' absolute object-cover'/>
+                          </div>
                       </div>
                       <div>
-                          <h4 className="font-bold">Michael Rodriguez</h4>
-                          <div className="flex text-yellow-400">
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star_half</span>
-                          </div>
+                          <h4 className="font-bold">Sarah Johnson</h4>
+                         
                       </div>
                   </div>
                   <p className="text-gray-600">
-                  &quot;I love being able to watch exclusive events that I couldn&apos;t attend in person.
-                      The multi-device feature lets me watch anywhere!&quot;
+                  &quot;The streaming quality is incredible! I&apos;ve never experienced such clear live
+                      events from the comfort of my home. Worth every penny!&quot;
                   </p>
               </div>
 
-              <div className="bg-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                   <div className="flex items-center mb-4">
                       <div className="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                          <span className="material-symbols-outlined text-primary-800">person</span>
+                          <div className=' relative w-[40px] h-[40px] rounded-full overflow-hidden'>
+                            <Image src={'/assets/woman.jpeg'} alt='img'  fill className=' absolute object-cover'/>
+                          </div>
                       </div>
                       <div>
-                          <h4 className="font-bold">Emily Chen</h4>
-                          <div className="flex text-yellow-400">
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                              <span className="material-symbols-outlined">star</span>
-                          </div>
+                          <h4 className="font-bold">Sarah Johnson</h4>
+                         
                       </div>
                   </div>
                   <p className="text-gray-600">
-                  &quot;The on-demand feature is a game-changer. I never miss an event even with my
-                      busy schedule. Customer support is also excellent!&quot;
+                  &quot;The streaming quality is incredible! I&apos;ve never experienced such clear live
+                      events from the comfort of my home. Worth every penny!&quot;
                   </p>
               </div>
           </div>

@@ -43,21 +43,8 @@ export function Header({
   const isHost = hostAsViewer === viewerIdentity;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-y-4 lg:gap-y-0 items-start justify-between px-4 radial--gradient">
-         <div
-        className="flex 
-         justify-between
-          items-center 
-      gap-y-5
-       w-full 
-       h-full 
-       bg-[#000] 
-       bg-opacity-90 
-       bg-clip-padding 
-       backdrop-filter 
-       backdrop--blur__safari 
-       backdrop-blur-3xl"
-      >
+    <div className="flex flex-row gap-y-4 lg:gap-y-0 items-center justify-between px-4">
+  
 
    
       <div className="flex items-center gap-x-3 py-4">
@@ -82,7 +69,7 @@ export function Header({
               </p>
             </div>
           ) : (
-            <Badge  className="font-semibold text-xs text-muted-foreground bg-black hover:text-gold shadow-md shadow-neutral-500">
+            <Badge  className="font-semibold text-xs text-muted-foreground bg-black hover:text-gold shadow-md ">
               Offline
             </Badge>
           )}
@@ -99,7 +86,6 @@ export function Header({
 
          <DotEllipse/>
             </div>
-    </div>
     </div>
   );
 }

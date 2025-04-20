@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
-import { updateUserToCreator } from '@/actions/user' 
+import { requestCreatorRole } from '@/actions/user' 
 import { useRouter } from 'next/navigation'
 
 interface Props {
@@ -17,11 +17,11 @@ const CreatorBTN: React.FC<Props> = ({ disabled }) => {
   const handleClick = async () => {
     try {
       setLoading(true)
-      await updateUserToCreator()
-      toast.success('You are now a creator!')
-      router.push(`/Stream`)
+      await requestCreatorRole()
+      toast.success('Your request has been sent to our Team !')
+      router.push(`/`)
     } catch (err) {
-      toast.error('Failed to update role')
+      toast.error('Failed to send request')
     } finally {
       setLoading(false)
     }
@@ -39,3 +39,6 @@ const CreatorBTN: React.FC<Props> = ({ disabled }) => {
 }
 
 export default CreatorBTN
+
+
+

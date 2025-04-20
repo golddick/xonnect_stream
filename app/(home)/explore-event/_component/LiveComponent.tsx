@@ -1,18 +1,18 @@
 import { getStreams } from '@/lib/feed-service';
 import { getLiveStreams } from '@/lib/stream-service';
 import Image from 'next/image'
+import Link from 'next/link';
 import React from 'react'
 
 const LiveComponent  = async () => {
 
-    const liveStreams = await getLiveStreams();
+    const liveStreams = await getStreams();
 
      console.log(liveStreams, 'data  li jj')
-    
-    // console.log(liveStreams, 'data jj liveStreams')
-    if (!liveStreams || liveStreams.length === 0) {
-        return null;
-    }
+
+    // if (!liveStreams || liveStreams.length === 0) {
+    //     return null;
+    // }
 
   return (
     
@@ -47,9 +47,14 @@ const LiveComponent  = async () => {
                             <div className="p-6">
                                 <div className="flex justify-between items-start mb-4">
                                     <h3 className="text-xl font-bold">{result.name}</h3>
-                                    <button className="bg-red-600 text-white px-4 py-1 rounded-full text-sm hover:bg-red-700 transition-colors duration-300 transform hover:scale-105">
+                                    <Link href={`/channel/${result.user.username}`}>
+                                        <button className="bg-red-600 text-white px-4 py-1 rounded-full text-sm hover:bg-red-700 transition-colors duration-300 transform hover:scale-105">
                                         Join Now
-                                    </button>
+                                        </button>
+                                    </Link>
+                                    {/* <button className="bg-red-600 text-white px-4 py-1 rounded-full text-sm hover:bg-red-700 transition-colors duration-300 transform hover:scale-105">
+                                        Join Now
+                                    </button> */}
                                 </div>
                                 <p className="text-gray-300 mb-4">
                                     {result.user.bio}

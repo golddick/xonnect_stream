@@ -20,19 +20,22 @@ export const AboutUS = () => {
         {/* Who We Are Section */}
         <section className="mb-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
+          <div>
               <h2 className="text-3xl font-bold mb-6">Who We Are</h2>
+
               <p className="text-lg text-gray-700 mb-6">
-                Xonnect was founded in 2023 with a simple yet powerful vision: to revolutionize how creators connect with their audiences. In an increasingly digital world, we recognized the need for more meaningful interactions between content creators and their communities.
+                XONNECT was founded in 2025 with a simple goal: to bring exclusive live experiences to fans who couldn’t attend in person. We launched as a streaming platform focused on concerts, helping users enjoy performances from their favorite artists—no matter where they are in the world.
               </p>
+
               <p className="text-lg text-gray-700 mb-6">
-                Our platform enables creators from all niches—gaming, education, arts, technology, and beyond—to host engaging live events, workshops, and interactive streams. We provide the tools and infrastructure that make it easy for creators to monetize their expertise while delivering exceptional value to their audiences.
+                Now evolving into a full-scale pay-on-demand platform, XONNECT empowers creators across music, education, gaming, tech, and more to host live streams, connect with audiences, and earn from their content—without the need for subscriptions.
               </p>
+
               <p className="text-lg text-gray-700">
-                Today, Xonnect hosts thousands of events monthly, supporting a diverse community of creators and millions of attendees worldwide.
+                While we&apos;re just getting started, our mission is clear: to redefine how creators and audiences interact—making live, premium content accessible, engaging, and rewarding for everyone involved.
               </p>
             </div>
-            <div className="bg-gray-100 rounded-lg p-8 w-full h-full relative">
+            <div className="bg-gray-100 rounded-lg p-8 w-full h-[400px] lg:h-full relative">
               <Image src="/assets/woman.jpeg" alt=" Team" fill className=" rounded-lg shadow-lg absolute " />
             </div>
           </div>

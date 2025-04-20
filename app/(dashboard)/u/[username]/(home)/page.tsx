@@ -19,7 +19,7 @@ export default async function CreatorPage({
   }
 
   return (
-    <div className="h-full">
+    <div className="  w-full ">
     <StreamPlayer user={user} stream={user.stream} isFollowing={true}  schedule={user.schedules} 
     userId={externalUser?.id || user.externalUserId}  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
     />

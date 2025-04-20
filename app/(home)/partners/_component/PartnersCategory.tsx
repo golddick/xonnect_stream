@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { Computer, Banknote, PlaySquareIcon, BookOpenCheck, FactoryIcon, BikeIcon } from 'lucide-react'
-import { getPartnersByIndustry } from '@/lib/partners'
+import { getPartnersByIndustry } from '@/lib/Adminpartners'
 
 // Mapping enum type to icons
 const industryIcons: Record<string, JSX.Element> = {

@@ -4,7 +4,7 @@ import { BsWhatsapp } from 'react-icons/bs'
 
 const ContactForm = () => {
   return (
-    <section className="py-16 px-8 bg-white text-black">
+    <section className="py-16 px-8 bg-gray-50 text-black">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-3">Get In Touch</h2>
@@ -14,7 +14,7 @@ const ContactForm = () => {
           </p>
         </div>
 
-        <div className="bg-gray-50 rounded-xl shadow-lg overflow-hidden w-full justify-center flex items-center ">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden w-full justify-center flex items-center ">
           <div className="flex  items-start w-full md:w-[50%] mx-auto py-8  justify-between px-4  md:gap-12">
 
             <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">

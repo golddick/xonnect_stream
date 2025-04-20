@@ -4,9 +4,10 @@ import { useState, useEffect } from "react"
 
 interface StreamCountdownProps {
   streamDate: string
+  isLive: boolean
 }
 
-export default function StreamCountdown({ streamDate }: StreamCountdownProps) {
+export default function StreamCountdown({ streamDate, isLive }: StreamCountdownProps) {
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -14,14 +15,18 @@ export default function StreamCountdown({ streamDate }: StreamCountdownProps) {
     seconds: 0,
   })
 
-  const [isLive, setIsLive] = useState(false)
+  const [eventOver, setEventOver] = useState(false)
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const difference = new Date(streamDate).getTime() - new Date().getTime()
+      const now = new Date().getTime()
+      const streamTime = new Date(streamDate).getTime()
+      const difference = streamTime - now
 
       if (difference <= 0) {
-        setIsLive(true)
+        if (!isLive) {
+          setEventOver(true)
+        }
         return {
           days: 0,
           hours: 0,
@@ -47,12 +52,20 @@ export default function StreamCountdown({ streamDate }: StreamCountdownProps) {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [streamDate])
+  }, [streamDate, isLive])
 
   if (isLive) {
     return (
       <div className="bg-red-800 text-white p-3 rounded-lg text-center">
         <p className="font-bold">Stream is Live Now!</p>
+      </div>
+    )
+  }
+
+  if (eventOver) {
+    return (
+      <div className="bg-gray-700 text-white p-3 rounded-lg text-center">
+        <p className="font-bold">Event Over</p>
       </div>
     )
   }
@@ -89,4 +102,3 @@ export default function StreamCountdown({ streamDate }: StreamCountdownProps) {
     </div>
   )
 }
-
