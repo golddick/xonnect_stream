@@ -6,17 +6,15 @@ import React from 'react'
 
 const LiveComponent  = async () => {
 
-    const liveStreams = await getStreams();
+    const liveStreams = await getLiveStreams();
 
-     console.log(liveStreams, 'data  li jj')
-
-    // if (!liveStreams || liveStreams.length === 0) {
-    //     return null;
-    // }
+    if (!liveStreams || liveStreams.length === 0) {
+        return null;
+    }
 
   return (
     
-     <section className="py-12 px-4 sm:px-8 bg-gradient-to-b from-gray-900 to-red-900 text-white overflow-hidden">
+     <section className="py-12 px-4 sm:px-8 bg-gradient-to-b from-black to-red-900 text-white overflow-hidden">
                         <div className="max-w-6xl mx-auto">
                             <div className="flex items-center mb-8">
                                 <div className="flex-shrink-0 h-4 w-4 bg-red-500 rounded-full mr-3 animate-pulse"></div>
@@ -40,9 +38,9 @@ const LiveComponent  = async () => {
                                     <span className="h-2 w-2 bg-white rounded-full inline-block"></span>
                                     <span>LIVE</span>
                                 </div>
-                                <div className="absolute bottom-4 right-4 bg-black/70 text-white text-sm px-3 py-1 rounded-full">
+                                {/* <div className="absolute bottom-4 right-4 bg-black/70 text-white text-sm px-3 py-1 rounded-full">
                                     14,382 watching
-                                </div>
+                                </div> */}
                             </div>
                             <div className="p-6">
                                 <div className="flex justify-between items-start mb-4">
@@ -52,9 +50,6 @@ const LiveComponent  = async () => {
                                         Join Now
                                         </button>
                                     </Link>
-                                    {/* <button className="bg-red-600 text-white px-4 py-1 rounded-full text-sm hover:bg-red-700 transition-colors duration-300 transform hover:scale-105">
-                                        Join Now
-                                    </button> */}
                                 </div>
                                 <p className="text-gray-300 mb-4">
                                     {result.user.bio}

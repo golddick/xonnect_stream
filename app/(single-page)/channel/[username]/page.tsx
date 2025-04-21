@@ -25,7 +25,7 @@ export default async function CreatorPage({
   if (isBlocked) notFound();
 
   return (
-    <div className=" w-full ">
+    <div className=" w-full h-full  bg-black">
     <Eventplayer user={user} stream={user.stream} isFollowing={isFollowing}  schedule={user.schedules}
         userId={externalUser?.id }  externalUserName={externalUser?.username || 'custom_name'} externalUserEmail={externalUser?.emailAddresses[0].emailAddress}
     />

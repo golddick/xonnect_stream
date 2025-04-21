@@ -39,7 +39,7 @@ const StreamVideos = ({ data }: StreamVideosProps) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="w-full h-auto items-center justify-center rounded-lg grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-4 px-4 mb-4">
+      <div className="w-full h-auto items-center justify-center rounded-lg grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 px-4 mb-4">
         {data.slice(0, visible).map((item, index) => (
           <StreamVideoCard
             streamName={item.title}

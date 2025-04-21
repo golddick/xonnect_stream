@@ -80,7 +80,7 @@ export function Eventplayer({
         token={token}
         serverUrl={process.env.NEXT_PUBLIC_LIVEKIT_WS_URL}
         className={cn(
-          "grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6  h-auto relative",
+          "grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6  h-auto relative bg-black",
           collapsed && "lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2"
         )}
       >

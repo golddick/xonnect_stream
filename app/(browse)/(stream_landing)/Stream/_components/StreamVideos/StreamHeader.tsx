@@ -29,7 +29,7 @@ const StreamHeader = ({label}:HeaderProps) => {
 
     return (
         <div className=' flex items-center justify-between px-2 '>
-            <h2><i className='text-white text-xl font-bold mb-4'>{label}</i> </h2>
+            <h2 className=' text-white text-lg'>{label} </h2>
             <div className='flex items-center gap-2 justify-end  lg:mr-10'>
                 {/* {routes.map(route => (
                     <Button
@@ -43,10 +43,10 @@ const StreamHeader = ({label}:HeaderProps) => {
                         </Link>
                     </Button>
                 ))} */}
-                {/* <span className='goldText cursor-pointer' style={{fontSize:'13px', fontFamily:'inherit'}}>XONNET</span> */}
-                <div className=' relative  size-10 cursor-pointer  animate-pulse'>
-                <Image src='/assets/xsb.png '  className=' rounded-lg shadow-md shadow-neutral-500  absolute' alt='logo'  fill/>
-                </div>
+                <span className=' cursor-pointer  animate-pulse  rounded-md p-2 flex items-center'><p className=' text-red-700'>X</p>ONNECT</span>
+                {/* <div className=' relative  size-10 cursor-pointer  animate-pulse'>
+                <Image src='/assets/xsb.png ' fill  className=' rounded-lg shadow-md shadow-neutral-500  absolute' alt='logo'  />
+                </div> */}
             </div>
         </div>
     );

@@ -39,15 +39,17 @@ const AllStream = async ({ label, type }: AllStreamProps) => {
   }
 
   return (
-    <div className="justify-center w-full h-auto flex flex-col gap-4">
-      <StreamHeader label={label} />
-      {
+    <>
+     {
         filteredEvents && (
-
+  
+    <div className="justify-center w-full h-auto flex flex-col gap-4">
+        <StreamHeader label={label} />
+     
           <StreamVideos data={filteredEvents} />
-        )
-      }
     </div>
+        ) }
+    </>
   );
 };
 
