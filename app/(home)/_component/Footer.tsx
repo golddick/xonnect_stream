@@ -29,9 +29,9 @@ const Footer = () => {
                         {
                             title: "Support",
                             links: [
-                                // { name: "Contact Us", url: "/contact-us" },
                                 { name: "FAQ", url: "/faq" },
-                                { name: "Platfrom Guide", url: "/platfrom-guide" }
+                                { name: "Platfrom Guide", url: "/platfrom-guide" },
+                                { name: "Contact Us", url: "/contact-us" },
                             ]
                         },
                         {

@@ -7,6 +7,7 @@ import { MdLocationOn, MdSupportAgent } from "react-icons/md"
 import { ArrowRight, Calendar, PhoneCall, Verified } from "lucide-react"
 import { FaHandshake } from "react-icons/fa"
 import { createContactMessage } from "@/actions/contact-us"
+import { toast } from "sonner"
 
 export const ContactPage = () => {
 
@@ -48,9 +49,11 @@ export const ContactPage = () => {
 
       if (!res.message) throw new Error("Failed to submit message.");
       setSuccessMsg("Message sent successfully!");
+      toast.success(successMsg)
       setForm({ name: "", email: "", subject: "", department: "", message: "", consent: false });
     } catch (error) {
       setErrorMsg((error as Error).message);
+      toast.error(errorMsg)
     } finally {
       setLoading(false);
     }
@@ -296,8 +299,8 @@ export const ContactPage = () => {
                                     </button>
 
 
-                                    {successMsg && <p className="text-green-600">{successMsg}</p>}
-                                    {errorMsg && <p className="text-red-600">{errorMsg}</p>}
+                                    {/* {successMsg && <p className="text-green-600">{successMsg}</p>}
+                                    {errorMsg && <p className="text-red-600">{errorMsg}</p>} */}
                                 </form>
                             </div>
                         </div>
