@@ -190,3 +190,25 @@ export const revertUserRole = async (userId: string) => {
     };
   }
 };
+
+
+
+
+export const fetchAdminContactMessages = async () => {
+  const session = await getSelf();
+
+  // Optional: Only allow admins
+  if (!session || session.role !== "ADMIN") {
+    throw new Error("Unauthorized access")
+  }
+
+  try {
+    const messages = await db.contactForm.findMany({
+      orderBy: { createdAt: "desc" },
+    })
+    return messages
+  } catch (error) {
+    console.error("Failed to fetch contact messages:", error)
+    throw new Error("Failed to fetch contact messages")
+  }
+}

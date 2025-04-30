@@ -16,7 +16,7 @@ export const getSelf = async () => {
     where: {
       externalUserId: self.id,
     },
-  });
+  });   
 
 
   if (!user) {

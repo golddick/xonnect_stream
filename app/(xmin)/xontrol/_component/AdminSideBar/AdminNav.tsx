@@ -8,6 +8,7 @@ const navItems = [
     { label: 'Dashboard', href: '/xontrol' },
     { label: 'Partners', href: '/xontrol/partners' },
     { label: 'Creators ', href: '/xontrol/creator-requests' },
+    { label: 'Contact-us ', href: '/xontrol/contact-us' },
     { label: 'Events', href: '/xontrol/events' },
   ];
 

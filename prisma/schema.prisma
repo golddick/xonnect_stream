@@ -139,8 +139,6 @@ model physicalTicketPayment {
 }
 
 
-
-
 enum SUBSCRIPTION_STATUS {
   PENDING 
   SUCCESSFUL
@@ -306,5 +304,17 @@ model Block {
   @@unique([blockerId, blockedId])
   @@index([blockerId])
   @@index([blockedId])
+}
+
+
+model ContactForm {
+  id          String @id @default(uuid())
+  fullName    String
+  email       String
+  subject     String
+  department  String
+  message     String
+  consent     Boolean
+  createdAt   DateTime @default(now())
 }
 
