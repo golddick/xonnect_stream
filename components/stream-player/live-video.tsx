@@ -6,7 +6,7 @@ import { useTracks } from "@livekit/components-react";
 import { useEventListener } from "usehooks-ts";
 import { toast } from "sonner";
 import { FullscreenControl } from "./fullscreen-control";
-import { VolumeControl } from "./volume-control";
+import { VolumeControl } from "./volume-control"; 
 import { checkIfUserPurchased } from "@/actions/payment";
 import { Schedule } from "@prisma/client";
 import NotPurchased from "../NotPurchased/NotPurchased";

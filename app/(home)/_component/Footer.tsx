@@ -30,16 +30,16 @@ const Footer = () => {
                             title: "Support",
                             links: [
                                 { name: "FAQ", url: "/faq" },
-                                { name: "Platfrom Guide", url: "/platfrom-guide" },
+                                { name: "About Us", url: "/about-us" },
                                 { name: "Contact Us", url: "/contact-us" },
                             ]
                         },
                         {
                             title: "Company",
                             links: [
-                                { name: "About Us", url: "/about-us" },
+                                { name: "Legal", url: "/legal" },
                                 { name: "partners", url: "/partners" },
-                                { name: "Legal", url: "/legal" }
+                                { name: "Xonnect Store", url: "/shop" },
                             ]
                         }
                     ].map((section, index) => (

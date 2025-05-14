@@ -49,11 +49,11 @@ export const ContactPage = () => {
 
       if (!res.message) throw new Error("Failed to submit message.");
       setSuccessMsg("Message sent successfully!");
-      toast.success(successMsg)
+      toast.success("Message sent successfully!")
       setForm({ name: "", email: "", subject: "", department: "", message: "", consent: false });
     } catch (error) {
       setErrorMsg((error as Error).message);
-      toast.error(errorMsg)
+      toast.error((error as Error).message)
     } finally {
       setLoading(false);
     }
