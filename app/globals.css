@@ -151,18 +151,18 @@ body,
   background-repeat: no-repeat;
 }
 
-/* .radial--double--gradient--cards--bottom {
-  background-image: radial-gradient(
-    at bottom right,
-    red 10%,
-    transparent 30%
-  );
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-} */
-
-.rbc-off-range-bg{
-  background-color: grey;
+.rbc-calendar {
+  background-color: #0a0a0a;
+  color: white;
+  border: none;
+}
+.rbc-event {
+  background-color: #e63946; /* red */
+  border: none;
+  color: white;
+}
+.rbc-toolbar button {
+  color: #e63946 !important ;
 }
 
 

@@ -24,5 +24,5 @@ export default async function CommunityPage() {
       </div>
       <DataTable columns={columns} data={formattedData} />
     </div>
-  );
+  ); 
 }

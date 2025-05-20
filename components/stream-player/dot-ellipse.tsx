@@ -28,10 +28,6 @@ import ShareBTN from "../share/ShareBTN"
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuGroup>
-            {/* <DropdownMenuItem>
-              <span>Report Channel</span>
-            </DropdownMenuItem> */}
-            <DropdownMenuSeparator />
             <ShareBTN/>
           </DropdownMenuGroup>
         

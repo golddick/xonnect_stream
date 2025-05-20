@@ -1,4 +1,5 @@
 import { Instagram, Twitter, Youtube } from 'lucide-react'
+import Image from 'next/image'
 import React from 'react'
 
 const Footer = () => {
@@ -63,18 +64,7 @@ const Footer = () => {
                 <p className="text-white/50">© 2025 xonnect. All rights reserved.</p>
                 
                 <div className="flex gap-4 md:gap-8">
-                {/* {[<Twitter key="twitter" />, <Instagram key="instagram" />, <Youtube key="youtube" />].map(
-                    (social, index) => (
-                    <a
-                        key={index}
-                        href="#"
-                        className="text-white/70 hover:text-red-400 transition-all duration-300 hover:-translate-y-2 inline-block text-xl"
-                    >
-                        <i>{social}</i>
-                    </a>
-                    )
-                )} */}
-                g
+                    <Image src={'/assets/GeeLogo.png'} alt='logo' width={20} height={20}/>
                 </div>
             </div>
         </div>

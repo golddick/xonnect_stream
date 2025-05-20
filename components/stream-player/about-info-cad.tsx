@@ -30,8 +30,12 @@ export function About_Tab({
   youtube,
   twitter,
   schedule,
+  imageUrl,
+  isFollowing
 }: {
   hostName: string;
+  imageUrl: string;
+  isFollowing: boolean;
   hostIdentity: string;
   viewerIdentity: string;
   bio: string | null;
@@ -54,7 +58,7 @@ export function About_Tab({
   );
 
   return (
-    <Tabs defaultValue="about" className="w-full pl-4 space-y-4">
+    <Tabs defaultValue="about" className="w-full  space-y-4">
       <TabsList className="grid w-[90%] mx-auto md:mx-0 md:w-[30%] grid-cols-3 bg-black">
         <TabsTrigger className=" " value="about">
           About
@@ -76,6 +80,8 @@ export function About_Tab({
           youtube={youtube}
           twitter={twitter}
           followedByCount={followedByCount}
+          imageUrl={imageUrl}
+          isFollowing={isFollowing}
         />
       </TabsContent>
       <TabsContent value="upcoming">

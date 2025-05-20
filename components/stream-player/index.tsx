@@ -93,15 +93,15 @@ export function StreamPlayer({
       >
         <div className="space-y-4 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10 bg-black ">
           <Video hostName={user.username} hostIdentity={user.id} userId={userId}  streamId={stream.id}    schedule={schedule} externalUserName={externalUserName} externalUserEmail={externalUserEmail || ''}/>
-          <Header
+          {/* <Header
             imageUrl={user.imageUrl}
             hostName={user.username}
             hostIdentity={user.id}
             isFollowing={isFollowing}
             name={stream.name}
             viewerIdentity={identity}
-          />
-          <div className="flex justify-start px-4 pt-2">
+          /> */}
+          <div className="flex justify-start px-4 pt-2 ">
           <Button
             onClick={() => setShowInfo((prev) => !prev)}
             className="text-white bg-black hover:bg-gray-700 px-3 py-1 rounded text-sm transition"
@@ -112,7 +112,7 @@ export function StreamPlayer({
 
          
         {showInfo && (
-          < div className=" container">
+          < div className="flex flex-col gap-4 lg:container p-4 lg:p-0">
             <About_Tab
               hostName={user.username}
               hostIdentity={user.id}
@@ -123,6 +123,8 @@ export function StreamPlayer({
               twitter={user.twitter}
               followedByCount={user._count.followedBy}
               schedule={schedule}
+              imageUrl={user.imageUrl}
+              isFollowing={isFollowing}
             />
             <InfoCard
               hostIdentity={user.id}
@@ -159,3 +161,4 @@ export function StreamPlayerSkeleton() {
    </div>
   );
 }
+

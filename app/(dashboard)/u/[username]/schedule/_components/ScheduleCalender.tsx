@@ -62,8 +62,7 @@ export const ScheduleCalender = ({data}:ScheduleStreamCalenderProps) => {
       defaultView='month'
       toolbar
       showAllEvents
-      style={{border:'red'}}
-      className=' border-none'
+      className="rbc-calendar text-white"
       max={new Date(new Date().setFullYear(new Date().getFullYear() + 1))}
       formats={{
         weekdayFormat:(date, culture, localizer) => localizer?.format(date, "EEE", culture) ?? ''
@@ -90,4 +89,5 @@ export const ScheduleCalender = ({data}:ScheduleStreamCalenderProps) => {
   </div>
   )
 }
+
 

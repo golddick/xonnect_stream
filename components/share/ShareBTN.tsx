@@ -47,7 +47,7 @@ const ShareBTN = () => {
       onClick={handleShare}
       variant="ghost"
       size="sm"
-      className="gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 w-full"
+      className="gap-2 hover:bg-gray-100 dark:hover:bg-gray-800 w-fit"
       title="Share this stream"
     >
       <Share2 className="w-4 h-4" />

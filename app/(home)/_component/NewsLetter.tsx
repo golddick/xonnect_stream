@@ -106,11 +106,11 @@ export default NewsLetter
 //         source: `${process.env.NEXT_PUBLIC_SOURCE}/category?${selectedCategoryName}`,
 //         status: "Subscribed",
 //         categoryId: selectedCategory,
-//         metadata: {
-//           campaign: selectedCampaignName || "Xonnect website landing page",
-//           pageUrl: `${process.env.NEXT_PUBLIC_SOURCE}/${selectedCategoryName}`,
-//           formId: "TheNews website general sub page",
-//         },
+        // metadata: {
+        //   campaign: selectedCampaignName || "Xonnect website landing page",
+        //   pageUrl: `${process.env.NEXT_PUBLIC_SOURCE}/${selectedCategoryName}`,
+        //   formId: "TheNews website general sub page",
+        // },
 //       };
 
   
