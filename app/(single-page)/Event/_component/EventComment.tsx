@@ -191,7 +191,7 @@ const EventComment = ({ scheduleId, comments: initialComments, userId }: Props) 
           {visibleComments.map(comment => (
             <div key={comment.id} className="flex items-start gap-3">
               <Avatar className="h-8 w-8">
-                <AvatarImage src={comment.user?.imageUrl} />
+                <AvatarImage src={comment.user?.imageUrl || '/assets/xsb.png'} />
                 <AvatarFallback>{comment.user?.username?.[0]}</AvatarFallback>
               </Avatar>
 
@@ -207,7 +207,7 @@ const EventComment = ({ scheduleId, comments: initialComments, userId }: Props) 
                 <div className="flex items-center gap-4 text-sm text-gray-500">
                   <button
                     className={`flex items-center gap-1 ${
-                      likedComments.includes(comment.id) ? 'text-red-800' : 'text-gray-500'
+                      likedComments.includes(comment.id) ? 'text-red-700' : 'text-gray-500'
                     } hover:text-red-600`}
                     onClick={() => toggleLike(comment.id)}
                   >

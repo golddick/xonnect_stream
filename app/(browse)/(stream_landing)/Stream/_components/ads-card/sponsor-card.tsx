@@ -4,7 +4,7 @@ import React from 'react'
 
 const SponsorCard = () => {
   return (
-    <div className="bg-gradient-to-r from-red-600/20 via-black-500/20 to-red-500/20 p-6 rounded-xl mb-8 relative overflow-hidden group cursor-pointer border-none w-[80%] lg:w-[90%] mx-auto ">
+    <div className="bg-gradient-to-r from-red-600/20 via-black-500/20 to-red-500/20 p-6 rounded-xl mb-8 relative overflow-hidden group cursor-pointer border-none w-full mx-auto ">
                         <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 via-black to-black border-none transform scale-105 blur-xl group-hover:blur-md transition-all duration-500 "></div>
                         <div className="absolute top-0 right-0 bg-gradient-to-bl from-red-600 to-black-600 text-white px-4 py-1 rounded-bl-lg font-bold uppercase text-xs tracking-wider">
                             Sponsored

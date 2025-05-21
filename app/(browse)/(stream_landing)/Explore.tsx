@@ -18,7 +18,7 @@ export default async function StreamExplore() {
        
             <div className="w-full bg-gradient-to-b from-black-900 via-black-950 to-red-900 relative overflow-hidden  border-none">
               
-                    <SponsorCard/>
+                    <SponsorCard/> 
                 <div className="relative z-10 p-4  md:p-8">
  
 

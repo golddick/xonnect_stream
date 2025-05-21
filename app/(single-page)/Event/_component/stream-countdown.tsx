@@ -64,8 +64,8 @@ export default function StreamCountdown({ streamDate, isLive }: StreamCountdownP
 
   if (eventOver) {
     return (
-      <div className="bg-gray-700 text-white p-3 rounded-lg text-center">
-        <p className="font-bold">Event Over</p>
+      <div className="bg-black animate-pulse border-b border-r text-white p-3 rounded-lg text-center">
+        <p className="font-light text-red-700">Stream is over watch higlight</p>
       </div>
     )
   }

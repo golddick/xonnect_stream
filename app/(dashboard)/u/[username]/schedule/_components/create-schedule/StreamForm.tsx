@@ -360,7 +360,7 @@ const ScheduleForm = () => {
             />
 
             {/* Thumbnail Upload */}
-            <div className="flex flex-col items-center justify-center w-full bg-black p-3 rounded-sm">
+            {/* <div className="flex flex-col items-center justify-center w-full bg-black p-3 rounded-sm">
               {!form.getValues('thumbnailImage') ? (
                 <UploadDropzone
                   endpoint="scheduleUploader"
@@ -383,7 +383,43 @@ const ScheduleForm = () => {
                   className=""
                 />
               )}
-            </div>
+            </div> */}
+
+            {/* Thumbnail Upload */}
+              <div className="flex flex-col items-center justify-center w-full bg-black p-3 rounded-sm gap-4">
+                {!form.watch('thumbnailImage') ? (
+                  <UploadDropzone
+                    endpoint="scheduleUploader"
+                    appearance={{
+                      label: { color: "#FFFFFF" },
+                      allowedContent: { color: "#FFFFFF" },
+                    }}
+                    onClientUploadComplete={(res) => {
+                      if (res?.[0]?.url) {
+                        form.setValue("thumbnailImage", res[0]?.url)
+                      }
+                    }}
+                  />
+                ) : (
+                  <>
+                    <Image
+                      src={form.watch("thumbnailImage") || ""}
+                      width={300}
+                      height={180}
+                      alt="Event Thumbnail"
+                      className="rounded-md border"
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => form.setValue("thumbnailImage", '')}
+                    >
+                      Remove Image
+                    </Button>
+                  </>
+                )}
+              </div>
+
 
             {/* Submit */}
             <Button type="submit" size="lg" variant="ghost" className="from-[red] font-medium to-[black] bg-gradient-to-br border-r border-b">

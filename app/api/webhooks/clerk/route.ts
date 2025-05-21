@@ -4,16 +4,15 @@ import {  WebhookEvent } from "@clerk/nextjs/server";
 
 import { db } from "@/lib/db";
 import { resetIngresses } from "@/actions/ingress";
-import { User } from "@prisma/client";
 
 export async function POST(req: Request) {
-  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
+  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET!;
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
       "Please add CLERK_WEBHOOK_SECRET from Clerk Dashboard to .env or .env.local"
     );
-  }
+  } 
 
   // Get the headers
   const headerPayload = headers();
@@ -55,23 +54,29 @@ export async function POST(req: Request) {
 
   const eventType = evt.type;
 
-  if (eventType === "user.created") {
-    const { id, email_addresses, username, image_url } = evt.data;
+if (eventType === "user.created") {
+  const { id, email_addresses, username, image_url } = evt.data;
 
-    await db.user.create({
-      data: {
-        externalUserId: id,
-        username: payload.data.username,
-        imageUrl: image_url,
-        email: email_addresses[0].email_address,
-        stream: {
-          create: {
-            name: `${payload.data.username}'s stream`,
-          },
+  const fallbackUsername =
+    username ||
+    email_addresses?.[0]?.email_address?.split("@")[0] ||
+    `user-${id.slice(-5)}`;
+
+  await db.user.create({
+    data: {
+      externalUserId: id,
+      username: fallbackUsername,
+      imageUrl: image_url,
+      email: email_addresses[0].email_address,
+      stream: {
+        create: {
+          name: `${fallbackUsername}'s stream`,
         },
       },
-    });
-  }
+    },
+  });
+}
+
 
 
  

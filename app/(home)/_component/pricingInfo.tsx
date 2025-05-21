@@ -17,10 +17,10 @@ export default function Pricing() {
     
 
       {/* Hero Section */}
-      <BannerHeader H1='Simple, Transparent Pricing' Header='PLATFORM PRICING' Desc=' Pay only for what you watch. Creators earn directly from their content without subscription fees.'/>
+      <BannerHeader H1='Simple, Transparent Pricing' Header='PLATFORM PRICING' Desc="Pay only for what you enjoy — every stream, event, or experience is yours to choose."/>
     
       <section className="py-16 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto text-center px-4">
+        <div className="container mx-auto text-center ">
           
           {/* Tab Selector */}
           <div className="inline-flex bg-gray-100 rounded-lg p-1 mb-6 lg:mb-16">
@@ -46,18 +46,18 @@ export default function Pricing() {
 
       {/* Pricing Section - Viewers */}
       {activeTab === 'viewers' && (
-        <section className="py-6 lg:py-16 px-4">
+        <section className="py-6 lg:py-16 ">
           <div className="container mx-auto">
             <div className="grid md:grid-cols-2 gap-8 w-full lg:w-[80%] mx-auto">
               {/* Pay Per Stream */}
               <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-lg transition-transform hover:scale-105">
                 <div className="p-8">
                   <div className="flex items-center mb-4">
-                    <Video className="text-red-700 mr-2" size={24} />
-                    <h3 className="text-xl font-bold text-black">Pay Per Stream</h3>
+                    <Video className="text-red-700 mr-2" size={20} />
+                    <h3 className="text-xl font-bold text-black">Xonnect Stream</h3>
                   </div>
                   <div className="mb-6">
-                    <span className="text-3xl font-bold text-black">OnDemand</span>
+                    <span className="text-xl font-bold text-black">OnDemand</span>
                     <span className="text-gray-600 ml-2">pricing varies by content</span>
                   </div>
                   <p className="text-gray-600 mb-6">
@@ -100,8 +100,8 @@ export default function Pricing() {
                 </div>
                 <div className="p-8">
                   <div className="flex items-center mb-4">
-                    <Music className="text-red-700 mr-2" size={24} />
-                    <h3 className="text-xl font-bold text-white">Music Premium</h3>
+                    <Music className="text-red-700 mr-2" size={20} />
+                    <h3 className="text-xl font-bold text-white">Xonnect Music</h3>
                   </div>
                   <div className="mb-6">
                     <span className="text-3xl font-bold text-white">N0</span>
@@ -187,7 +187,7 @@ export default function Pricing() {
 
       {/* Pricing Section - Creators */}
       {activeTab === 'creators' && (
-        <section className="py-16 px-4">
+        <section className="py-16 ">
           <div className="container mx-auto">
             <div className="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto">
               {/* Standard Creator */}

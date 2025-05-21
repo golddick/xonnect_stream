@@ -13,11 +13,13 @@ export async function HomeNavActions() {
   const user = await currentUser();
   const userInfo = user?.username ? await getUserByUsername(user.username) : null;
 
+  console.log("User Info:", userInfo);
 
 
-  // const adminEMail = 'golddick60@gmail.com'
-  // const Creator = user?.emailAddresses[0].emailAddress === adminEMail
-  const Creator = userInfo?.role === 'CREATOR' || 'ADMIN'
+
+  const adminEMail = 'golddick60@gmail.com'
+  const Creator = user?.emailAddresses[0].emailAddress === adminEMail || userInfo?.role === 'CREATOR' || userInfo?.role === 'ADMIN'
+  // const Creator = userInfo?.role === 'CREATOR' || 'ADMIN'
 
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">

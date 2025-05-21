@@ -22,7 +22,7 @@ const Footer = () => {
                         {
                             title: "Platform",
                             links: [
-                                { name: "Events", url: "/explore-events" },
+                                { name: "Events", url: "/explore-event" },
                                 { name: "Pricing", url: "/pricing" },
                                 { name: "Features", url: "/features" }
                             ]
@@ -64,7 +64,7 @@ const Footer = () => {
                 <p className="text-white/50">© 2025 xonnect. All rights reserved.</p>
                 
                 <div className="flex gap-4 md:gap-8">
-                    <Image src={'/assets/GeeLogo.png'} alt='logo' width={20} height={20}/>
+                    <Image src={'/assets/signature.jpeg'} alt='logo' width={100} height={20}/>
                 </div>
             </div>
         </div>

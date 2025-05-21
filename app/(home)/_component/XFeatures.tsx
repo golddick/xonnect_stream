@@ -76,8 +76,6 @@ export const XFeatures = () => {
       details: [
         'Secure payment processing',
         'QR code ticket generation',
-        'Tiered pricing options',
-        'Group booking discounts',
         'Digital ticket transfer capabilities'
       ]
     },
@@ -128,7 +126,7 @@ export const XFeatures = () => {
       details: [
         'Creator-approved merchandise',
         'Secure payment processing',
-        'Global shipping options',
+        'Local shipping options',
         'Exclusive limited-edition items',
         'Wishlist and favorites features'
       ]
@@ -163,7 +161,7 @@ export const XFeatures = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white">
 
 
       {/* Hero Section */}

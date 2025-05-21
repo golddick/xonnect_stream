@@ -3,7 +3,7 @@ import React from 'react'
 
 const PartnershipFAQ = () => {
   return (
-    <section className="bg-gray-100 rounded-xl p-8 mb-16">
+    <section className="bg-gray-100 rounded-xl p-4 md:p-8 mb-16">
   <h2 className="text-2xl font-semibold text-black mb-6 text-center">Frequently Asked Questions</h2>
   <div className="max-w-3xl mx-auto space-y-4">
     {[
@@ -44,7 +44,7 @@ const PartnershipFAQ = () => {
         key={index}
         className="bg-white rounded-lg shadow overflow-hidden transition-all duration-300 hover:shadow-md group"
       >
-        <summary className="px-6 py-4 cursor-pointer text-gray-800 font-medium flex justify-between items-center">
+        <summary className=" px-4 md:px-6 py-4 cursor-pointer text-gray-800 font-medium flex justify-between items-center">
           {faq.question}
           <ArrowDown className="material-symbols-outlined transform group-open:rotate-180 transition-transform text-red-700" />
         </summary>

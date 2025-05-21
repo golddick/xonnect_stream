@@ -1,31 +1,145 @@
 
-
-
 'use client'
 
 import React, { useEffect, useState } from "react"
 import { useUser } from "@clerk/nextjs"
 import { toast } from "sonner"
-import {  getUserPlatfromAgreementStatus, updatePlatformTerms } from "@/actions/user"
+import { jsPDF } from "jspdf"
 import Link from "next/link"
+import { Download } from "lucide-react"
 import { useSearchParams } from "next/navigation"
+import { getUserPlatfromAgreementStatus, updatePlatformTerms } from "@/actions/user"
+
+const legalSections = [
+  {
+    category: "Privacy Policy",
+    items: [
+      {
+        title: "Personal Data Collection",
+        content:
+          "We collect personal information such as name, email address, payment details, viewing history, and device data when you use our platform. This data is necessary for account management, recommendations, and improving our services."
+      },
+      {
+        title: "Usage & Analytics",
+        content:
+          "We track user activity, watch history, search queries, and device data using internal tools and third-party analytics providers to understand and enhance your streaming experience."
+      },
+      {
+        title: "Cookies & Tracking Technologies",
+        content:
+          "We use cookies and similar technologies to personalize content, remember your preferences, and analyze site traffic. You can control cookie settings in your browser."
+      },
+      {
+        title: "Data Sharing & Disclosure",
+        content:
+          "We may share data with trusted service providers for billing, analytics, content delivery, and support. We do not sell or rent your personal information."
+      },
+      {
+        title: "International Transfers",
+        content:
+          "Your data may be stored or processed in locations outside your country. We ensure such transfers comply with data protection regulations like GDPR and CCPA."
+      },
+      {
+        title: "Your Rights",
+        content:
+          "You have rights to access, correct, or delete your data. You may also request to opt-out of marketing communications or request data portability."
+      },
+      {
+        title: "Data Retention",
+        content:
+          "We retain your data only as long as necessary to provide services and comply with legal obligations."
+      },
+      {
+        title: "Security Practices",
+        content:
+          "We use encryption, secure servers, and regular audits to protect your data. However, no method of transmission is completely secure."
+      }
+    ]
+  },
+  {
+    category: "Terms of Service",
+    items: [
+      {
+        title: "Acceptance of Terms",
+        content:
+          "By accessing or using our platform, you agree to these Terms of Service, our Privacy Policy, and any additional terms presented to you."
+      },
+      {
+        title: "User Accounts",
+        content:
+          "You are responsible for maintaining the confidentiality of your account credentials. You agree to notify us immediately of any unauthorized use."
+      },
+      {
+        title: "Subscription & Billing",
+        content:
+          "Some features require a paid subscription. You agree to pay all applicable fees and understand that subscriptions automatically renew unless canceled."
+      },
+      {
+        title: "Content Licensing",
+        content:
+          "All content on the platform is licensed or owned by us or our partners. You may not reproduce, distribute, or publicly perform content without authorization."
+      },
+      {
+        title: "User-Generated Content",
+        content:
+          "If you upload or stream content (e.g., comments, video submissions), you retain ownership but grant us a non-exclusive license to use, host, and display it."
+      },
+      {
+        title: "Prohibited Conduct",
+        content:
+          "You agree not to misuse the platform, including uploading harmful content, violating copyrights, attempting to reverse-engineer the service, or harassing other users."
+      },
+      {
+        title: "Third-Party Services",
+        content:
+          "We may integrate services such as payment processors or content delivery networks. Your use of those services is governed by their terms."
+      },
+      {
+        title: "Service Modifications",
+        content:
+          "We may modify, suspend, or discontinue parts of the platform at any time without notice. We are not liable for any resulting loss."
+      },
+      {
+        title: "Termination",
+        content:
+          "We reserve the right to suspend or terminate your access for violations of these terms, illegal activity, or at our discretion."
+      },
+      {
+        title: "Limitation of Liability",
+        content:
+          "We are not liable for any indirect or consequential damages, including loss of data, profits, or access due to outages or platform changes."
+      },
+      {
+        title: "Dispute Resolution",
+        content:
+          "Any disputes shall be resolved through binding arbitration under local governing laws. You waive the right to a jury trial."
+      },
+      {
+        title: "Changes to Terms",
+        content:
+          "We may update these terms periodically. Continued use of the platform constitutes acceptance of the updated terms."
+      }
+    ]
+  }
+]
+
 
 export const Legal = () => {
   const { user } = useUser()
   const [hasAccepted, setHasAccepted] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
   const [loading, setLoading] = useState(false)
-  const searchParams = useSearchParams();
-  const showToast = searchParams.get('showToast');
+  const searchParams = useSearchParams()
+  const showToast = searchParams.get('showToast')
 
   useEffect(() => {
     if (showToast) {
-      toast.error('You must accept platform terms to continue.');
+      toast.error('You must accept platform terms to continue.')
     }
-  }, [showToast]);
+  }, [showToast])
 
   useEffect(() => {
-    const fetchTermsStatus = async () => {
+    const fetchStatus = async () => {
       if (!user) return
       try {
         const res = await getUserPlatfromAgreementStatus()
@@ -38,12 +152,11 @@ export const Legal = () => {
       }
     }
 
-    fetchTermsStatus()
+    fetchStatus()
   }, [user])
 
   const handleCheckboxChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked
-
     if (!user) {
       toast.error("You must log in to accept the terms.")
       return
@@ -72,10 +185,40 @@ export const Legal = () => {
     }
   }
 
+  const downloadPDF = () => {
+    const doc = new jsPDF()
+    doc.setFont("Helvetica", "normal")
+    doc.setFontSize(12)
+
+    doc.text("Xonnect Platform Legal Agreement", 10, 20)
+    doc.text(`User: ${user?.fullName || 'Unnamed User'}`, 10, 30)
+
+    let y = 40
+    legalSections.forEach(section => {
+      doc.setFont("Helvetica", "bold")
+      doc.text(section.category, 10, y)
+      y += 8
+
+      section.items.forEach(item => {
+        doc.setFont("Helvetica", "bold")
+        doc.text(item.title, 10, y)
+        y += 6
+        doc.setFont("Helvetica", "normal")
+        const lines = doc.splitTextToSize(item.content, 180)
+        doc.text(lines, 10, y)
+        y += lines.length * 6 + 4
+      })
+
+      y += 6
+    })
+
+    doc.save(`Xonnect-Legal-Agreement-${user?.fullName || 'User'}.pdf`)
+  }
+
   return (
     <div id="xonnect">
-      <div className="w-full text-black bg-white shadow-xl overflow-hidden container">
-        <header className="bg-primary-600 py-6 px-8">
+      <div className="w-full text-black bg-white shadow-xl overflow-hidden p-2 md:container">
+        <header className="bg-primary-600 py-2 px-8">
           <h1 className="text-3xl font-semibold text-white">Privacy Policy & Terms of Service</h1>
           <p className="text-primary-100 mt-2">
             Please review and accept our legal agreements before proceeding
@@ -83,85 +226,24 @@ export const Legal = () => {
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 p-2 md:p-8">
-                    <div className="border border-gray-200 rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-md">
-                        <div className="bg-gray-50 px-5 py-4 border-b border-gray-200">
-                            <h2 className="text-xl font-medium">Privacy Policy</h2>
-                        </div>
-                        <div className="h-full overflow-y-auto p-5 text-sm leading-relaxed">
-                            <h3 className="font-medium text-lg mb-2">Data Collection and Usage</h3>
-                            <p className="mb-4">
-                                We collect personal information that you voluntarily provide to us when you register on
-                                the website, express an interest in obtaining information about us or our products and
-                                services, when you participate in activities on the website or otherwise when you
-                                contact us.
-                            </p>
+          {legalSections.map((section, i) => (
+            <div key={i} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-all duration-300">
+              <div className="bg-gray-50 px-5 py-4 border-b border-gray-200">
+                <h2 className="text-xl font-medium">{section.category}</h2>
+              </div>
+              <div className="h-full overflow-y-auto p-5 text-sm leading-relaxed">
+                {section.items.map((item, j) => (
+                  <div key={j} className="mb-4">
+                    <h3 className="font-medium text-lg mb-1">{item.title}</h3>
+                    <p>{item.content}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
 
-                            <h3 className="font-medium text-lg mb-2">Information Security</h3>
-                            <p className="mb-4">
-                                We take steps to ensure that your information is treated securely and in accordance with
-                                this Privacy Policy. Unfortunately, no data transmission over the Internet or any
-                                wireless network can be guaranteed to be 100% secure.
-                            </p>
-
-                            <h3 className="font-medium text-lg mb-2">Cookies Policy</h3>
-                            <p className="mb-4">
-                                Our website uses cookies to enhance your browsing experience. Cookies are small files
-                                stored on your device that help us analyze website traffic and customize content to your
-                                preferences.
-                            </p>
-
-                            <h3 className="font-medium text-lg mb-2">Third-Party Disclosure</h3>
-                            <p className="mb-4">
-                                We do not sell, trade, or otherwise transfer your personally identifiable information to
-                                outside parties unless we provide you with advance notice. This does not include website
-                                hosting partners and other parties who assist us in operating our website.
-                            </p>
-                            {/* Next: "Add detailed sections on GDPR compliance" */}
-                        </div>
-                        
-                    </div>
-
-                    <div className="border border-gray-200 rounded-lg overflow-hidden transform transition-all duration-300 hover:shadow-md">
-                        <div className="bg-gray-50 px-5 py-4 border-b border-gray-200">
-                            <h2 className="text-xl font-medium">Terms of Service</h2>
-                        </div>
-                        <div className="h-full overflow-y-auto p-5 text-sm leading-relaxed">
-                            <h3 className="font-medium text-lg mb-2">Terms of Use</h3>
-                            <p className="mb-4">
-                                By accessing this website, you are agreeing to be bound by these website Terms and
-                                Conditions of Use, all applicable laws and regulations, and agree that you are
-                                responsible for compliance with any applicable local laws.
-                            </p>
-
-                            <h3 className="font-medium text-lg mb-2">License</h3>
-                            <p className="mb-4">
-                                Permission is granted to temporarily download one copy of the materials on our website
-                                for personal, non-commercial transitory viewing only. This is the grant of a license,
-                                not a transfer of title.
-                            </p>
-
-                            <h3 className="font-medium text-lg mb-2">User Responsibilities</h3>
-                            <p className="mb-4">
-                                Users are responsible for maintaining the confidentiality of their account information
-                                and for all activities that occur under their account. Users agree not to use the
-                                service for any illegal or unauthorized purpose.
-                            </p>
-
-                            <h3 className="font-medium text-lg mb-2">Limitation of Liability</h3>
-                            <p className="mb-4">
-                                In no event shall we or our suppliers be liable for any damages (including, without
-                                limitation, damages for loss of data or profit, or due to business interruption) arising
-                                out of the use or inability to use the materials on our website.
-                            </p>
-                            {/* Next: "Add dispute resolution and arbitration section" */}
-                        </div>
-                       
-                    </div>
-                </div>
-
-        {/* Accept Terms Section */}
-        <div className=" p-2 md:p-8">
-
+        <div className="p-2 md:p-8">
           <div className="flex items-start mb-8">
             <input
               id="agree"
@@ -177,19 +259,31 @@ export const Legal = () => {
           </div>
 
           <div className="mt-8 flex justify-between items-center">
-            <Link href={'/'}>
-            <button className="text-gray-600 hover:text-gray-800 transition-colors duration-300">
-              Go back
-            </button>
+            <Link href="/">
+              <button className="text-gray-600 hover:text-gray-800 transition-colors duration-300">
+                Go back
+              </button>
             </Link>
-            <button
-              disabled={!hasAccepted || loading}
-              className={`${
-                hasAccepted ? "bg-red-600" : "bg-gray-300"
-              } text-white px-6 py-3 rounded-lg shadow-sm transform transition-all duration-300 hover:shadow focus:outline-none`}
-            >
-              {hasAccepted ? "Accepted" : "Accept & Continue"}
-            </button>
+
+            <div className="flex items-center gap-4">
+              {hasAccepted && (
+                <button
+                  onClick={downloadPDF}
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2 transition"
+                >
+                  <Download className="w-4 h-4" />
+                    <span className=" hidden md:block">Download PDF</span>
+                </button>
+              )}
+              <button
+                disabled={!hasAccepted || loading}
+                className={`${
+                  hasAccepted ? "bg-red-600" : "bg-gray-300"
+                } text-white px-6 py-3 rounded-lg shadow-sm transition-all duration-300 hover:shadow`}
+              >
+                {hasAccepted ? "Accepted" : "Accept & Continue"}
+              </button>
+            </div>
           </div>
         </div>
       </div>

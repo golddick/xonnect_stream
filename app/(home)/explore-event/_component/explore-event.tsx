@@ -4,6 +4,7 @@ import BannerHeader from "../../_component/BannerHeader"
 import LiveComponent from "./LiveComponent"
 import ScheduledEvent from "./ScheduledEvent"
 import { getStreams } from "@/lib/feed-service"
+import CTA from "../../_component/CTA"
 
 export const EventExplore = async () => {
 
@@ -50,7 +51,16 @@ export const EventExplore = async () => {
                 </section>
 
 
-                <section className="py-16 gap-10 px-4 sm:px-8 bg-white text-black container mx-auto justify-center flex flex-col items-center">
+                {/* cta */}
+                <section className="py-16 px-4 sm:px-8 bg-white text-black overflow-hidden">
+                    <div className="max-w-6xl mx-auto">
+                        <CTA/>
+                    </div>
+                </section>
+                        
+
+
+                {/* <section className="py-16 gap-10 px-4 sm:px-8 bg-white text-black container mx-auto justify-center flex flex-col items-center">
                 <h2 className="text-2xl font-bold mb-6">Top Creators</h2>
                 <div className="flex items-center flex-wrap gap-16">
                 {creators.slice(0, 6).map((result, index) => (
@@ -68,7 +78,7 @@ export const EventExplore = async () => {
                     </div>
                 ))}
                 </div>
-                </section>
+                </section> */}
             </div>
         </div>
     )

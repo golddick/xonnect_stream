@@ -9,7 +9,7 @@ interface HeroSectionProps {
 
 const BannerHeader = ({Header, H1, Desc}:HeroSectionProps) => {
   return (
-    <section className="pt-20 pb-16 bg-white text-black">
+    <section className="pt-20 pb-16 bg-gray-50 text-black">
         <div className="container mx-auto px-4 text-center">
           <div className="inline-block bg-red-100 text-red-700 px-4 py-1 rounded-full text-sm font-medium mb-6">{Header}</div>
           {/* <h1 className="text-4xl md:text-5xl font-bold mb-6">{H1}</h1> */}

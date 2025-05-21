@@ -63,11 +63,11 @@ export const ContactPage = () => {
     return (
         <div id="xonnect">
             <div className="w-full min-h-screen bg-gray-50">
+                    <BannerHeader H1='Contact Us' Header='PLATFROM CONTACT' Desc=' We are here to help! Reach out to our team with any questions, feedback, or support requests.'/>
 
                 <section className="py-16 px-4 bg-white">
-                    <div className="container mx-auto">
+                    <div className=" w-full md:container mx-auto">
 
-                    <BannerHeader H1='Contact Us' Header='PLATFROM CONTACT' Desc=' We are here to help! Reach out to our team with any questions, feedback, or support requests.'/>
      
 
 
@@ -81,10 +81,10 @@ export const ContactPage = () => {
                                     Need help with your account, subscriptions, or platform features?
                                 </p>
                                 <a
-                                    href="mailto:support@xonnect.com"
+                                    href="mailto:support@xonnect.net"
                                     className="text-red-700 hover:text-red-900 font-medium flex items-center group"
                                 >
-                                    support@xonnect.com
+                                    support@xonnect.net
                                     <ArrowRight className="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform duration-200"/>
                                 </a>
                                 <p className="text-gray-500 mt-2 text-sm">Response time: Within 24 hours</p>
@@ -92,7 +92,6 @@ export const ContactPage = () => {
 
                             <div className="bg-gray-50 p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center">
                                 <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 mb-4">
-                                    {/* <span className="material-symbols-outlined text-3xl">handshake</span> */}
                                     <FaHandshake  className="material-symbols-outlined text-3xl"/>
                                 </div>
                                 <h3 className="text-xl font-bold mb-2">Partnerships</h3>
@@ -100,10 +99,10 @@ export const ContactPage = () => {
                                     Interested in business collaborations, sponsorships, or API integration?
                                 </p>
                                 <a
-                                    href="mailto:partnerships@xonnect.com"
+                                    href="mailto:partnership@xonnect.net"
                                     className="text-red-700 hover:text-red-900 font-medium flex items-center group"
                                 >
-                                    partnerships@xonnect.com
+                                    partnership@xonnect.net
                                     <ArrowRight className="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform duration-200"/>
                                 </a>
                                 <p className="text-gray-500 mt-2 text-sm">Response time: 2-3 business days</p>
@@ -116,10 +115,10 @@ export const ContactPage = () => {
                                 <h3 className="text-xl font-bold mb-2">Creator Verification</h3>
                                 <p className="text-gray-600 mb-4">Want to become a verified creator on our platform?</p>
                                 <a
-                                    href="mailto:creators@xonnect.com"
-                                    className="text-red-600 hover:text-red-700 font-medium flex items-center group"
+                                    href="mailto:creators@xonnect.net"
+                                    className="text-red-700 hover:text-red-900 font-medium flex items-center group"
                                 >
-                                    creators@xonnect.com
+                                    creators@xonnect.net
                                     <ArrowRight className="material-symbols-outlined ml-1 group-hover:translate-x-1 transition-transform duration-200"/>
                                 </a>
                                 <p className="text-gray-500 mt-2 text-sm">Response time: 3-5 business days</p>
@@ -131,27 +130,25 @@ export const ContactPage = () => {
                                 <h2 className="text-2xl font-bold mb-6">Get In Touch</h2>
                                 <div className="space-y-6">
                                     <div className="flex items-start">
-                                        {/* <span className="material-symbols-outlined mr-3 mt-1">location_on</span> */}
                                         <MdLocationOn  className="material-symbols-outlined mr-3 mt-1"/>
                                         <div>
                                             <h4 className="font-semibold mb-1">Headquarters</h4>
                                             <p className="text-white/80">
-                                                123 Creator Avenue
+                                                ibadan plot 12 PDCOS
                                                 <br />
-                                                San Francisco, CA 94103
+                                                general gas 
                                                 <br />
-                                                United States
+                                                oyo state, Nigeria
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="flex items-start">
-                                        {/* <span className="material-symbols-outlined mr-3 mt-1">schedule</span> */}
                                         <Calendar className="material-symbols-outlined mr-3 mt-1"/>
                                         <div>
                                             <h4 className="font-semibold mb-1">Hours of Operation</h4>
                                             <p className="text-white/80">
-                                                Monday - Friday: 9am - 6pm PST
+                                                Monday - Friday: 9am - 6pm WAT
                                                 <br />
                                                 Saturday - Sunday: Closed
                                             </p>
@@ -159,13 +156,11 @@ export const ContactPage = () => {
                                     </div>
 
                                     <div className="flex items-start">
-                                        {/* <span className="material-symbols-outlined mr-3 mt-1">phone</span> */}
                                         <PhoneCall  className="material-symbols-outlined mr-3 mt-1"/>
                                         <div>
                                             <h4 className="font-semibold mb-1">Phone Support</h4>
                                             <p className="text-white/80">
-                                                +1 (555) 123-4567
-                                                
+                                                +234-705-099-8742
                                             </p>
                                         </div>
                                     </div>
@@ -266,8 +261,7 @@ export const ContactPage = () => {
                                         </label>
                                         <textarea
                                             id="message"
-                                            // rows="5"
-                                            className="w-full px-4 bg-white  text-black py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 outline-none resize-none"
+                                            className="w-full h-20 px-4 bg-white  text-black py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-200 outline-none resize-none"
                                             placeholder="Please describe your question or concern in detail..."
                                             onChange={handleChange}
                                             value={form.message}

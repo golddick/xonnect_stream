@@ -3,6 +3,7 @@
 import React from 'react';
 import { getSchedules } from '@/lib/schedule-service';
 import EventRow from './EventRow';
+import NoEventsFound from './NoEvent';
 
 interface AllStreamProps {
   type: 'upcoming' | 'past'; // Add a `type` prop to specify the filter
@@ -34,7 +35,7 @@ const ScheduledEvent = async ({  type }: AllStreamProps) => {
     return (
       <div className="justify-center w-full h-auto flex flex-col gap-4">
         <p className="text-center text-gray-500">
-          {type === 'upcoming' ? 'No upcoming events found.' : 'No past events found.'}
+          {type === 'upcoming' ? <NoEventsFound type='upcoming'  /> : <NoEventsFound type='past' />}
         </p>
       </div>
     );

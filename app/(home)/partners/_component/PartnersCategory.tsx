@@ -52,7 +52,7 @@ export default function PartnerCategoriesSection() {
               <div>
                 <h3 className="text-xl font-semibold text-gray-800 mb-1">{item.name}</h3>
                 <p className="text-gray-600">{item.count} partners</p>
-                <a
+                {/* <a
                   href={`/partners/${item.type.toLowerCase()}`}
                   className="text-red-700 group-hover:underline flex items-center mt-3"
                 >
@@ -71,7 +71,7 @@ export default function PartnerCategoriesSection() {
                       d="M9 5l7 7-7 7"
                     />
                   </svg>
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

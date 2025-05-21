@@ -11,28 +11,29 @@ const Team = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-8"> */}
+          <div className="flex items-center justify-center gap-8">
             {[
               {
-                name: "Sarah Johnson",
-                title: "CEO & Co-Founder",
-                bio: "Former content creator with a vision to revolutionize the creator economy through technology.",
-                image: "/assets/woman.jpeg"
+                name: "Gold Dick",
+                title: "Founder",
+                bio: "Visionary entrepreneur focused on empowering creators through innovative tech and direct audience connection.",
+                image: "/assets/founder.jpeg"
               },
-              {
-                name: "Michael Chen",
-                title: "CTO & Co-Founder",
-                bio: "Tech visionary with 15+ years of experience building scalable platforms for content creators.",
-                image: "/assets/woman.jpeg"
-              },
-              {
-                name: "Aisha Patel",
-                title: "Chief Product Officer",
-                bio: "Creator advocate focused on building intuitive, powerful tools for the creator community.",
-                image: "/assets/xc.jpg"
-              }
+              // {
+              //   name: "Michael Chen",
+              //   title: "CTO & Co-Founder",
+              //   bio: "Tech visionary with 15+ years of experience building scalable platforms for content creators.",
+              //   image: "/assets/woman.jpeg"
+              // },
+              // {
+              //   name: "Aisha Patel",
+              //   title: "Chief Product Officer",
+              //   bio: "Creator advocate focused on building intuitive, powerful tools for the creator community.",
+              //   image: "/assets/xc.jpg"
+              // }
             ].map((member, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">
+              <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center justify-center w-80">
                 <div className=' relative  w-32 h-32  mx-auto'>
                 <Image 
                   src={member.image} 

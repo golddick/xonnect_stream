@@ -10,8 +10,8 @@ import PartnershipFAQ from "../partners/_component/PartnershipFAQ"
 export const Partners = () => {
     return (
         <div id="xonnect">
-            <div className="bg-white min-h-screen p-4 md:p-6 lg:p-8 container text-black mx-auto">
             <BannerHeader H1='Our Partners' Header='PLATFROM PARTNERS' Desc=' We are proud to collaborate with these industry leaders who share our vision for innovation and excellence.'/>
+            <div className="bg-white min-h-screen p-4 md:p-6 lg:p-8 container text-black mx-auto">
 
               <ApprovedPartnersSection/>
 

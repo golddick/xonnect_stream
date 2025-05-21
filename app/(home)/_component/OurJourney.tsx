@@ -38,8 +38,8 @@ const OurJourney = () => {
               //   description: "Expanded operations to support creators in over 50 countries, with multi-language support and localized payment options."
               // }
             ].map((milestone, index) => (
-              <div key={index} className="flex flex-col md:flex-row">
-                <div className="md:w-1/5">
+              <div key={index} className="flex flex-col md:flex-row  ">
+                <div className=" md:w-1/5  items-center lg:justify-center flex">
                   <div className="bg-red-700 text-white text-xl font-bold py-2 px-4 rounded-lg inline-block">
                     {milestone.year}
                   </div>

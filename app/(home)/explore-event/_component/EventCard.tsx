@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -70,11 +71,8 @@ const EventCard = ({
           )}
         </div>
         
-        {isLive ? (
-          <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
-            LIVE NOW
-          </div>
-        ) : isExpired ? (
+       {
+        isExpired ? (
           <div className="absolute top-4 left-4 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded">
             CATCH UP
           </div>
@@ -108,9 +106,11 @@ const EventCard = ({
           <span>{formatDate(new Date(date))}</span>
         </div>
         
-        <p className="text-gray-600 text-sm mb-4">
-          {description}
-        </p>
+          <ScrollArea className="h-full  mb-2">
+            <p className="text-gray-600 text-sm mb-4 max-h-10 ">
+              {description}
+            </p>
+            </ScrollArea>
         
         <div className="flex justify-between items-center">
           <span className="text-gray-700 font-bold">

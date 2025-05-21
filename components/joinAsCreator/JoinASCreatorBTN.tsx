@@ -31,7 +31,7 @@ export function  JoinASCreatorBTN ({tittle}:Props) {
             {tittle || ' Join as Creator'}
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-[425px] lg:w-[700px] bg-white text-black p-0 h-[90%]  my-auto  overflow-scroll hidden-scrollbar">
+      <DialogContent className="w-full lg:w-[700px] bg-white text-black p-0  h-[90%]  my-auto  overflow-scroll hidden-scrollbar">
         <CreatorAgreement/>
       </DialogContent>
     </Dialog>

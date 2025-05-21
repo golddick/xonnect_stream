@@ -117,7 +117,7 @@ export default function Home() {
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 mx-auto">
                 <GiftIcon className="text-2xl text-red-700" />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-center">Virtual Gifting and Donations</h3>
+              <h3 className="text-xl font-bold mb-4 text-center">Virtual Gifting</h3>
               <p className="text-gray-600 text-center">
               Send virtual gifts to creators during live streams that can be converted to real currency.
               </p>
@@ -313,7 +313,7 @@ export default function Home() {
               <div className="relative">
                 <div className="w-full h-96 lg:h-[500px] relative rounded-2xl overflow-hidden shadow-2xl">
                   <Image 
-                    src="/assets/xlogo.jpg" 
+                    src="/assets/xc.jpg" 
                     alt="Community Interaction" 
                     layout="fill"
                     objectFit="cover"

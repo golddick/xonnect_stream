@@ -22,7 +22,7 @@ const CTA = async ({bgColor}:Props) => {
             />
             <Link 
               href="/sign-up" 
-              className="bg-white hover:bg-gray-100 text-black font-bold  flex justify-center items-center px-8 rounded-lg"
+              className="bg-white hover:bg-gray-100 text-black font-bold  flex justify-center items-center px-8 rounded-lg py-2"
             >
               Sign Up as Fan
             </Link>

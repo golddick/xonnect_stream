@@ -170,7 +170,11 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                   <Link href={`/channel/${data.user?.username}`} className=" w-full">
                     <Button size={'lg'} variant={'ghost'} className="w-full text-white">Watch</Button>
                   </Link>
-                <SchedulePurchaseBTN data={data} selfEmail={selfEmail} selfName={selfName} userId={userId}/>
+
+                   {!data?.isFree && (
+                   <SchedulePurchaseBTN data={data} selfEmail={selfEmail} selfName={selfName} userId={userId}/>
+                )}
+               
 
                 </div>
                 <div className="flex gap-2">
@@ -276,21 +280,34 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                        
 
                         <div className="flex gap-3 items-center">
-                          <Link href={`${data.user?.instagram}`}>
-                          <Button variant={'outline'} size={'icon'} className=" shadow-black shadow-md ">
-                            <Instagram className=" size-6  text-white"/>
-                          </Button>
-                          </Link>
-                          <Link href={`${data.user?.youtube}`}>
-                          <Button variant={'outline'} size={'icon'} className=" shadow-black shadow-md ">
-                            <YoutubeIcon className=" size-6  text-white"/>
-                          </Button>
-                          </Link>
-                          <Link href={`${data.user?.twitter}`}>
-                          <Button variant={'outline'} size={'icon'} className=" shadow-black shadow-md ">
-                            <Twitter className=" size-6  text-white"/>
-                          </Button>
-                          </Link>
+                          {
+                            data.user?.youtube && (
+                              <Link href={`${data.user?.youtube}`}>
+                                <Button variant={'outline'} size={'icon'} className=" shadow-black shadow-md ">
+                                  <YoutubeIcon className=" size-6  text-white"/>
+                                </Button>
+                              </Link>
+                            )
+                          }
+                          {
+                            data.user?.twitter && (
+                              <Link href={`${data.user?.twitter}`}>
+                                <Button variant={'outline'} size={'icon'} className=" shadow-black shadow-md ">
+                                  <Twitter className=" size-6  text-white"/>
+                                </Button>
+                              </Link>
+                            )
+                          }
+                          {
+                            data.user?.instagram && (
+                              <Link href={`${data.user?.instagram}`}>
+                                <Button variant={'outline'} size={'icon'} className=" shadow-black shadow-md ">
+                                  <Instagram className=" size-6  text-white"/>
+                                </Button>
+                              </Link>
+                            )
+                          
+                          }
                      
                         </div>
                       </div>

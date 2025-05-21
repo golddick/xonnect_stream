@@ -17,23 +17,22 @@ const ContactForm = () => {
         <div className="bg-white rounded-xl shadow-lg overflow-hidden w-full justify-center flex items-center ">
           <div className="flex  items-start w-full md:w-[50%] mx-auto py-8  justify-between px-4  md:gap-12">
 
-            <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/xonnect.hq" target="_blank" rel="noopener noreferrer">
               <InstagramIcon className='size-8 rounded-lg cursor-pointer shadow-black shadow-md p-1' />
             </a>
 
-            <a href="https://www.facebook.com/yourprofile" target="_blank" rel="noopener noreferrer">
-              <FacebookIcon className='size-8 rounded-lg cursor-pointer shadow-black shadow-md p-1' />
-            </a>
-
-            <a href="https://wa.me/+2348065591354" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/+2347050998742" target="_blank" rel="noopener noreferrer">
               <BsWhatsapp className='size-8 rounded-lg cursor-pointer shadow-black shadow-md p-1' />
             </a>
+            <a href="https://www.youtube.com/channel/UCvml8bzO0XwYoTesaj0ismw" target="_blank" rel="noopener noreferrer">
+              <YoutubeIcon className='size-8 rounded-lg cursor-pointer shadow-black shadow-md p-1' />
+            </a>
 
-            <a href="mailto:hrxonnet@gmail.com" target="_blank" rel="noopener noreferrer">
+            <a href="mailto:support@xonnect.net" target="_blank" rel="noopener noreferrer">
               <Mail className='size-8 rounded-lg cursor-pointer shadow-black shadow-md p-1' />
             </a>
 
-            <a href="tel:+2348065591354" target="_blank" rel="noopener noreferrer">
+            <a href="tel:+2347050998742" target="_blank" rel="noopener noreferrer">
               <PhoneCall className='size-8 rounded-lg cursor-pointer shadow-black shadow-md p-1' />
             </a>
 

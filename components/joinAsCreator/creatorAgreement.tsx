@@ -3,9 +3,46 @@
 import React, { useEffect, useState } from "react"
 import { useUser } from '@clerk/nextjs'
 import { toast } from "sonner"
-import { Shield } from "lucide-react"
+import { jsPDF } from "jspdf"
+import { Shield, Download } from "lucide-react"
 import CreatorBTN from "./CreatorBTN"
-import { getUserCreatorAgreementStatus, updateCreatorTerms,  } from "@/actions/user"
+import { getUserCreatorAgreementStatus, updateCreatorTerms } from "@/actions/user"
+
+const agreementSections = [
+  {
+    title: "1. Revenue Sharing",
+    content: "Creators receive 70% of revenue from content. Xonnect retains 30% for platform upkeep."
+  },
+  {
+    title: "2. Streaming Events",
+    content: `Exclusive concerts or events: revenue split is managed off-platform and settled within 48 hours.
+Regular streaming: split agreement will be updated once this feature is officially supported.`
+  },
+  {
+    title: "3. Payment Model",
+    content: "Payment is based on a 'pay what you want, when you want' model. No monthly threshold."
+  },
+  {
+    title: "4. Content Guidelines",
+    content: "Content must follow community guidelines. Violations may result in removal or termination."
+  },
+  {
+    title: "5. Intellectual Property",
+    content: "You retain IP rights. By uploading, you allow Xonnect to display and monetize your content."
+  },
+  {
+    title: "6. Termination",
+    content: "Either party may terminate with 30 days’ notice."
+  },
+  {
+    title: "7. Modifications",
+    content: "Agreement terms may change. Continued use signifies acceptance of changes."
+  },
+  {
+    title: "8. Dispute Resolution",
+    content: "Disputes resolved via arbitration under Xonnect's jurisdiction."
+  }
+]
 
 export const CreatorAgreement = () => {
   const { user } = useUser()
@@ -32,7 +69,6 @@ export const CreatorAgreement = () => {
 
   const handleCheckbox = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked
-
     if (!user) {
       toast.error("You must log in to accept the agreement.")
       return
@@ -61,91 +97,85 @@ export const CreatorAgreement = () => {
     }
   }
 
+  const generatePDF = () => {
+    const doc = new jsPDF()
+    doc.setFont("Helvetica", "normal")
+    doc.setFontSize(12)
+
+    doc.text(`Xonnect Creator Agreement`, 10, 20)
+    doc.text(`Creator: ${user?.fullName || 'Unnamed User'}`, 10, 30)
+
+    let y = 40
+    agreementSections.forEach(section => {
+      doc.setFont("Helvetica", "bold")
+      doc.text(section.title, 10, y)
+      y += 7
+      doc.setFont("Helvetica", "normal")
+      const lines = doc.splitTextToSize(section.content, 180)
+      doc.text(lines, 10, y)
+      y += lines.length * 7 + 5
+    })
+
+    doc.save(`Xonnect-Creator-Agreement-${user?.fullName || 'User'}.pdf`)
+  }
+
   return (
     <div id="xonnect">
-      <div className="full text-black bg-white rounded-lg shadow-lg overflow-hidden font-sans">
+      <div className="text-black bg-white rounded-lg shadow-lg overflow-hidden font-sans ">
         <div className="p-8">
           <h1 className="text-3xl font-bold text-red-700 mb-6">Xonnect Creator Agreement</h1>
+          <p className="mb-4 text-gray-700">Creator: <span className="font-semibold">{user?.fullName || 'Unnamed User'}</span></p>
 
-          <div className="bg-gray-50  p-2  rounded-lg shadow-inner mb-8 max-h-[600px] overflow-y-auto text-black">
-          <div className="space-y-4 text-gray-700">
-                            <p>
-                                Welcome to Xonnect&apos;s Creator Program. This agreement outlines the terms of our
-                                partnership and revenue sharing model.
-                            </p>
-
-                            <h3 className="text-lg font-medium text-primary-500 mt-6">1. Revenue Sharing</h3>
-                            <p>
-                                As a Xonnect creator, you will receive 70% of all revenue generated from your content.
-                                Xonnect will retain 30% to cover platform costs, marketing, and development.
-                            </p>
-
-                            <h3 className="text-lg font-medium text-primary-500 mt-4">2. Payment Schedule</h3>
-                            <p>
-                                Payments will be processed on a monthly basis for all earnings that exceed $50. If your
-                                earnings are below this threshold, they will be rolled over to the following month.
-                            </p>
-
-                            <h3 className="text-lg font-medium text-primary-500 mt-4">3. Content Guidelines</h3>
-                            <p>
-                                All content must comply with our community guidelines. Content that violates these
-                                guidelines may be removed, and repeated violations may result in termination of this
-                                agreement.
-                            </p>
-
-                            <h3 className="text-lg font-medium text-primary-500 mt-4">4. Intellectual Property</h3>
-                            <p>
-                                You retain all intellectual property rights to your content. By uploading content to
-                                Xonnect, you grant us a non-exclusive license to display, promote, and monetize your
-                                content on our platform.
-                            </p>
-
-                            <h3 className="text-lg font-medium text-primary-500 mt-4">5. Term and Termination</h3>
-                            <p>
-                                This agreement remains in effect until terminated by either party. Either party may
-                                terminate this agreement with 30 days written notice.
-                            </p>
-
-                            <h3 className="text-lg font-medium text-primary-500 mt-4">6. Modifications</h3>
-                            <p>
-                                Xonnect reserves the right to modify this agreement at any time. You will be notified of
-                                any changes, and continued use of the platform constitutes acceptance of the modified
-                                terms.
-                            </p>
-
-                            <h3 className="text-lg font-medium text-primary-500 mt-4">7. Dispute Resolution</h3>
-                            <p>
-                                Any disputes arising from this agreement will be resolved through arbitration in
-                                accordance with the laws of the jurisdiction where Xonnect is headquartered.
-                            </p>
-                        </div>
+          <div className="bg-gray-50 p-4 rounded-lg shadow-inner mb-8 h-full lg:max-h-[600px] overflow-y-auto text-black space-y-6 text-gray-700">
+            {agreementSections.map((section, i) => (
+              <div key={i}>
+                <h3 className="text-lg font-medium text-primary-500">{section.title}</h3>
+                {section.title.includes("Streaming Events") && (
+                  <p className="text-red-700 font-semibold">{section.content.split('\n')[0]}</p>
+                )}
+                {section.title.includes("Streaming Events") && (
+                  <p className="text-blue-600 font-semibold">{section.content.split('\n')[1]}</p>
+                )}
+                {!section.title.includes("Streaming Events") && (
+                  <p>{section.content}</p>
+                )}
+              </div>
+            ))}
           </div>
 
           <div className="flex items-start mb-8">
-            <div className="flex items-center h-6">
-              <input
-                id="agreement-checkbox"
-                type="checkbox"
-                className="w-5 h-5 text-primary-600 border-gray-300 rounded focus:ring-primary-500 transition-all cursor-pointer"
-                checked={agreed}
-                onChange={handleCheckbox}
-                disabled={hasAccepted || loading}
-              />
-            </div>
+            <input
+              id="agreement-checkbox"
+              type="checkbox"
+              className="w-5 h-5 text-primary-600 border-gray-300 rounded focus:ring-primary-500 cursor-pointer"
+              checked={agreed}
+              onChange={handleCheckbox}
+              disabled={hasAccepted || loading}
+            />
             <label
               htmlFor="agreement-checkbox"
-              className="ml-3 text-gray-700 cursor-pointer hover:text-primary-600 transition-colors"
+              className="ml-3 text-gray-700 cursor-pointer hover:text-primary-600"
             >
               I have read and agree to the Xonnect Creator Agreement.
             </label>
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-between items-center">
             <CreatorBTN disabled={!hasAccepted || !user} />
+
+            {hasAccepted && (
+              <button
+                onClick={generatePDF}
+                className="ml-4 inline-flex items-center gap-2 px-4 py-2 text-sm bg-green-600 text-white rounded hover:bg-green-700 transition"
+              >
+                <Download className="w-4 h-4" />
+                Download PDF
+              </button>
+            )}
           </div>
         </div>
 
-        <div className="bg-gray-50 p-6 border-t border-gray-200">
+        {/* <div className="bg-gray-50 p-6 border-t border-gray-200">
           <div className="flex items-center justify-between">
             <div className="flex items-center text-sm text-gray-500">
               <Shield className="mr-2 size-6" />
@@ -157,10 +187,8 @@ export const CreatorAgreement = () => {
               </a>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
 }
-
-

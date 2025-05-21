@@ -1,9 +1,5 @@
 
 
-
-
-
-
 import React from "react"
 import BannerHeader from "./BannerHeader"
 import { ArrowDownIcon } from "lucide-react"
@@ -12,13 +8,9 @@ export const PlatfromFAQ = () => {
     return (
         <div id="xonnect">
             <div className="w-full min-h-screen bg-gray-50 text-black">
-    
-
-                <section className="py-16 px-4 bg-white">
-                    <div className="container mx-auto">
-                      
 						<BannerHeader H1='Our FAQ' Header='PLATFROM FAQ' Desc='Find answers to common questions about Xonnect streaming services and features. If you can not find what you are looking for, please contact our support team.'/>
-     
+                <section className="py-16 px-4 bg-white gap-4">
+                    <div className=" w-full md:container mx-auto">
 
                         <div className="max-w-4xl mx-auto mb-16">
                             <div className="bg-red-50 rounded-xl p-6 mb-8 border border-red-100">
@@ -106,7 +98,7 @@ export const PlatfromFAQ = () => {
                                                     <li>Pay-per-view live streams and events</li>
                                                     <li>Digital merchandise and exclusive content sales</li>
                                                     <li>Sponsored content opportunities through our partner network</li>
-                                                    <li>Tips and donations from viewers during streams</li>
+                                                    <li>Virtual Gifting and donations from viewers during streams</li>
                                                     <li>Revenue sharing from platform advertisements</li>
                                                 </ul>
                                             </p>
@@ -114,21 +106,20 @@ export const PlatfromFAQ = () => {
                                     </details>
 
                                     <details className="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md">
-                                        <summary className="cursor-pointer p-4 flex items-center justify-between font-medium">
-                                            What is the revenue split for creators?
-											<ArrowDownIcon className="material-symbols-outlined text-red-600 transform transition-transform duration-200"/>
-                                        </summary>
-                                        <div className="p-4 pt-0 text-gray-600 border-t">
-                                            <p>
-                                                Xonnect offers one of the most competitive revenue splits in the
-                                                industry. Standard creators receive 70% of subscription and ticket
-                                                revenue, while Xonnect retains 30% to cover platform costs. Top-tier
-                                                creators may qualify for our premium program with a 80/20 split.
-                                                Merchandise sales have a 85/15 split in favor of creators. Detailed
-                                                revenue information will be available in your creator dashboard.
-                                            </p>
-                                        </div>
+                                    <summary className="cursor-pointer p-4 flex items-center justify-between font-medium">
+                                        What is the revenue split for creators?
+                                        <ArrowDownIcon className="material-symbols-outlined text-red-600 transform transition-transform duration-200" />
+                                    </summary>
+                                    <div className="p-4 pt-0 text-gray-600 border-t">
+                                        <p>
+                                        Xonnect offers a transparent and competitive revenue split for creators. Typically, creators receive 70% of the revenue generated from tickets and other content, while Xonnect retains 30% for platform maintenance. 
+                                        </p>
+                                        <p>
+                                        For special events like concerts or unique streams, the revenue split will be determined and agreed upon outside the platform. Please reach out to us directly for more information and to discuss the specifics of revenue sharing for such events.
+                                        </p>
+                                    </div>
                                     </details>
+
 
                                     {/* <details className="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md">
                                         <summary className="cursor-pointer p-4 flex items-center justify-between font-medium">
@@ -484,24 +475,24 @@ export const PlatfromFAQ = () => {
                             </div>
                         </div>
 
-                        <div className="max-w-2xl mx-auto text-center bg-red-600 text-white p-8 rounded-xl shadow-lg">
+                        <div className="max-w-2xl mx-auto text-center bg-red-700 text-white p-8 rounded-xl shadow-lg">
                             <h2 className="text-2xl font-bold mb-4">Still have questions?</h2>
                             <p className="mb-6">
                                 Our support team is ready to help you with any questions not covered in our FAQ.
                             </p>
                             <div className="flex flex-col sm:flex-row justify-center gap-4">
                                 <a
-                                    href="#"
-                                    className="bg-white text-red-600 hover:bg-gray-100 px-6 py-3 rounded-md transition-all duration-200 hover:scale-105 font-medium"
+                                    href="/contact-us"
+                                    className="bg-white text-red-700 hover:bg-gray-100 px-6 py-3 rounded-md transition-all duration-200 hover:scale-105 font-medium"
                                 >
                                     Contact Support
                                 </a>
-                                <a
+                                {/* <a
                                     href="#"
                                     className="bg-transparent border-2 border-white hover:bg-white/10 px-6 py-3 rounded-md transition-all duration-200 hover:scale-105 font-medium"
                                 >
                                     Browse Help Center
-                                </a>
+                                </a> */}
                             </div>
                         </div>
                     </div>
