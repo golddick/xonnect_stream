@@ -13,7 +13,10 @@ export async function HomeNavActions() {
   const user = await currentUser();
   const userInfo = user?.username ? await getUserByUsername(user.username) : null;
 
+  console.log("User:", user);
   console.log("User Info:", userInfo);
+
+
 
 
 

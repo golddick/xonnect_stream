@@ -21,7 +21,7 @@ export async function Actions() {
         <div className="flex items-center gap-x-4">
           <Button
             size="sm"
-            variant="ghost"
+            variant="ghost" 
             className="text-muted-foreground hover:text-primary"
             asChild
           >

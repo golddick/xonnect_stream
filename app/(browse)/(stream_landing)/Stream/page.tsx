@@ -3,35 +3,34 @@ import StreamExplore from '../Explore';
 import { checkUser } from '@/lib/user-service';
 import { currentUser } from '@clerk/nextjs/server';
 
-export const metadata = {
-  title: 'Explore',
-  description: 'Discover streams and content on the platform',
-};
+
 
 const Page = async () => {
   const sessionUser = await currentUser(); 
 
-  if (!sessionUser) {
-    redirect('/sign-in'); 
-  }
+  console.log(sessionUser, 'sessionUser');
 
-  const user = await checkUser({ externalUserId: sessionUser.id });
+  // if (!sessionUser) {
+  //   redirect('/sign-in'); 
+  // }
 
-  if (process.env.NODE_ENV === 'development') {
-    console.log(user, 'user user');
-  }
+  // const user = await checkUser({ externalUserId: sessionUser.id });
 
-  if (!user) {
-    redirect('/sign-up');
-  }
+  // if (process.env.NODE_ENV === 'development') {
+  //   console.log(user, 'user user');
+  // }
 
-  if (!user.acceptPlatformTerms) {
-    redirect('/legal?showToast=true');
-  }
+  // if (!user) {
+  //   redirect('/sign-up');
+  // }
 
-  if (!user.acceptCreatorTerms) {
-    redirect('/legal/creator?showToast=true');
-  }
+  // if (!user.acceptPlatformTerms) {
+  //   redirect('/legal?showToast=true');
+  // }
+
+  // if (!user.acceptCreatorTerms) {
+  //   redirect('/legal/creator?showToast=true');
+  // }
 
   return <StreamExplore />;
 };
