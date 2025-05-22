@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 import { resetIngresses } from "@/actions/ingress";
 
 export async function POST(req: Request) {
-  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET!;
+  const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 
   if (!WEBHOOK_SECRET) {
     throw new Error(
@@ -57,21 +57,21 @@ export async function POST(req: Request) {
 if (eventType === "user.created") {
   const { id, email_addresses, username, image_url } = evt.data;
 
-  const fallbackUsername =
-    username ||
-    email_addresses?.[0]?.email_address?.split("@")[0] ||
-    `user-${id.slice(-5)}`;
+  // const fallbackUsername =
+  //   username ||
+  //   email_addresses?.[0]?.email_address?.split("@")[0] ||
+  //   `user-${id.slice(-5)}`;
 
  
   await db.user.create({
     data: {
       externalUserId: id,
-      username: payload.data.username || fallbackUsername,
+      username: payload.data.username || username,
       imageUrl: image_url,
       email: email_addresses[0].email_address,
       stream: {
         create: {
-          name: `${payload.data.username || fallbackUsername}'s stream`,
+          name: `${payload.data.username || username}'s stream`,
         },
       },
     },

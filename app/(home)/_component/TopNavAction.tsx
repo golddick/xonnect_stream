@@ -21,8 +21,13 @@ export async function HomeNavActions() {
 
 
   const adminEMail = 'golddick60@gmail.com'
-  const Creator = user?.emailAddresses[0].emailAddress === adminEMail || userInfo?.role === 'CREATOR' || userInfo?.role === 'ADMIN'
-  // const Creator = userInfo?.role === 'CREATOR' || 'ADMIN'
+ 
+  const Creator = 
+  userInfo?.role === 'CREATOR' ||
+  userInfo?.role === 'ADMIN' ||
+  user?.emailAddresses?.[0]?.emailAddress === adminEMail;
+
+  console.log('Creator:', Creator);
 
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
