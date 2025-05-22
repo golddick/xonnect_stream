@@ -122,7 +122,7 @@ const legalSections = [
     ]
   }
 ]
-
+ 
 
 export const Legal = () => {
   const { user } = useUser()

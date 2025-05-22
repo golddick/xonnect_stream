@@ -62,15 +62,16 @@ if (eventType === "user.created") {
     email_addresses?.[0]?.email_address?.split("@")[0] ||
     `user-${id.slice(-5)}`;
 
+ 
   await db.user.create({
     data: {
       externalUserId: id,
-      username: fallbackUsername,
+      username: payload.data.username || fallbackUsername,
       imageUrl: image_url,
       email: email_addresses[0].email_address,
       stream: {
         create: {
-          name: `${fallbackUsername}'s stream`,
+          name: `${payload.data.username || fallbackUsername}'s stream`,
         },
       },
     },

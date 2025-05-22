@@ -1,29 +1,12 @@
-
-
-// import React from 'react'
-// import XonnectExplorePage from '../StreamExplore'
-// import StreamExplore from '../Explore'
-
-// const page = () => {
-//   return (
-//     <>
-//       {/* <XonnectExplorePage/> */}
-//       <StreamExplore/>
-//     </>
-//   )
-// }
-
-// export default page
-
-
-
-
-// app/yourPagePath/page.tsx
 import { redirect } from 'next/navigation';
 import StreamExplore from '../Explore'; 
 import { checkUser } from '@/lib/user-service';
 import { currentUser } from '@clerk/nextjs/server';
 
+export const metadata = {
+  title: 'Explore',
+  description: 'Discover streams and content on the platform',
+};
 
 const Page = async () => {
   const sessionUser = await currentUser(); 
@@ -34,24 +17,23 @@ const Page = async () => {
 
   const user = await checkUser({ externalUserId: sessionUser.id });
 
-  console.log(user, 'user user')
+  if (process.env.NODE_ENV === 'development') {
+    console.log(user, 'user user');
+  }
 
   if (!user) {
     redirect('/sign-up');
   }
 
-  if (!user.acceptPlatformTerms  ) {
-    redirect('/legal?showToast=true'); // pass param
-  }
-  if (!user.acceptCreatorTerms  ) {
-    redirect('/legal/creator?showToast=true'); // pass param
+  if (!user.acceptPlatformTerms) {
+    redirect('/legal?showToast=true');
   }
 
-  return (
-    <>
-      <StreamExplore />
-    </>
-  );
+  if (!user.acceptCreatorTerms) {
+    redirect('/legal/creator?showToast=true');
+  }
+
+  return <StreamExplore />;
 };
 
 export default Page;
