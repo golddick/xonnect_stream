@@ -57,16 +57,21 @@ export async function POST(req: Request) {
 if (eventType === "user.created") {
   const { id, email_addresses, username, image_url } = evt.data;
 
+  const fallbackUsername =
+    username ||
+    email_addresses?.[0]?.email_address?.split("@")[0] ||
+    `user-${id.slice(-5)}`;
+
  
   await db.user.create({
     data: {
       externalUserId: id,
-      username: payload.data.username,
+      username: payload.data.username || fallbackUsername,
       imageUrl: image_url,
       email: email_addresses[0].email_address,
       stream: {
         create: {
-          name: `${payload.data.username }'s stream`,
+          name: `${payload.data.username || fallbackUsername}'s stream`,
         },
       },
     },
