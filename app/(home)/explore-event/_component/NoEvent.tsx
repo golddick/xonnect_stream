@@ -9,9 +9,9 @@ export default function NoEventsFound({ type }: NoEventsFoundProps) {
     <div className="flex flex-col items-center justify-center w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <div className="w-20 h-20 mb-4 rounded-full bg-gray-50 flex items-center justify-center">
         {type === "upcoming" ? (
-          <Calendar className="w-10 h-10 text-red-500" />
+          <Calendar className="w-10 h-10 text-red-700" />
         ) : (
-          <Clock className="w-10 h-10 text-red-500" />
+          <Clock className="w-10 h-10 text-red-700" />
         )}
       </div>
 

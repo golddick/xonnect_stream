@@ -44,31 +44,76 @@ export function Video({
 
    // Function to find the schedule closest to the current time
 
-  const getClosestSchedule = (schedules: (Schedule & { user: User })[]) => {
-    if (schedules.length === 0) return null;
+  // const getClosestSchedule = (schedules: (Schedule & { user: User })[]) => {
+  //   if (schedules.length === 0) return null;
   
-    // Get the current time
-    const currentTime = new Date();
+  //   // Get the current time
+  //   const currentTime = new Date();
   
-    // Filter out past schedules (only keep upcoming schedules)
-    const upcomingSchedules = schedules.filter(
-      (schedule) => new Date(schedule.eventDateTime).getTime() > currentTime.getTime()
-    );
+  //   // Filter out past schedules (only keep upcoming schedules)
+  //   const upcomingSchedules = schedules.filter(
+  //     (schedule) => new Date(schedule.eventDateTime).getTime() > currentTime.getTime()
+  //   );
   
-    // If no upcoming schedules exist, return null
-    if (upcomingSchedules.length === 0) return null;
+  //   // If no upcoming schedules exist, return null
+  //   if (upcomingSchedules.length === 0) return null;
   
-    // Sort upcoming schedules by the start time (ascending)
-    upcomingSchedules.sort(
-      (a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime()
-    );
+  //   // Sort upcoming schedules by the start time (ascending)
+  //   upcomingSchedules.sort(
+  //     (a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime()
+  //   );
   
-    // The first schedule in the sorted list is the closest upcoming schedule
-    return upcomingSchedules[0];
-  };
+  //   // The first schedule in the sorted list is the closest upcoming schedule
+  //   return upcomingSchedules[0];
+  // };
+
+
+
+  const getActiveOrUpcomingSchedule = (schedules: (Schedule & { user: User })[]) => {
+  if (schedules.length === 0) return null;
+
+  const now = new Date();
+
+  const isToday = (date: Date) =>
+    date.getFullYear() === now.getFullYear() &&
+    date.getMonth() === now.getMonth() &&
+    date.getDate() === now.getDate();
+
+  // Filter schedules for today
+  const todaysSchedules = schedules.filter(sch => isToday(new Date(sch.eventDateTime)));
+
+  if (todaysSchedules.length === 0) return null;
+
+  // 1. Find live streams (started and isLive === true)
+  const liveStreams = todaysSchedules.filter(
+    sch => new Date(sch.eventDateTime).getTime() <= now.getTime() && sch.isLive
+  );
+
+  if (liveStreams.length > 0) {
+    // If multiple live, pick the one started most recently
+    liveStreams.sort((a, b) => new Date(b.eventDateTime).getTime() - new Date(a.eventDateTime).getTime());
+    return liveStreams[0];
+  }
+
+  // 2. If no live streams, find upcoming ones (not started yet)
+  const upcomingStreams = todaysSchedules.filter(
+    sch => new Date(sch.eventDateTime).getTime() > now.getTime()
+  );
+
+  if (upcomingStreams.length > 0) {
+    // Pick the earliest upcoming
+    upcomingStreams.sort((a, b) => new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime());
+    return upcomingStreams[0];
+  }
+
+  // 3. If no live or upcoming streams, return null
+  return null;
+};
+
+
 
   // Get the closest schedule from the array
-  const closestSchedule = getClosestSchedule(schedule);
+  const closestSchedule = getActiveOrUpcomingSchedule(schedule);
 
 
 

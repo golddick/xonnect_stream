@@ -15,7 +15,7 @@ export default function StreamCountdown({ streamDate, isLive }: StreamCountdownP
     seconds: 0,
   })
 
-  const [eventOver, setEventOver] = useState(false)
+  const [hasStarted, setHasStarted] = useState(false)
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -24,9 +24,7 @@ export default function StreamCountdown({ streamDate, isLive }: StreamCountdownP
       const difference = streamTime - now
 
       if (difference <= 0) {
-        if (!isLive) {
-          setEventOver(true)
-        }
+        setHasStarted(true)
         return {
           days: 0,
           hours: 0,
@@ -46,14 +44,14 @@ export default function StreamCountdown({ streamDate, isLive }: StreamCountdownP
     // Initial calculation
     setTimeLeft(calculateTimeLeft())
 
-    // Update every second
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft())
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [streamDate, isLive])
+  }, [streamDate])
 
+  // === DISPLAY LOGIC ===
   if (isLive) {
     return (
       <div className="bg-red-800 text-white p-3 rounded-lg text-center">
@@ -62,14 +60,15 @@ export default function StreamCountdown({ streamDate, isLive }: StreamCountdownP
     )
   }
 
-  if (eventOver) {
+  if (hasStarted && !isLive) {
     return (
       <div className="bg-black animate-pulse border-b border-r text-white p-3 rounded-lg text-center">
-        <p className="font-light text-red-700">Stream is over watch higlight</p>
+        <p className="font-light text-red-700">Stream is over. Watch highlight</p>
       </div>
     )
   }
 
+  // Not started yet
   return (
     <div className="bg-gray-800 p-3 rounded-lg">
       <p className="text-gray-300 text-sm mb-2 text-center">Stream starts in</p>

@@ -167,9 +167,11 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                 <StreamCountdown streamDate={data.eventDateTime.toISOString()}  isLive={data.isLive}/>
 
                 <div className=" flex w-full items-center justify-between gap-6">
-                  <Link href={`/channel/${data.user?.username}`} className=" w-full">
-                    <Button size={'lg'} variant={'ghost'} className="w-full text-white">Watch</Button>
-                  </Link>
+                  {data.isLive && (
+                    <Link href={`/channel/${data.user?.username}`} className=" w-full">
+                      <Button size={'lg'} variant={'ghost'} className="w-full text-white">Watch</Button>
+                    </Link>
+                  )}
 
                    {!data?.isFree && (
                    <SchedulePurchaseBTN data={data} selfEmail={selfEmail} selfName={selfName} userId={userId}/>
