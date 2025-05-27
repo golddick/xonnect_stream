@@ -10,6 +10,8 @@ import { ThemeToggle } from "@/components/ThemeToggleBTN";
 export async function Actions() {
   const user = await currentUser();
 
+  console.log("User:", user);
+
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
       {!user && (
@@ -25,7 +27,7 @@ export async function Actions() {
             className="text-muted-foreground hover:text-primary"
             asChild
           >
-            <Link href={`/u/${user.username}`}>
+            <Link href={`/u/${user?.username}`}>
               <Clapperboard className="h-5 w-5 lg:mr-2" />
               <span className="hidden lg:block">Dashboard</span>
             </Link>

@@ -79,7 +79,7 @@ export function SchedulePurchaseBTN({ data, selfName, selfEmail, userId }: Purch
             return;
         }
 
-        const email = selfEmail || `custom${selfName}@gmail.com`;
+        const email = selfEmail || `custom${selfName}@gmail.com`; 
         const name = selfName || 'custom name';
         const paystack = new PaystackPop();
 
@@ -88,7 +88,6 @@ export function SchedulePurchaseBTN({ data, selfName, selfEmail, userId }: Purch
             email: email,
             amount: data.amount * 100,
             currency: "NGN",
-            channels: ['card', 'ussd', 'qr', 'mobile_money', 'bank_transfer'],
             metadata: {
                 custom_fields: [
                     { display_name: "User Name", variable_name: "user_name", value: name },

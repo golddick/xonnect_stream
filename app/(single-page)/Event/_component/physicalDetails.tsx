@@ -49,9 +49,6 @@ const PhysicalDetails: React.FC<PhysicalDetailsProps> = ({
   const [currentReference, setCurrentReference] = useState<string | null>(null)
 
 
-  console.log(slotsLeft, 'left')
-  console.log(availableSlots, 'ava')
-  console.log(remainingSlots, 'remain')
 
   // 🔁 Retry logic for verifying payment
   const verifyPaymentWithRetry = async (reference: string, attempts = MAX_RETRIES) => {
