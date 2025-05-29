@@ -21,7 +21,7 @@ export const updatePartnerStatus = async ({
   status,
 }: {
   partnerId: string
-  status: 'APPROVED' | 'REJECTED'
+  status: 'APPROVED' | 'REJECTED' | 'PENDING'
 }) => {
   try {
     const updated = await db.partner.update({

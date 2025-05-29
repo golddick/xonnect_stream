@@ -27,7 +27,7 @@ export default function Home() {
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4  md:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">The Complete <span className=' text-red-700'>X</span>onnect Ecosystem</h2>
+            <h2 className="text-4xl font-bold mb-4">The Complete <span className=' text-red-700'>x</span>onnect Ecosystem</h2>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
               Xonnect brings together everything creators need to share, engage, and monetize their content across multiple formats.
             </p>

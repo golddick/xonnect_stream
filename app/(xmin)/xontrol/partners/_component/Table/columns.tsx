@@ -106,7 +106,7 @@ export const PartnerColumns : ColumnDef<Partner>[] = [
       return (
 
         <div className="flex items-center gap-x-2 text-sm font-medium capitalize">
-       <p>{site || 'www.xonnect.co'}</p>
+       <p>{site }</p>
         </div>
 
       );

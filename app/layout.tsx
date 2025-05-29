@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "XONNECT",
+    template: "xonnect",
     default: "xonnect streaming",
   },
   icons: {

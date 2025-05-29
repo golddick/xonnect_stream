@@ -43,6 +43,21 @@ export const ourFileRouter = {
       return { fileUrl: file.url };
     }),
 
+      // partner logo uploader
+      partnerLogoUploader: uploadthing({
+    image: {
+      maxFileSize: "4MB",  // Adjust size limit as needed
+      maxFileCount: 1,
+    },
+  })
+    .middleware(async () => {
+      const self = await getSelf();
+      return { user: self };
+    })
+    .onUploadComplete(async ({ file, metadata }) => {
+      return { fileUrl: file.url };
+    }),
+
 
     //file uploader
     ScheduleFileUploader: uploadthing({

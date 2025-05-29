@@ -359,31 +359,6 @@ const ScheduleForm = () => {
               )}
             />
 
-            {/* Thumbnail Upload */}
-            {/* <div className="flex flex-col items-center justify-center w-full bg-black p-3 rounded-sm">
-              {!form.getValues('thumbnailImage') ? (
-                <UploadDropzone
-                  endpoint="scheduleUploader"
-                  appearance={{
-                    label: { color: "#FFFFFF" },
-                    allowedContent: { color: "#FFFFFF" },
-                  }}
-                  onClientUploadComplete={(res) => {
-                    if (res?.[0]?.url) {
-                      form.setValue("thumbnailImage", res[0]?.url)
-                    }
-                  }}
-                />
-              ) : (
-                <Image
-                  src={form.getValues("thumbnailImage") || ""}
-                  width={200}
-                  height={100}
-                  alt="Event Image"
-                  className=""
-                />
-              )}
-            </div> */}
 
             {/* Thumbnail Upload */}
               <div className="flex flex-col items-center justify-center w-full bg-black p-3 rounded-sm gap-4">

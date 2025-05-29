@@ -16,7 +16,7 @@ const Team = () => {
             {[
               {
                 name: "Gold Dick",
-                title: "Founder",
+                title: "Founder & Developer",
                 bio: "Visionary entrepreneur focused on empowering creators through innovative tech and direct audience connection.",
                 image: "/assets/founder.jpeg"
               },

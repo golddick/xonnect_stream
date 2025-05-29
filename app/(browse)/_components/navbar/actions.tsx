@@ -10,8 +10,6 @@ import { ThemeToggle } from "@/components/ThemeToggleBTN";
 export async function Actions() {
   const user = await currentUser();
 
-  console.log("User:", user);
-
   return (
     <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
       {!user && (
