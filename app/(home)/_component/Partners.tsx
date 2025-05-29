@@ -21,7 +21,7 @@ export const Partners = () => {
                             <h2 className="text-2xl font-bold mb-3">Become Our Partner</h2>
                             <p className="max-w-xl">
                                 Join our partner network and unlock new opportunities for growth and collaboration. We
-                                believe in building strong, mutually beneficial relationships with our partners.
+                                believe in building strong, mutually beneficial relationships with our partners....
                             </p>
                         </div>
                        <AddPartner/>
