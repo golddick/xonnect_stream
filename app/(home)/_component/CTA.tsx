@@ -11,10 +11,10 @@ const CTA = async ({bgColor}:Props) => {
 
   return (
     <section className={cn("bg-black text-white rounded-lg p-12 text-center", bgColor )}>
-          <h2 className="text-3xl font-bold mb-4">Join <span className='text-red-700'>X</span>ONNECT Community</h2>
+          <h2 className="text-3xl font-bold mb-4">Join <span className='text-red-700'>x</span>onnect Community</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Whether you&apos;re a creator looking to connect with your audience or a fan seeking unique experiences,
-            <span className='text-red-700'>X</span>onnect is the platform for you.
+            <span className='text-red-700'>x</span>onnect is the platform for you.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <JoinASCreatorBTN 

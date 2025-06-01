@@ -13,10 +13,10 @@ export default function SearchPage({
   if (!searchParams.term) redirect("/");
 
   return (
-    <div className="h-full p-8 max-w-screen-2xl mx-auto">
+    <div className="h-full p-8 w-[300px] max-w-screen-2xl mx-auto ">
       <Suspense fallback={<ResultsSkeleton />}>
         <Results term={searchParams.term} />
       </Suspense>
-    </div>
+    </div> 
   );
 }

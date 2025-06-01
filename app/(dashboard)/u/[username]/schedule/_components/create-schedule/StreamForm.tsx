@@ -189,8 +189,8 @@ const ScheduleForm = () => {
                   <FormItem className="w-full">
                     <FormLabel>Price</FormLabel>
                     <FormControl>
-                      <div className="flex items-center gap-4 p-1 bg-black rounded-md">
-                        <Image src="/assets/icons/dollar.svg" alt="dollar" width={23} height={23} />
+                      <div className="flex items-center gap-4 p-1  rounded-md">
+                        <Image src="/assets/nicon.svg" alt="n" width={23} height={23} />
                         <Input type="number" placeholder="Price" {...field} className="bg-black border-none" />
                       </div>
                     </FormControl>

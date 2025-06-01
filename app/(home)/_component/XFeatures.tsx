@@ -165,8 +165,7 @@ export const XFeatures = () => {
 
 
       {/* Hero Section */}
-      <BannerHeader H1='Everything creators and fans need' Header='PLATFORM FEATURES' Desc='Xonnect offers a comprehensive suite of tools designed to connect creators
-            with their audience through multiple channels.'/>
+      <BannerHeader H1=' Unleash Creativity. Build Your Tribe.' Header='XONNECT FEATURES' Desc='Stream live, share exclusive content, connect with fans, and sell merch effortlessly.'/>
 
       {/* Main Features Section */}
       <section className="py-16">

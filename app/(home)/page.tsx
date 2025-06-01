@@ -14,6 +14,7 @@ import HeroSection from './_component/Hero-section';
 import { GiftIcon, PenLineIcon, Star, TicketIcon } from 'lucide-react';
 import { JoinASCreatorBTN } from '@/components/joinAsCreator/JoinASCreatorBTN';
 import ContactForm from './_component/contact-form';
+import Rating from './_component/Rating';
 
 export default function Home() {
   return (
@@ -29,7 +30,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">The Complete <span className=' text-red-700'>x</span>onnect Ecosystem</h2>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-              Xonnect brings together everything creators need to share, engage, and monetize their content across multiple formats.
+              xonnect brings together everything creators need to share, engage, and monetize their content across multiple formats.
             </p>
           </div>
 
@@ -144,7 +145,7 @@ export default function Home() {
             <div className="lg:w-1/2">
               <h2 className="text-4xl font-bold mb-6">Multiple Revenue Streams</h2>
               <p className="text-lg text-gray-700 mb-8">
-                Xonnect gives you the power to monetize your creativity across various channels, from live content to merchandise.
+                xonnect gives you the power to monetize your creativity across various channels, from live content to merchandise.
               </p>
 
               <div className="space-y-6">
@@ -311,26 +312,35 @@ export default function Home() {
           <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
             <div className="lg:w-1/2 w-full">
               <div className="relative">
-                <div className="w-full h-96 lg:h-[500px] relative rounded-2xl overflow-hidden shadow-2xl">
+                <div className="w-full h-96 lg:h-[500px] relative rounded-2xl overflow-hidden shadow-2xl bg-green-500">
                   <Image 
                     src="/assets/xc.jpg" 
                     alt="Community Interaction" 
-                    layout="fill"
+                    fill
                     objectFit="cover"
+                    className=' absolute inset-0'
                   />
                 </div>
 
                 {/* Floating chat widget */}
                 <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-lg w-64">
                   <div className="flex items-center mb-3">
-                    <div className="w-8 h-8 bg-gray-200 rounded-full mr-2"></div>
-                    <div className="font-medium">xonnect24</div>
+                    <div className="w-8 h-8 bg-gray-200 rounded-full mr-2 relative  overflow-hidden">
+                        <Image 
+                    src="/assets/xsb.png" 
+                    alt="Community Interaction" 
+                    fill
+                    objectFit="cover"
+                    className=' absolute inset-0'
+                  />
+                    </div>
+                    <div className="font-medium">xonnect_hq</div>
                   </div>
                   <div className="bg-gray-100 p-2 rounded-lg text-sm mb-3">
-                    who is going to jiggy&apos;s concert?
+                     Anyone else heading to jiggy&apos;s concert tonight? 👀
                   </div>
-                  <div className="bg-red-100 p-2 rounded-lg text-sm ml-auto max-w-[80%] text-right">
-                    Im going! Will leave home by 8PM 🎉
+                  <div className="bg-red-100 p-2 rounded-lg text-sm ml-auto max-w-[70%] text-right">
+                     I&apos;ll be there! Leaving around 8 🎉
                   </div>
                 </div>
               </div>
@@ -339,7 +349,7 @@ export default function Home() {
             <div className="lg:w-1/2">
               <h2 className="text-4xl font-bold mb-6">Build Your Community</h2>
               <p className="text-lg text-gray-700 mb-8">
-                Xonnect provides all the tools you need to create a thriving community around your content, from live interactions to persistent social spaces.
+                xonnect provides all the tools you need to create a thriving community around your content, from live interactions to persistent social spaces.
               </p>
 
               <div className="space-y-5">
@@ -407,72 +417,7 @@ export default function Home() {
       <NewsLetter/>
 
       {/* What viewers say Section */}
-      <section className="bg-gray-50 py-24 text-black">
-      <div className="container mx-auto px-8">
-          <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">What Our Viewers Say</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">
-                  Join thousands of satisfied viewers who enjoy premium content on StreamVue.
-              </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-center mb-4">
-                      <div className="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                          <div className=' relative w-[40px] h-[40px] rounded-full overflow-hidden'>
-                            <Image src={'/assets/woman.jpeg'} alt='img'  fill className=' absolute object-cover'/>
-                          </div>
-                      </div>
-                      <div>
-                          <h4 className="font-bold">Sarah Johnson</h4>
-                         
-                      </div>
-                  </div>
-                  <p className="text-gray-600">
-                  &quot;The streaming quality is incredible! I&apos;ve never experienced such clear live
-                      events from the comfort of my home. Worth every penny!&quot;
-                  </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-center mb-4">
-                      <div className="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                          <div className=' relative w-[40px] h-[40px] rounded-full overflow-hidden'>
-                            <Image src={'/assets/woman.jpeg'} alt='img'  fill className=' absolute object-cover'/>
-                          </div>
-                      </div>
-                      <div>
-                          <h4 className="font-bold">Sarah Johnson</h4>
-                         
-                      </div>
-                  </div>
-                  <p className="text-gray-600">
-                  &quot;The streaming quality is incredible! I&apos;ve never experienced such clear live
-                      events from the comfort of my home. Worth every penny!&quot;
-                  </p>
-              </div>
-
-              <div className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-center mb-4">
-                      <div className="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mr-4">
-                          <div className=' relative w-[40px] h-[40px] rounded-full overflow-hidden'>
-                            <Image src={'/assets/woman.jpeg'} alt='img'  fill className=' absolute object-cover'/>
-                          </div>
-                      </div>
-                      <div>
-                          <h4 className="font-bold">Sarah Johnson</h4>
-                         
-                      </div>
-                  </div>
-                  <p className="text-gray-600">
-                  &quot;The streaming quality is incredible! I&apos;ve never experienced such clear live
-                      events from the comfort of my home. Worth every penny!&quot;
-                  </p>
-              </div>
-          </div>
-      </div>
-      </section>
+      <Rating/>
         
       {/* FAQ Section */}
       <FAQ/>

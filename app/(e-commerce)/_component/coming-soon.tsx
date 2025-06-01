@@ -239,7 +239,7 @@ export default function ComingSoon() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [launchDate]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -317,19 +317,19 @@ export default function ComingSoon() {
     <div className="min-h-screen bg-white text-gray-900">
       <div className="max-w-6xl mx-auto px-4 py-16 flex flex-col items-center justify-center text-center space-y-12">
         {/* Logo */}
-        <motion.h1 className="text-4xl md:text-5xl font-extrabold flex items-center gap-3">
+        <motion.h1 className="text-4xl md:text-5xl font-extrabold flex items-center ">
           <span className="text-red-700">X</span>ONNECT
-          <span className="bg-red-700 text-white rounded-xl px-4 py-1 text-lg">Store</span>
+          <span className="bg-red-700 text-white rounded-xl px-4 py-1 text-lg ml-2">Store</span>
         </motion.h1>
 
         {/* Headline */}
         <motion.h2 className="text-2xl md:text-4xl font-semibold">
-          xonnect Marketplace <span className="text-red-700">Coming Soon</span>
+        <span className="text-red-700">Coming Soon</span>
         </motion.h2>
 
         {/* Description */}
         <motion.p className="max-w-2xl text-gray-600 text-base md:text-lg leading-relaxed">
-          xConnect Store is revolutionizing how creators and buyers interact online.
+          xonnect Store is revolutionizing how creators and buyers interact online.
         </motion.p>
 
         {/* Countdown */}

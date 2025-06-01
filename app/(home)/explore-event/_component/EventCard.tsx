@@ -84,7 +84,7 @@ const EventCard = ({
       </div>
       
       <div className="p-5">
-        <h3 className="text-xl font-bold mb-2 group-hover:text-red-600 transition-colors duration-300">
+        <h3 className="text-xl font-bold mb-2 group-hover:text-red-600 transition-colors duration-300  text-black">
           {streamName}
         </h3>
         

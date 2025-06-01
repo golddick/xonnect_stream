@@ -17,7 +17,7 @@ export default function Pricing() {
     
 
       {/* Hero Section */}
-      <BannerHeader H1='Simple, Transparent Pricing' Header='PLATFORM PRICING' Desc="Pay only for what you enjoy — every stream, event, or experience is yours to choose."/>
+      <BannerHeader H1='Simple, Transparent Pricing' Header='XONNECT PRICING' Desc="No subscriptions, no pressure. Just pay for the content you actually want — when you want it."/>
     
       <section className="py-16 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto text-center ">
@@ -54,7 +54,7 @@ export default function Pricing() {
                 <div className="p-8">
                   <div className="flex items-center mb-4">
                     <Video className="text-red-700 mr-2" size={20} />
-                    <h3 className="text-xl font-bold text-black">Xonnect Stream</h3>
+                    <h3 className="text-xl font-bold text-black">xonnect Stream</h3>
                   </div>
                   <div className="mb-6">
                     <span className="text-xl font-bold text-black">OnDemand</span>
@@ -101,7 +101,7 @@ export default function Pricing() {
                 <div className="p-8">
                   <div className="flex items-center mb-4">
                     <Music className="text-red-700 mr-2" size={20} />
-                    <h3 className="text-xl font-bold text-white">Xonnect Music</h3>
+                    <h3 className="text-xl font-bold text-white">xonnect Music</h3>
                   </div>
                   <div className="mb-6">
                     <span className="text-3xl font-bold text-white">N0</span>
@@ -280,79 +280,78 @@ export default function Pricing() {
 
       {/* Features Section */}
       <section className="py-16 px-4 bg-gray-50">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16 text-black">Platform Features</h2>
-          <div className="grid md:grid-cols-3 gap-10">
-            <div className="text-center">
-              <div className="bg-red-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <DollarSign size={28} className="text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-black">Pay As You Go</h3>
-              <p className="text-gray-700">
-                No monthly subscription fees for streams. Viewers only pay for the content they actually want to watch.
-              </p>
+      <div className="container mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-16 text-black">Core Platform Benefits</h2>
+        <div className="grid md:grid-cols-3 gap-10">
+
+          <div className="text-center">
+            <div className="bg-red-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+              <DollarSign size={28} className="text-white" />
             </div>
-            <div className="text-center">
-              <div className="bg-red-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <PieChart size={28} className="text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-black">Fair Revenue Split</h3>
-              <p className="text-gray-700">
-                Creators earn the majority of revenue from their content with transparent payment processing.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-red-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Music size={28} className="text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-black">Exclusive Music</h3>
-              <p className="text-gray-700">
-                Access our exclusive music found only on xonnect library through a monthly subscription or purchase individual songs on demand.
-              </p>
-            </div>
+            <h3 className="text-xl font-bold mb-4 text-black">Pay on Demand</h3>
+            <p className="text-gray-700">
+              No subscriptions, no bundles just simple, per-stream access. Pay only when you watch.
+            </p>
           </div>
+
+          <div className="text-center">
+            <div className="bg-red-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Music size={28} className="text-white" />
+            </div>
+            <h3 className="text-xl font-bold mb-4 text-black">Premium Content</h3>
+            <p className="text-gray-700">
+              Get access to exclusive music, concerts, comedy shows, album drops, and listening parties all in one place.
+            </p>
+          </div>
+
+          <div className="text-center">
+            <div className="bg-red-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+              <PieChart size={28} className="text-white" />
+            </div>
+            <h3 className="text-xl font-bold mb-4 text-black">Built-in Monetization</h3>
+            <p className="text-gray-700">
+              Empowering creators to earn directly from every view, tip, and exclusive release with no middlemen.
+            </p>
+          </div>
+
         </div>
-      </section>
+      </div>
+    </section>
+
 
 
       {/* FAQ Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-black">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
-              <h3 className="text-xl font-bold mb-3 text-black">How does pay-per-stream work?</h3>
-              <p className="text-gray-700">
-                Each stream has a price set by the creator. You&apos;ll see the price before watching and only pay for streams you choose to watch. No hidden fees or subscriptions required.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
-              <h3 className="text-xl font-bold mb-3 text-black">How do creators get paid?</h3>
-              <p className="text-gray-700">
-                Creators receive 70-85% of the revenue generated from their streams and music sales. Payments are processed monthly and transferred directly to your linked payment account.
-              </p>
-            </div>
-            <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
-              <h3 className="text-xl font-bold mb-3 text-black">What&apos;s included in the Music Premium subscription?</h3>
-              <p className="text-gray-700">
-                The Music Premium subscription gives you unlimited access to our entire exclusive music library for a monthly fee. This includes early access to new releases, HD audio quality, and offline playback.
-              </p>
-            </div>
-            {/* <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
-              <h3 className="text-xl font-bold mb-3 text-black">Can I buy individual songs without a subscription?</h3>
-              <p className="text-gray-700">
-                Yes, many songs are available for individual purchase. Pay once and get lifetime access to that track, even if you don&apos;t have a subscription.
-              </p>
-            </div> */}
-            {/* <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
-              <h3 className="text-xl font-bold mb-3 text-black">Can I upgrade from Standard to Premium Creator?</h3>
-              <p className="text-gray-700">
-                Yes, you can upgrade at any time. Once you meet the eligibility requirements (based on audience size and stream frequency), the Premium Creator option will become available in your dashboard.
-              </p>
-            </div> */}
-          </div>
-        </div>
-      </section>
+  <section className="py-16 px-4 bg-gray-50">
+  <div className="container mx-auto max-w-4xl">
+    <h2 className="text-3xl font-bold text-center mb-12 text-black">Frequently Asked Questions</h2>
+    <div className="space-y-6">
+
+      <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
+        <h3 className="text-xl font-bold mb-3 text-black">How does Pay on Demand work?</h3>
+        <p className="text-gray-700">
+          Each stream is individually priced by the creator. You see the cost upfront and only pay for what you watch no subscriptions or hidden fees.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
+        <h3 className="text-xl font-bold mb-3 text-black">How do creators get paid?</h3>
+        <p className="text-gray-700">
+          For regular streams, creators receive 70% of the revenue, with the platform taking 30%. Payments are processed monthly and sent directly to creators’ accounts.
+        </p>
+      </div>
+
+      <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-md">
+        <h3 className="text-xl font-bold mb-3 text-black">How is revenue split for premium events?</h3>
+        <p className="text-gray-700">
+          Revenue for premium events is managed outside the platform through direct agreements between xonnect and the organizers, ensuring full control and flexibility.
+        </p>
+      </div>
+
+
+    </div>
+  </div>
+  </section>
+
 
       {/* <CTA bgColor='bg-red-700'/> */}
     </div>

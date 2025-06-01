@@ -23,7 +23,7 @@ const POLL_INTERVAL = 5000; // 5 seconds
 interface PurchaseBTNProps {
     data: Schedule | null;
     selfName: string | null | undefined
-    userId: string | undefined
+    userId: string | undefined;
     selfEmail: string | null | undefined;
 }
 
@@ -32,6 +32,11 @@ export function SchedulePurchaseBTN({ data, selfName, selfEmail, userId }: Purch
     const [isPending, startTransition] = useTransition();
     const [hasPurchased, setHasPurchased] = useState(false);
     const [currentReference, setCurrentReference] = useState<string | null>(null);
+
+       if (!userId || userId === "undefined") {
+         toast.error("You must be logged in to access this stream.");
+         router.push("/sign-in");
+       }
 
     // Add useEffect for polling
     useEffect(() => {

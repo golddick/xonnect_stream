@@ -63,7 +63,7 @@ export default function StreamCountdown({ streamDate, isLive }: StreamCountdownP
   if (hasStarted && !isLive) {
     return (
       <div className="bg-black animate-pulse border-b border-r text-white p-3 rounded-lg text-center">
-        <p className="font-light text-red-700">Stream is over. Watch highlight</p>
+        <p className="font-light text-red-700">Stream is over.</p>
       </div>
     )
   }

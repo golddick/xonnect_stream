@@ -43,6 +43,25 @@ const ScheduledEvent = async ({  type }: AllStreamProps) => {
 
   return (
     <div className="justify-center w-full h-auto flex flex-col gap-4 ">
+      
+      {
+        type === 'upcoming' ? (
+          <div className="text-center mb-12 animate-fadeIn">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3">Upcoming Events</h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-6"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+              Secure your spot for these exclusive upcoming streams before tickets sell out
+          </p>
+      </div>
+        ) : (
+           <div className="text-center mb-12 animate-fadeIn">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3">Past Events</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-6"></div>
+            <p>catch up with extended higlight from the event </p>
+        </div>
+        )
+      }
+
         <EventRow data={filteredEvents}/>
     </div>
   );

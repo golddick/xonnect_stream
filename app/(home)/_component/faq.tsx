@@ -4,29 +4,29 @@ import React from 'react'
 
 const faqItems = [
   {
-    question: "What is XONNECT?",
+    question: "What is xonnect?",
     answer:
-      "XONNECT is a pay-on-demand streaming platform where users only pay for the content they want to watch—no monthly subscriptions or hidden fees."
+      "xonnect is a pay-on-demand streaming platform where users only pay for the content they want to watch—no monthly subscriptions or hidden fees."
   },
   {
-    question: "What kind of content is available on XONNECT?",
+    question: "What kind of content is available on xonnect?",
     answer:
-      "XONNECT features live concerts, sports, interviews, theater, and educational events. New content is added frequently to keep the experience fresh."
+      "xonnect features live concerts, sports, interviews, theater, and educational events. New content is added frequently to keep the experience fresh."
   },
   {
-    question: "How does the pay-per-view model work?",
+    question: "How does the Pay On Demand model work?",
     answer:
       "You pay only for the events or streams you choose to watch. Once purchased, you get access to the content for the specified viewing window—no recurring fees."
   },
+  // {
+  //   question: "Can I watch replays or highlights after a live event?",
+  //   answer:
+  //       "Users can only watch extended highlights, which will be posted after the event. Full event replays are not available."
+  // },
   {
-    question: "Can I watch replays or highlights after a live event?",
+    question: "How can I become a creator on xonnect?",
     answer:
-        "Users can only watch extended highlights, which will be posted after the event. Full event replays are not available."
-  },
-  {
-    question: "How can I become a creator on XONNECT?",
-    answer:
-      "To stream on XONNECT, creators must agree to our terms and submit a request. Our team reviews and approves all creator applications before granting access."
+      "To stream on xonnect, creators must agree to our terms and submit a request. Our team reviews and approves all creator applications before granting access."
   },
 ]
 
@@ -37,7 +37,7 @@ const FAQ = () => {
         <div className="text-center mb-12">
           <h2 className="text-2xl font-bold mb-3 text-black">Frequently Asked Questions</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Quick answers to the most common questions about XONNECT for viewers and creators.
+            Quick answers to the most common questions about <span className='text-red-700'>x</span>onnect for viewers and creators.
           </p>
         </div>
 

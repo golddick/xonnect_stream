@@ -5,7 +5,7 @@ import { Lock } from "lucide-react";
 
 interface NotPurchasedProps{
     data: Schedule | null;
-    userId: string
+    userId: string | undefined;
     externalUserName: string
     externalUserEmail: string
 }

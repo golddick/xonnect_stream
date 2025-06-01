@@ -15,7 +15,7 @@ export const EventExplore = async () => {
             <div className="w-full bg-white font-sans">
                 {/* About Us Section Header */}
               
-              <BannerHeader H1='Creator Events & Streams' Header=' PLATFORM EVENT' Desc='Discover and join live events from your favorite content creators.'/>
+              <BannerHeader H1='Experience Live Event' Header=' XONNECT EVENTS' Desc='Join real-time events hosted by your favorite creators — unfiltered, exclusive, and interactive.'/>
 
                 {/* Live Events Section */}
                <LiveComponent/>
@@ -24,13 +24,6 @@ export const EventExplore = async () => {
                 {/* Upcoming Events Section */}
                 <section className="py-16 px-4 sm:px-8 bg-white text-black overflow-hidden">
                     <div className="max-w-6xl mx-auto">
-                        <div className="text-center mb-12 animate-fadeIn">
-                            <h2 className="text-3xl sm:text-4xl font-bold mb-3">Upcoming Events</h2>
-                            <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-6"></div>
-                            <p className="text-gray-600 max-w-2xl mx-auto">
-                                Secure your spot for these exclusive upcoming streams before tickets sell out
-                            </p>
-                        </div>
 
                             <ScheduledEvent type="upcoming"/>
                  
@@ -41,11 +34,7 @@ export const EventExplore = async () => {
                 {/* Past Events Section */}
                 <section className="py-16 px-4 sm:px-8 bg-gray-50 text-black overflow-hidden">
                     <div className="max-w-6xl mx-auto">
-                        <div className="text-center mb-12 animate-fadeIn">
-                            <h2 className="text-3xl sm:text-4xl font-bold mb-3">Past Events</h2>
-                            <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-6"></div>
-                            <p>catch up with extended higlight from the event </p>
-                        </div>
+                      
                         <ScheduledEvent type="past"/>
                     </div>
                 </section>

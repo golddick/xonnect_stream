@@ -9,12 +9,16 @@ const Footer = () => {
             <div className=" grid md:grid-cols-2 items-center gap-12 justify-between  py-12">
                 <div className="max-w-sm ">
                     <div className="flex items-center gap-3 mb-6">
-                        <svg className="w-8 h-8 text-red-800" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* <svg className="w-8 h-8 text-red-800" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 3L19 7M19 7L15 11M19 7H8C6.93913 7 5.92172 7.42143 5.17157 8.17157C4.42143 8.92172 4 9.93913 4 11V13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                        <span className="text-white text-2xl font-bold tracking-wider">xonnect</span>
+                        </svg> */}
+                        <div className=' relative w-[40px] h-[40px] rounded-full overflow-hidden'>
+                            <Image src={'/assets/xsb.png'} alt='logo' fill className=' absolute object-cover'/>
+                        </div>
+
+                        <span className="text-white text-2xl font-bold tracking-wider"><span className=' text-red-700'>x</span>onnect</span>
                     </div>
-                    <p className="text-white/70">The premier platform for streaming exclusive content, live events, concerts and more with no commitments.</p>
+                    <p className="text-white/70">Your go to destination for exclusive content, live shows, and concerts no subscriptions, no strings attached.</p>
                 </div>
 
                 <div className=" flex flex-wrap gap-4 lg:gap-16 text-white  w-full md:justify-between ">
@@ -40,7 +44,7 @@ const Footer = () => {
                             links: [
                                 { name: "Legal", url: "/legal" },
                                 { name: "partners", url: "/partners" },
-                                { name: "Xonnect Store", url: "/shop" },
+                                { name: "xonnect Store", url: "/shop" },
                             ]
                         }
                     ].map((section, index) => (
@@ -61,7 +65,7 @@ const Footer = () => {
             </div>
 
             <div className="pt-12 border-t border-white/10 flex justify-between items-center">
-                <p className="text-white/50">© 2025 xonnect. All rights reserved.</p>
+                <p className="text-white/50">© 2025 <span className=' text-red-700'>x</span>onnect. All rights reserved.</p>
                 
                 <div className="flex gap-4 md:gap-8">
                     <Image src={'/assets/signature.jpeg'} alt='logo' width={100} height={20}/>

@@ -51,7 +51,7 @@ export default function PlatformFeatures() {
             }`}
           >
             <Globe size={18} className="mr-2" />
-            Web Platform
+            Web <span  className=' hidden md:block'>Platform</span>
           </button>
         </div>
         
@@ -70,8 +70,8 @@ export default function PlatformFeatures() {
                     <Smartphone className="text-red-700" size={24} />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold">Mobile Application</h3>
-                    <p className="text-gray-600">Experience <span className='text-red-700'>X</span>onnect on the go with our feature-rich mobile app</p>
+                    {/* <h3 className="text-2xl font-bold">Mobile Application</h3> */}
+                    <p className="text-gray-600">Experience <span className='text-red-700'>x</span>onnect on the go with our feature rich mobile app</p>
                   </div>
                 </div>
                 
@@ -99,16 +99,11 @@ export default function PlatformFeatures() {
                       </svg>
                     </div>
                     <p className="text-sm text-gray-700">
-                      Our mobile app is currently in development and will be launching soon. Join our waitlist to be notified when it&apos;s available!
+                      Our mobile app is currently in development and will be launching soon. subscribe to our newsletter to be notified when it&apos;s available!
                     </p>
                   </div>
                 </div>
                 
-                <div className="mt-6 text-center">
-                  <button className="px-8 py-3 bg-red-700 text-white rounded-full font-semibold hover:bg-red-800 transition-all">
-                    Join Mobile App Waitlist
-                  </button>
-                </div>
               </div>
             </div>
           ) : (
@@ -119,7 +114,7 @@ export default function PlatformFeatures() {
                     <Globe className="text-red-700" size={24} />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold">Web Platform</h3>
+                    {/* <h3 className="text-2xl font-bold">Web Platform</h3> */}
                     <p className="text-gray-600">Available now with professional creator tools</p>
                   </div>
                 </div>
@@ -159,11 +154,6 @@ export default function PlatformFeatures() {
                   </div>
                 </div>
                 
-                <div className="mt-6 text-center">
-                  <button className="px-8 py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition-all">
-                    Access Web Platform
-                  </button>
-                </div>
               </div>
             </div>
           )}

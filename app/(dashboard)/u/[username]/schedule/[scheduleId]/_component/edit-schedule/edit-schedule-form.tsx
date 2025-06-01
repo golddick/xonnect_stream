@@ -97,7 +97,6 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
         <form className="flex flex-col gap-4 w-full p-2" onSubmit={form.handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-6 overflow-scroll hidden-scrollbar mb-10">
             <div className="w-full Container flex flex-col gap-4 rounded-lg">
-              <h1 className="flex capitalize text-[15px] text-[#b28228]"> Update Schedule Stream / Event</h1>
               <div className="flex w-full gap-6">
                 <FormField
                   control={form.control}
@@ -178,15 +177,15 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
                        name="amount"
                        render={({ field }) => (
                          <FormItem className="w-full">
-                            <FormLabel className="flex font-sans font-thin text-[#b28228]" ><i>Price</i></FormLabel>
+                            <FormLabel className="flex font-sans font-thin " >Price</FormLabel>
                            <FormControl>
-                             <div className="flex items-center gap-4 h-auto w-full overflow-hidden rounded-md p-1 bg-black">
+                             <div className="flex items-center gap-4 h-auto w-full overflow-hidden rounded-md p-1 bg-transparent">
                                <Image
-                                 src="/assets/icons/dollar.svg"
-                                 alt="dollar"
+                                 src="/assets/nicon.svg"
+                                 alt="n"
                                  width={23}
                                  height={23}
-                                 className="filter-grey-500"
+                                 className="filter-grey-500 text-white"
                                />
                                <Input
                                  type="number"
@@ -314,7 +313,7 @@ const EditScheduleForm = ({schedule}:EditScheduleFormProps) => {
             <Button
               type="submit"
               size='lg'
-              variant='ghost'
+              // variant='ghost'
             >
               {form.formState.isSubmitting ? ('submitting...') : ` Register`}
             </Button>

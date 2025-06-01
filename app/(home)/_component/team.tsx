@@ -1,55 +1,78 @@
+
 import Image from 'next/image'
 import React from 'react'
+import { FaLinkedin, FaInstagram } from 'react-icons/fa'
 
 const Team = () => {
-  return (
-    <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Meet Our Leadership</h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-              The passionate team behind Creator Connect is dedicated to building the future of creator-audience relationships.
-            </p>
-          </div>
+  const teamMembers = [
+    {
+      name: "Gold Dick",
+      title: "Founder & Lead Developer",
+      bio: "Building transformative software that challenges the norm and shapes the future.",
+      image: "/assets/founder.jpeg",
+      linkedin: "https://www.linkedin.com/in/gold-dick-81550629a",
+      instagram: "https://www.instagram.com/__goldick/"
+    },
+    // Add more members with social URLs here
+  ]
 
-          {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-8"> */}
-          <div className="flex items-center justify-center gap-8">
-            {[
-              {
-                name: "Gold Dick",
-                title: "Founder & Developer",
-                bio: "Visionary entrepreneur focused on empowering creators through innovative tech and direct audience connection.",
-                image: "/assets/founder.jpeg"
-              },
-              // {
-              //   name: "Michael Chen",
-              //   title: "CTO & Co-Founder",
-              //   bio: "Tech visionary with 15+ years of experience building scalable platforms for content creators.",
-              //   image: "/assets/woman.jpeg"
-              // },
-              // {
-              //   name: "Aisha Patel",
-              //   title: "Chief Product Officer",
-              //   bio: "Creator advocate focused on building intuitive, powerful tools for the creator community.",
-              //   image: "/assets/xc.jpg"
-              // }
-            ].map((member, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center justify-center w-80">
-                <div className=' relative  w-32 h-32  mx-auto'>
-                <Image 
-                  src={member.image} 
-                  alt={member.name} 
-                  fill
-                  className=" absolute rounded-full mb-4 object-cover"
-                />
-                </div>
-               
-                <h3 className="text-xl font-bold mb-1">{member.name}</h3>
-                <p className="text-red-700 font-medium mb-3">{member.title}</p>
-                <p className="text-gray-700">{member.bio}</p>
-              </div>
-            ))}
-          </div>
-        </section>
+  return (
+    <section aria-labelledby="team-heading" className="mb-20 px-4">
+      <div className="text-center mb-12 max-w-3xl mx-auto">
+        <h2 id="team-heading" className="text-3xl font-bold mb-4">Meet Our Leadership</h2>
+        <p className="text-lg text-gray-700">
+          The passionate team behind <span className=' text-red-700'>x</span>onnect is dedicated to building the future of creator audience relationships.
+        </p>
+      </div>
+
+      <div className=" flex justify-center items-center gap-8">
+        {teamMembers.map((member, index) => (
+          <article
+            key={index}
+            className="bg-white p-6 rounded-lg shadow-md text-center max-w-xs"
+            role="group"
+            aria-label={`Team member: ${member.name}`}
+          >
+            <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden">
+              <Image
+                src={member.image}
+                alt={`Portrait of ${member.name}`}
+                fill
+                sizes="(max-width: 640px) 128px, 128px"
+                className="object-cover"
+              />
+            </div>
+
+            <h3 className="text-xl font-bold mb-1">{member.name}</h3>
+            <p className="text-red-700 font-medium mb-3">{member.title}</p>
+            <p className="text-gray-700 mb-4">{member.bio}</p>
+
+            <div className="flex justify-center gap-6 text-gray-600  text-2xl">
+              {member.linkedin && (
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${member.name} LinkedIn profile`}
+                >
+                  <FaLinkedin  className=' hover:text-red-700'/>
+                </a>
+              )}
+              {member.instagram && (
+                <a
+                  href={member.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${member.name} Instagram profile`}
+                >
+                  <FaInstagram  className=' hover:text-red-700'/>
+                </a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   )
 }
 
