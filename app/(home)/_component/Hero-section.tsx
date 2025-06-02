@@ -30,8 +30,8 @@ const HeroSection = () => {
   }, [])
 
   const features = [
-    { icon: Zap, text: "Exclusive Content" },
-    { icon: Users, text: "Creator Community" },
+    { icon: Zap, text: "Premium Event" },
+    { icon: Users, text: "Community Building" },
     { icon: DollarSign, text: "Pay On Demand" }
   ]
 
@@ -84,15 +84,17 @@ const HeroSection = () => {
             </h1>
           </div>
 
+
           {/* Subtitle */}
           <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
-              The revolutionary platform connecting creators with audiences through 
-              <span className="text-red-400 font-semibold"> premium live streaming</span> and 
-              <span className="text-red-400 font-semibold"> exclusive content</span>.
-              <br />
-              <span className="text-white/80">No subscriptions. No commitments. Pay only for what you watch.</span>
-            </p>
+            {/* <h2 className="text-4xl font-bold mb-4">Everything Creators Need, All in One Place</h2> */}
+           <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+            Stream <span className="text-red-400 font-semibold">premium live event</span> like never before direct, and on your terms.
+            <br />
+            <span className="text-white/80">No strings. No subscriptions. Pay only for what you watch</span>
+          </p>
+
+
           </div>
 
           {/* Feature Pills */}

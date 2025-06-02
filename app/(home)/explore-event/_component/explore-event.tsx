@@ -15,7 +15,7 @@ export const EventExplore = async () => {
             <div className="w-full bg-white font-sans">
                 {/* About Us Section Header */}
               
-              <BannerHeader H1='Experience Live Event' Header=' XONNECT EVENTS' Desc='Join real-time events hosted by your favorite creators — unfiltered, exclusive, and interactive.'/>
+              <BannerHeader H1='Experience Live Event' Header=' XONNECT EVENTS' Desc='Join real time events hosted by your favorite creators unfiltered, premium, and interactive.'/>
 
                 {/* Live Events Section */}
                <LiveComponent/>

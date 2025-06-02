@@ -18,7 +18,7 @@ const Footer = () => {
 
                         <span className="text-white text-2xl font-bold tracking-wider"><span className=' text-red-700'>x</span>onnect</span>
                     </div>
-                    <p className="text-white/70">Your go to destination for exclusive content, live shows, and concerts no subscriptions, no strings attached.</p>
+                    <p className="text-white/70">Your go to destination for premium content, live shows, and concerts no subscriptions, no strings attached.</p>
                 </div>
 
                 <div className=" flex flex-wrap gap-4 lg:gap-16 text-white  w-full md:justify-between ">

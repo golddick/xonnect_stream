@@ -6,7 +6,7 @@ const faqItems = [
   {
     question: "What is xonnect?",
     answer:
-      "xonnect is a pay-on-demand streaming platform where users only pay for the content they want to watch—no monthly subscriptions or hidden fees."
+      "xonnect is a pay on demand streaming platform where users only pay for the content they want to watch—no monthly subscriptions or hidden fees."
   },
   {
     question: "What kind of content is available on xonnect?",
@@ -16,7 +16,7 @@ const faqItems = [
   {
     question: "How does the Pay On Demand model work?",
     answer:
-      "You pay only for the events or streams you choose to watch. Once purchased, you get access to the content for the specified viewing window—no recurring fees."
+      "You pay only for the events or streams you choose to watch. Once purchased, you get access to the content for the specified viewing window no recurring fees."
   },
   // {
   //   question: "Can I watch replays or highlights after a live event?",
@@ -68,7 +68,7 @@ const FAQ = () => {
             </details>
           ))}
         </div>
-
+{/* 
         <div className="text-center mt-10">
           <p className="text-sm text-gray-500">
             Have more questions about features?{" "}
@@ -77,7 +77,7 @@ const FAQ = () => {
             </a>{" "}
             for full details.
           </p>
-        </div>
+        </div> */}
       </div>
     </section>
   )

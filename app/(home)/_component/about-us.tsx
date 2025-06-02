@@ -12,7 +12,7 @@ export const AboutUS = () => {
     <div className="min-h-screen bg-white">
     
       {/* Hero Section */}
-      <BannerHeader H1='Our Story' Header=' ABOUT XONNECT' Desc='From global concerts to exclusive shows, xonnect brings unforgettable live experiences straight to your screen—anytime, anywhere.'/>
+      <BannerHeader H1='Our Story' Header=' ABOUT XONNECT' Desc='From global concerts to exclusive shows, xonnect brings unforgettable live experiences straight to your screen anytime, anywhere.'/>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-16 text-black">

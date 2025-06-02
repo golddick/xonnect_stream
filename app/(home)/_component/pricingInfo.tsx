@@ -17,7 +17,7 @@ export default function Pricing() {
     
 
       {/* Hero Section */}
-      <BannerHeader H1='Simple, Transparent Pricing' Header='XONNECT PRICING' Desc="No subscriptions, no pressure. Just pay for the content you actually want — when you want it."/>
+      <BannerHeader H1='Simple, Transparent Pricing' Header='XONNECT PRICING' Desc="No subscriptions, no pressure. Just pay for the content you actually want when you want it."/>
     
       <section className="py-16 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto text-center ">
