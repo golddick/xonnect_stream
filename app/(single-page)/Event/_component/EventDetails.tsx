@@ -322,13 +322,14 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
                       <h3 className="text-lg font-bold text-black">More from {data.user?.username}</h3>
-                      <Link
+                      {/* <Link
                         href={`/creators/${data.userId}`}
                         className="text-red-700 hover:text-red-800 text-sm font-medium flex items-center"
                       >
                         View all
                         <ChevronRight className="h-4 w-4 ml-1" />
-                      </Link>
+                      </Link> */}
+                      <p className=" text-black animate-pulse"><span className=" text-red-700">x</span>onnect</p>
                     </div>
 
                     <div className="flex  gap-4 w-full">

@@ -1,15 +1,3 @@
-// import React from 'react'
-// import { Button } from '../ui/button'
-
-// const ShareBTN = () => {
-//   return (
-//     <Button>
-//       share
-//     </Button>
-//   )
-// }
-
-// export default ShareBTN
 
 
 
@@ -21,8 +9,8 @@ import { toast } from 'sonner'
 const ShareBTN = () => {
   const handleShare = async () => {
     const shareData = {
-      title: 'Xonnect Stream',
-      text: 'Check out this live stream on Xonnect!',
+      title: 'xonnect',
+      text: 'Join the experience and be part of the moment!',
       url: window.location.href
     }
 

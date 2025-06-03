@@ -107,7 +107,7 @@ export function Eventplayer({
 
           {/* Mobile Chat Toggle */}
             {showFullChat && (
-          <div className="flex  lg:hidden px-4 mt-4 w-full h-[500px]">
+          <div className="flex  lg:hidden mt-4 w-full h-[500px]">
               <Chat
                 viewerName={name}
                 hostName={user.username}

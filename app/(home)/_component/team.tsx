@@ -7,7 +7,7 @@ const Team = () => {
   const teamMembers = [
     {
       name: "Gold Dick",
-      title: "Founder & Lead Developer",
+      title: "Founder & Developer",
       bio: "Building transformative software that challenges the norm and shapes the future.",
       image: "/assets/founder.jpeg",
       linkedin: "https://www.linkedin.com/in/gold-dick-81550629a",
