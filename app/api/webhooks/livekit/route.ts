@@ -49,8 +49,6 @@
 
 
 
-
-
 import { headers } from "next/headers";
 import { WebhookReceiver } from "livekit-server-sdk";
 import { db } from "@/lib/db";
@@ -102,27 +100,34 @@ export async function POST(req: Request) {
       date.getMonth() === now.getMonth() &&
       date.getDate() === now.getDate();
 
-    const todaysSchedules = schedules.filter(sch =>
+    const todaysSchedules = schedules.filter((sch) =>
       isToday(new Date(sch.eventDateTime))
     );
 
     if (todaysSchedules.length === 0) return null;
 
-    const live = todaysSchedules.filter(s =>
-      new Date(s.eventDateTime).getTime() <= now.getTime() && s.isLive
+    const upcoming = todaysSchedules.filter(
+      (s) => new Date(s.eventDateTime).getTime() > now.getTime()
     );
-    if (live.length > 0) {
-      return live.sort((a, b) =>
-        new Date(b.eventDateTime).getTime() - new Date(a.eventDateTime).getTime()
+
+    if (upcoming.length > 0) {
+      return upcoming.sort(
+        (a, b) =>
+          new Date(a.eventDateTime).getTime() -
+          new Date(b.eventDateTime).getTime()
       )[0];
     }
 
-    const upcoming = todaysSchedules.filter(s =>
-      new Date(s.eventDateTime).getTime() > now.getTime()
+    // Fallback: Pick latest past schedule for today
+    const past = todaysSchedules.filter(
+      (s) => new Date(s.eventDateTime).getTime() <= now.getTime()
     );
-    if (upcoming.length > 0) {
-      return upcoming.sort((a, b) =>
-        new Date(a.eventDateTime).getTime() - new Date(b.eventDateTime).getTime()
+
+    if (past.length > 0) {
+      return past.sort(
+        (a, b) =>
+          new Date(b.eventDateTime).getTime() -
+          new Date(a.eventDateTime).getTime()
       )[0];
     }
 
@@ -138,10 +143,9 @@ export async function POST(req: Request) {
       await db.schedule.update({
         where: { id: schedule.id },
         data: {
-           isLive: true,
-           status: "ONGOING",
-
-         },
+          isLive: true,
+          status: "ONGOING",
+        },
       });
     }
   }
@@ -154,16 +158,13 @@ export async function POST(req: Request) {
     if (schedule) {
       await db.schedule.update({
         where: { id: schedule.id },
-        data: { 
+        data: {
           isLive: false,
           status: "PAST",
-         },
+        },
       });
     }
   }
 
   return new Response("Success!", { status: 200 });
 }
-
-
-

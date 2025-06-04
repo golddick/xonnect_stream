@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react'
 
 const navItems = [
-    { label: 'Dashboard', href: '/xontrol' },
+    { label: 'Dashboard', href: '/xontrol/dash' },
     { label: 'Partners', href: '/xontrol/partners' },
     { label: 'Creators ', href: '/xontrol/creator-requests' },
     { label: 'Contact-us ', href: '/xontrol/contact-us' },
