@@ -137,7 +137,11 @@ export async function POST(req: Request) {
     if (schedule) {
       await db.schedule.update({
         where: { id: schedule.id },
-        data: { isLive: true },
+        data: {
+           isLive: true,
+           status: "ONGOING",
+
+         },
       });
     }
   }
@@ -150,7 +154,10 @@ export async function POST(req: Request) {
     if (schedule) {
       await db.schedule.update({
         where: { id: schedule.id },
-        data: { isLive: false },
+        data: { 
+          isLive: false,
+          status: "PAST",
+         },
       });
     }
   }

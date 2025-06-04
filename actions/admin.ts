@@ -212,3 +212,165 @@ export const fetchAdminContactMessages = async () => {
     throw new Error("Failed to fetch contact messages")
   }
 }
+
+
+export async function getAllReviewsForAdmin() {
+  // Optional: Ensure only admin can call this
+  const session = await getSelf();
+
+  // Optional: Only allow admins
+  if (!session || session.role !== "ADMIN") {
+    throw new Error("Unauthorized access")
+  }
+
+  const reviews = await db.review.findMany({
+    include: {
+      user: true,
+      stream: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  })
+
+  return reviews
+}
+
+export async function updateReviewDisplayFlag(reviewId: string, value: boolean) {
+   const session = await getSelf();
+
+  // Optional: Only allow admins
+  if (!session || session.role !== "ADMIN") {
+    throw new Error("Unauthorized access")
+  }
+
+
+  const updated = await db.review.update({
+    where: { id: reviewId },
+    data: { AdminReviewDisplay: value },
+  })
+
+  revalidatePath("/admin/reviews") // or the relevant path
+  return updated
+}
+
+
+
+import { formatISO } from 'date-fns'
+
+interface GetEventDetailsOptions {
+  platformFeePercent?: number // e.g. 0.3 for 30%
+}
+
+export async function getEventDetails(
+  eventId: string,
+  options: GetEventDetailsOptions = {}
+) {
+  const platformFeePercent = options.platformFeePercent ?? 0.3
+
+   const session = await getSelf();
+
+  // Optional: Only allow admins
+  if (!session || session.role !== "ADMIN") {
+    throw new Error("Unauthorized access")
+  }
+
+  const schedule = await db.schedule.findUnique({
+    where: { id: eventId },
+    include: {
+      user: true,
+      payments: true,
+      physicalTicket: true,
+      streams: true,
+    },
+  })
+
+  if (!schedule) {
+    throw new Error('Event not found')
+  }
+
+  const hasPhysicalTicket =
+    schedule.physicalTicketAmount != null && schedule.availableSlots != null
+
+  const physicalPayments = hasPhysicalTicket ? schedule.physicalTicket.length : 0
+  const streamPayments = schedule.streams.length
+
+  const physicalRaw = hasPhysicalTicket
+    ? (schedule.physicalTicketAmount ?? 0) * physicalPayments
+    : 0
+  const physicalNet = physicalRaw * (1 - platformFeePercent)
+
+  const streamRaw = (schedule.amount ?? 0) * streamPayments
+  const streamNet = streamRaw * (1 - platformFeePercent)
+
+  const combinedRaw = physicalRaw + streamRaw
+  const combinedNet = physicalNet + streamNet
+
+  return {
+    id: schedule.id,
+    name: schedule.title,
+    date: formatISO(schedule.eventDateTime),
+    description:
+      schedule.description ??
+      'Join us for an amazing night of live music and entertainment.',
+    isPriority: false,
+    status: schedule.status ,
+    originalPrices: {
+      physical: hasPhysicalTicket ? schedule.physicalTicketAmount ?? 0 : 0,
+      stream: schedule.amount ?? 0,
+    },
+    totals: {
+      physical: { raw: physicalRaw, net: physicalNet },
+      stream: { raw: streamRaw, net: streamNet },
+      combined: { raw: combinedRaw, net: combinedNet },
+    },
+    slots: {
+      remainingSlots: hasPhysicalTicket ? schedule.remainingSlots ?? 0 : 0,
+      totalSlots: hasPhysicalTicket ? schedule.availableSlots ?? 0 : 0,
+    },
+    creator: {
+      name:  schedule.user.username || 'Unknown',
+      email: schedule.orgEmail,
+      id: schedule.userId,
+    },
+    attendees: {
+      physical: physicalPayments,
+      stream: streamPayments,
+      total: physicalPayments + streamPayments,
+    },
+    streamUrl: schedule.streams[1]?.serverUrl ?? '',
+    streamKey: schedule.streams[0]?.streamKey ?? '',
+    location: schedule.address,
+    category: schedule.category,
+    tags: schedule.tags?.split(',').map((tag) => tag.trim()) || [],
+    hasPhysicalTicket, // <-- new boolean flag
+  }
+}
+
+
+
+
+export const updateEventPriority = async (id: string, isPriority: boolean) => {
+  try {
+
+
+    const session = await getSelf();
+
+  // Optional: Only allow admins
+  if (!session || session.role !== "ADMIN") {
+    throw new Error("Unauthorized access")
+  }
+
+
+    await db.schedule.update({
+      where: { id },
+      data: { isPriority },
+    })
+
+    console.log(`Updated event ${id} priority to ${isPriority}`)
+    return { success: true }
+  } catch (error) {
+    console.error(`Failed to update event ${id} priority`, error)
+    return { success: false, error: (error as Error).message }
+  }
+}

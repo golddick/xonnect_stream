@@ -9,6 +9,19 @@ generator client {
   // previewFeatures = [ "fullTextIndex"]
 }
 
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int
+  comment   String
+  streamId  String
+  userId    String
+  createdAt DateTime @default(now())
+  AdminReviewDisplay Boolean @default(false)
+  user   User   @relation("UserReviews", fields: [userId], references: [id])
+  stream Stream @relation("StreamReviews", fields: [streamId], references: [id])
+}
+
+
 model User {
   id             String  @id @default(uuid())
   username       String  @unique
@@ -41,6 +54,7 @@ model User {
   replies      Reply[]     @relation("UserReplies")
   likes        CommentLike[] @relation("UserLikes")
   creatorRequest CreatorRequest[] @relation("UserCreatorRequest")
+  reviews      Review[]    @relation("UserReviews")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -92,6 +106,7 @@ model Stream {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   payments          Payment[] @relation("StreamPayments")
+  reviews           Review[] @relation("StreamReviews")
 
 
   @@index([userId])
@@ -144,6 +159,12 @@ enum SUBSCRIPTION_STATUS {
   SUCCESSFUL
 }
 
+enum SCHEDULE_STATUS {
+  UPCOMING 
+  ONGOING
+  PAST
+}
+
 model Schedule {
   id              String   @id @default(uuid())
   title           String  
@@ -157,6 +178,8 @@ model Schedule {
   availableSlots  Float ?
   remainingSlots  Float ?
   TicketType     String?
+  status          SCHEDULE_STATUS @default(UPCOMING)
+  isPriority      Boolean @default(false)
   isFree          Boolean @default(false)
   thumbnailImage  String?  
   thumbnailVideo  String?
