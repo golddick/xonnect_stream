@@ -163,7 +163,7 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 w-full">
                 <StreamCountdown streamDate={data.eventDateTime.toISOString()}  isLive={data.isLive}/>
 
                 <div className=" flex w-full items-center justify-between gap-6">
@@ -173,17 +173,18 @@ export default function ScheduledStreamPage({data,userId,scheduledEvent, selfEma
                     </Link>
                   )}
 
-                   {!data?.isFree && (
-                   <SchedulePurchaseBTN data={data} selfEmail={selfEmail} selfName={selfName} userId={userId}/>
-                )}
+               
                
 
                 </div>
                 <div className="flex gap-2">
-                  <Button variant="outline" className="flex-1 gap-2 border-gray-700 text-white hover:bg-gray-800">
+                  {/* <Button variant="outline" className="flex-1 gap-2 border-gray-700 text-white hover:bg-gray-800">
                     <CalendarPlus className="h-4 w-4" />
                     <span>Calendar</span>
-                  </Button>
+                  </Button> */}
+                      {!data?.isFree && (
+                   <SchedulePurchaseBTN data={data} selfEmail={selfEmail} selfName={selfName} userId={userId}/>
+                )}
                     <ShareBTN/>
                 </div>
 

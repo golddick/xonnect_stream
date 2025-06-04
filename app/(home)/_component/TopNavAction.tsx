@@ -20,7 +20,7 @@ export async function HomeNavActions() {
 
 
 
-  const adminEMail = 'golddick60@gmail.com'
+  const adminEMail = 'golddick60@gmail.com' 
  
   const Creator = 
   userInfo?.role === 'CREATOR' ||

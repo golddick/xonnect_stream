@@ -13,7 +13,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: {
     template: "xonnect",
-    default: "xonnect streaming",
+    default: "xonnect stream",
   },
   icons: {
     icon: "/favicon.png",

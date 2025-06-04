@@ -31,6 +31,7 @@ interface EventDetailProps {
     date: string
     description?: string
     isPriority: boolean
+    isFree: boolean
     status: "UPCOMING" | "ONGOING" | "PAST" 
     originalPrices: {
       physical: number
@@ -81,6 +82,8 @@ export default function AdminEventDetail({ event }: EventDetailProps) {
       setIsUpdating(false)
     }
   }
+
+  console.log("Event Data:", event)
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -205,7 +208,7 @@ export default function AdminEventDetail({ event }: EventDetailProps) {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <div className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-10">
+      <div className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-20">
         <div className="w-full p-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="flex items-center gap-4">
@@ -252,7 +255,16 @@ export default function AdminEventDetail({ event }: EventDetailProps) {
         <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-2">{event.name}</h2>
+                <div className=" flex items-center gap-2 relative">
+
+                      <div className="absolute top-0 left-0 z-10 bg-red-700 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                        <span className="h-4 w-4 mr-1">₦</span>
+                        <span>{event.isFree ? "Free" : "Premium"}</span>
+                    </div>
+
+                     <h2 className="text-3xl font-bold text-white mb-2 ml-20">{event.name}</h2>
+                </div>
+             
               <div className="flex flex-wrap items-center gap-4 text-gray-400">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />

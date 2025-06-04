@@ -45,6 +45,7 @@ export const getAdminScheduleSummary = async () => {
           where: { status: 'SUCCESSFUL' },
           select: { amount: true },
         },
+        user: true, 
       },
     })
   
@@ -68,11 +69,15 @@ export const getAdminScheduleSummary = async () => {
           id: schedule.id,
           name: schedule.title,
           date: schedule.eventDateTime,
+          creator: {
+            username:schedule.user?.username
+          },
           slots,
           originalPrices: {
             stream: schedule.amount ?? 0,
             physical: schedule.physicalTicketAmount ?? 0,
           },
+          isFree: schedule.isFree ,
           totals: {
             stream: {
               raw: streamTotalRaw,
@@ -313,7 +318,8 @@ export async function getEventDetails(
     description:
       schedule.description ??
       'Join us for an amazing night of live music and entertainment.',
-    isPriority: false,
+    isPriority: schedule.isPriority,
+    isFree: schedule.isFree,
     status: schedule.status ,
     originalPrices: {
       physical: hasPhysicalTicket ? schedule.physicalTicketAmount ?? 0 : 0,

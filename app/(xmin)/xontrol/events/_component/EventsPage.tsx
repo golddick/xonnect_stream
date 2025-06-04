@@ -33,6 +33,7 @@ interface Event {
   creator?: {
     username: string
   }
+  isFree?: boolean
   totals: {
     physical: { raw: number; net: number }
     stream: { raw: number; net: number }
@@ -88,6 +89,9 @@ export default function AdminEventsPage() {
       setLoading(false)
     }
   }
+
+
+  console.log("Events loaded:", events, "events")
 
   const filterAndSortEvents = () => {
     let filtered = [...events]
@@ -338,17 +342,27 @@ export default function AdminEventsPage() {
               >
                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3
-                        className="text-xl font-bold text-white cursor-pointer hover:text-gray-300 transition-colors"
-                        onClick={() => router.push(`/xontrol/events/${event.id}`)}
-                      >
-                        {event.name}
-                      </h3>
-                      {event.isPriority && (
-                        <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                      )}
+                   <div className="relative flex items-center gap-3 mb-2">
+                    {/* Free / Premium badge */}
+                    <div className="absolute top-0 left-0 z-10 bg-red-700 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center">
+                        <span className="h-4 w-4 mr-1">₦</span>
+                        <span>{event.isFree ? "Free" : "Premium"}</span>
                     </div>
+
+                    {/* Event name and click handler */}
+                    <h3
+                        className="text-xl font-bold text-white cursor-pointer hover:text-gray-300 transition-colors ml-24"
+                        onClick={() => router.push(`/xontrol/events/${event.id}`)}
+                    >
+                        {event.name}
+                    </h3>
+
+                    {/* Priority icon */}
+                    {event.isPriority && (
+                        <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                    )}
+                    </div>
+
 
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-gray-400 mb-4">
                       <div className="flex items-center gap-2">
@@ -379,6 +393,8 @@ export default function AdminEventsPage() {
                         {event.status === "PAST" && <CheckCircle className="w-3 h-3" />}
                         <span>{event.status}</span>
                       </div>
+
+                    
 
                       <div className="flex items-center gap-2 text-gray-300">
                         <Ticket className="w-4 h-4" />

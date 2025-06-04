@@ -29,6 +29,12 @@ const StreamDetails = ({data}:Props) => {
                             <span className="text-[15px] ml-2">{data.category}</span>
                         </li>
                         <li className="flex items-baseline">
+                            <span className="text-neutral-600 font-bold ">Priority:</span> 
+                            <span className="text-[15px] ml-2">
+                                {data.isPriority ? "Yes" : "No"}
+                            </span>
+                        </li>
+                        <li className="flex items-baseline">
                             <span className="text-neutral-600 font-bold ">Address:</span>
                             <span className="text-[15px] ml-2">{data.address}</span>
                         </li>
@@ -66,6 +72,10 @@ const StreamDetails = ({data}:Props) => {
                         <li className="flex items-baseline">
                             <span className="text-neutral-600 font-bold ">Tags:</span> 
                             <span className="text-[15px] ml-2">{data.tags}</span>
+                        </li>
+                        <li className="flex items-baseline">
+                            <span className="text-neutral-600 font-bold ">Status:</span> 
+                            <span className="text-[15px] ml-2">{data.status}</span>
                         </li>
                         <li className="flex items-baseline">
                             <span className="text-neutral-600 font-bold ">Ticket slot:</span> 

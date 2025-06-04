@@ -33,10 +33,6 @@ export function SchedulePurchaseBTN({ data, selfName, selfEmail, userId }: Purch
     const [hasPurchased, setHasPurchased] = useState(false);
     const [currentReference, setCurrentReference] = useState<string | null>(null);
 
-       if (!userId || userId === "undefined") {
-         toast.error("You must be logged in to access this stream.");
-         router.push("/sign-in");
-       }
 
     // Add useEffect for polling
     useEffect(() => {
@@ -146,7 +142,7 @@ export function SchedulePurchaseBTN({ data, selfName, selfEmail, userId }: Purch
             onClick={onPay}
             size="sm"
             className={cn(
-                "w-full lg:w-auto font-medium text-white",
+                "w-full  font-medium text-white",
                 hasPurchased ? "bg-green-500 hover:bg-green-600" : "from-[red] to-[black] bg-gradient-to-br"
             )}
         >
