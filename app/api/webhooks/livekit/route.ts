@@ -156,31 +156,33 @@ export async function POST(req: Request) {
     }
   }
 
-  if (event.event === "ingress_ended") {
-    const stream = await handleStreamEvent(false);
-    if (!stream) return new Response("Stream not found", { status: 404 });
+if (event.event === "ingress_ended") {
+  const stream = await handleStreamEvent(false);
+  if (!stream) return new Response("Stream not found", { status: 404 });
 
-    const schedule = await getClosestSchedule(stream.userId);
-    if (schedule) {
-      const joined = joinedParticipantMap.get(schedule.id) || new Set();
-      const active = activeParticipantMap.get(schedule.id) || new Set();
+  const schedule = await getClosestSchedule(stream.userId);
+  if (schedule) {
+    const room = event.room?.name;
+    if (!room) return new Response("Missing room name", { status: 400 });
 
-      await db.schedule.update({
-        where: { id: schedule.id },
-        data: {
-          isLive: false,
-          status: "PAST",
-          perticipant: JSON.stringify({
-            totalJoined: joined.size,
-            stillPresent: active.size,
-          }),
-        },
-      });
+    const joined = joinedParticipantMap.get(room) ?? new Set();
+    const active = activeParticipantMap.get(room) ?? new Set();
 
-      joinedParticipantMap.delete(schedule.id);
-      activeParticipantMap.delete(schedule.id);
-    }
+    await db.schedule.update({
+      where: { id: schedule.id },
+      data: {
+        isLive: false,
+        status: "PAST",
+        participantCount: joined.size,
+        activeAtStreamEndCount: active.size,
+      },
+    });
+
+    joinedParticipantMap.delete(room);
+    activeParticipantMap.delete(room);
   }
+}
+
 
   if (event.event === "participant_joined") {
    const room = event.room?.name;

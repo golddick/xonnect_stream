@@ -185,7 +185,8 @@ model Schedule {
   thumbnailVideo  String?
   artists         String?  
   organizers      String? 
-  perticipant      String? 
+   participantCount       Int?   // 🆕 total joined
+  activeAtStreamEndCount Int?
   orgEmail        String  
   userId          String  
   user            User     @relation(name: "scheduledBy",  fields: [userId], references: [id], onDelete: Cascade)
