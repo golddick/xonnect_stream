@@ -161,7 +161,7 @@ export async function POST(req: Request) {
         });
 
         // Initialize participant tracking for this room
-        const room = event.room?.name;
+        const room = event.room?.sid;
         if (room) {
           participantData.set(room, {
             joined: new Set(),
@@ -178,7 +178,7 @@ export async function POST(req: Request) {
 
       const schedule = await getClosestSchedule(stream.userId, stream.id);
       if (schedule) {
-        const room = event.room?.name;
+        const room = event.room?.sid;
         if (!room) return new Response("Missing room name", { status: 400 });
 
         const { joined = new Set(), active = new Set() } = participantData.get(room) || {};
