@@ -20,6 +20,22 @@ export async function POST(req: Request) {
 
   const event = receiver.receive(body, authorization);
 
+  const handleStreamEvent = async (isLive: boolean) => {
+    const stream = await db.stream.findUnique({
+      where: { ingressId: event.ingressInfo?.ingressId },
+      select: { userId: true },
+    });
+
+    if (!stream) return null;
+
+    await db.stream.update({
+      where: { ingressId: event.ingressInfo?.ingressId },
+      data: { isLive },
+    });
+
+    return stream;
+  };
+
   const getClosestSchedule = async (userId: string) => {
     const schedules = await db.schedule.findMany({
       where: { userId },
@@ -50,50 +66,45 @@ export async function POST(req: Request) {
     for (let i = 0; i < sorted.length; i++) {
       const eventTime = new Date(sorted[i].eventDateTime);
       if (now < eventTime) {
-        return lastPastSchedule;
+        return lastPastSchedule; // return latest past schedule before the next upcoming one
       }
       lastPastSchedule = sorted[i];
     }
 
+    // If all schedules are in the past, return the latest one
     return lastPastSchedule;
   };
 
-  const handleStreamEvent = async (isLive: boolean) => {
-    const stream = await db.stream.findUnique({
-      where: { ingressId: event.ingressInfo?.ingressId },
-      select: { userId: true },
-    });
-
-    if (!stream) return null;
+  if (event.event === "ingress_started") {
+    const stream = await handleStreamEvent(true);
+    if (!stream) return new Response("Stream not found", { status: 404 });
 
     const schedule = await getClosestSchedule(stream.userId);
     if (schedule) {
       await db.schedule.update({
         where: { id: schedule.id },
         data: {
-          isLive,
-          status: isLive ? "ONGOING" : "PAST",
+          isLive: true,
+          status: "ONGOING",
         },
       });
     }
-
-    // Now update the stream after updating the schedule
-    await db.stream.update({
-      where: { ingressId: event.ingressInfo?.ingressId },
-      data: { isLive },
-    });
-
-    return stream;
-  };
-
-  if (event.event === "ingress_started") {
-    const stream = await handleStreamEvent(true);
-    if (!stream) return new Response("Stream not found", { status: 404 });
   }
 
   if (event.event === "ingress_ended") {
     const stream = await handleStreamEvent(false);
     if (!stream) return new Response("Stream not found", { status: 404 });
+
+    const schedule = await getClosestSchedule(stream.userId);
+    if (schedule) {
+      await db.schedule.update({
+        where: { id: schedule.id },
+        data: {
+          isLive: false,
+          status: "PAST",
+        },
+      });
+    }
   }
 
   return new Response("Success!", { status: 200 });
